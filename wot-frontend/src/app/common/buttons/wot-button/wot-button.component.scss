@@ -1,0 +1,32 @@
+.btn {
+  padding: 1rem;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 0rem;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn-right {
+  float: left;
+}
+
+.btn-icon {
+
+}
+
+.btn-text {
+}
+
+ion-icon {
+  --ionicon-stroke-width: 64px;
+  font-size: 24px;
+}

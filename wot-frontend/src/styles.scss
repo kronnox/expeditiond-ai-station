@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+
+:root {
+  --base-scale: 1;
+
+  --base-font: 'Ubuntu', sans-serif;
+
+  --color-primary: #90be6d
+}
+
+* {
+  font-family: var(--base-font);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}

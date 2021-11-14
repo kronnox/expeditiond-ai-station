@@ -1,0 +1,23 @@
+<wot-header>
+  <wot-header-title>
+    Schritt 1: Zeichne UFOs, um den Computer zu zeigen, wie diese aussehen.
+  </wot-header-title>
+</wot-header>
+<div class="content">
+  <div class="inner-content">
+    <ngx-drawing-canvas [width]="'100%'" [height]="'100%'" strokeColor="#fff" backgroundColor="#121212" #drawingCanvas></ngx-drawing-canvas>
+    <wot-toolbar>
+      <wot-button icon="arrow-undo" (click)="drawingCanvas.undoLast()" [disabled]="!drawingCanvas.canUndo()"></wot-button>
+      <wot-button icon="arrow-redo" (click)="drawingCanvas.redoLast()" [disabled]="!drawingCanvas.canRedo()"></wot-button>
+      <wot-button icon="checkmark" (click)="saveCanvas(drawingCanvas)" (click)="drawingCanvas.clear()" [disabled]="images.length >= 3"></wot-button>
+    </wot-toolbar>
+  </div>
+  <wot-sidebar>
+    <div style="padding: 1rem 2rem 0 2rem" *ngFor="let image of images">
+      <img width="100%" style="border: 2px solid #fff; border-radius: 0" src="{{image}}"/>
+    </div>
+    <wot-toolbar>
+      <wot-button slot="fill" [disabled]="images.length < 3">Weiter ></wot-button>
+    </wot-toolbar>
+  </wot-sidebar>
+</div>

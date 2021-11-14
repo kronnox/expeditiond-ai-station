@@ -1,0 +1,32 @@
+.content {
+  position: relative;
+  height: calc(100% - calc(var(--base-scale) * 4rem));
+  display:flex;
+  flex-direction: row;
+}
+.inner-content {
+  background-color: #ffaa00;
+  flex:1;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
+
+//colors
+$red: #E1332D;
+$white: #fff;
+
+//base styles
+
+* {
+  box-sizing: inherit;
+  transition-property: all;
+  transition-duration: .6s;
+  transition-timing-function: ease;
+}
+
+html,
+body {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+}

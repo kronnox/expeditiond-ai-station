@@ -1,0 +1,15 @@
+.wot-header {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(var(--base-scale) * 4rem);
+
+  z-index: 100;
+  margin: 0;
+  overflow: hidden;
+  background: var(--color-primary);
+
+  text-align: left;
+  color: white;
+}
