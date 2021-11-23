@@ -68,26 +68,26 @@ export class NgxDrawingCanvasComponent implements AfterViewInit {
   }
 
   private captureEvents(canvasEl: HTMLCanvasElement) {
-    const $mouseDown = fromEvent(canvasEl, 'mousedown');
-    const $mouseUp = fromEvent(canvasEl, 'mouseup').pipe(mergeWith(fromEvent(canvasEl, 'mouseleave')));
-    const $mouseMove = $mouseDown.pipe(
+    const $pointerDown = fromEvent(canvasEl, 'pointerdown');
+    const $pointerUp = fromEvent(canvasEl, 'pointerup').pipe(mergeWith(fromEvent(canvasEl, 'pointerleave')));
+    const $pointerMove = $pointerDown.pipe(
         switchMap((e) => {
-          return fromEvent(canvasEl, 'mousemove')
+          return fromEvent(canvasEl, 'pointermove')
             .pipe(
               // @ts-ignore
-              takeUntil($mouseUp),
+              takeUntil($pointerUp),
               pairwise()
             ) as Observable<[MouseEvent, MouseEvent]>
         })
       );
 
-    $mouseUp.subscribe(() => {
+    $pointerUp.subscribe(() => {
       if (this.currentStroke.paths.length < 1) return;
       this.strokes.push(this.currentStroke);
       this.currentStroke = new Stroke();
     });
 
-    $mouseMove.subscribe((res: [MouseEvent, MouseEvent]) => {
+    $pointerMove.subscribe((res: [MouseEvent, MouseEvent]) => {
       const rect = canvasEl.getBoundingClientRect();
 
       const prevPos: Vector = new Vector(res[0].clientX - rect.left, res[0].clientY - rect.top);
