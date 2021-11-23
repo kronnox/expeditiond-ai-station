@@ -1,0 +1,16 @@
+<wot-header>
+    <wot-header-title>
+        Unsere fleißigen Inder haben auch Bilder von UFOs gemalt:
+    </wot-header-title>
+</wot-header>
+<div cdkDropListGroup class="content">
+    <div cdkDropList #board="cdkDropList" [cdkDropListData]="images">
+        <img *ngFor="let image of images" class="dragElement" draggable="true" src="{{image}}" cdkDrag/>
+    </div>
+    
+    <div class="footer">
+        <div *ngFor="let class of label_classes" cdkDropList [cdkDropListData]="class.images" (cdkDropListDropped)="onDrop($event)" class="dropElement">
+            {{class.class}}
+        </div>
+    </div>
+</div>

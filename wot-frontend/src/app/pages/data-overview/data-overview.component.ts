@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-data-overview',
@@ -9,7 +10,7 @@ export class DataOverviewComponent implements OnInit {
 
   public images: string[] = [];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.images = JSON.parse(localStorage.getItem('images') || '');
@@ -18,4 +19,7 @@ export class DataOverviewComponent implements OnInit {
     }
   }
 
+  public continue(): void {
+    this.router.navigate(['/data-labeling']);
+  }
 }
