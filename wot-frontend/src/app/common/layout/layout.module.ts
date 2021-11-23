@@ -4,6 +4,7 @@ import {WotHeaderComponent} from './wot-header/wot-header.component';
 import {WotHeaderTitleComponent} from './wot-header-title/wot-header-title.component';
 import {WotSidebarComponent} from './wot-sidebar/wot-sidebar.component';
 import {WotToolbarComponent} from './wot-toolbar/wot-toolbar.component';
+import { WotFooterComponent } from './wot-footer/wot-footer.component';
 
 
 @NgModule({
@@ -11,13 +12,15 @@ import {WotToolbarComponent} from './wot-toolbar/wot-toolbar.component';
         WotHeaderComponent,
         WotHeaderTitleComponent,
         WotSidebarComponent,
-        WotToolbarComponent
+        WotToolbarComponent,
+        WotFooterComponent
     ],
   exports: [
     WotHeaderComponent,
     WotHeaderTitleComponent,
     WotSidebarComponent,
-    WotToolbarComponent
+    WotToolbarComponent,
+    WotFooterComponent
   ],
     imports: [
         CommonModule

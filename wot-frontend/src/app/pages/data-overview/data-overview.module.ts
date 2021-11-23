@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DataOverviewComponent } from './data-overview.component';
 import {DataOverviewRoutingModule} from './data-overview-routing.module';
 import {LayoutModule} from "../../common/layout/layout.module";
+import { ButtonsModule } from 'src/app/common/buttons/buttons.module';
 
 
 
@@ -13,7 +14,8 @@ import {LayoutModule} from "../../common/layout/layout.module";
   imports: [
     CommonModule,
     DataOverviewRoutingModule,
-    LayoutModule
+    LayoutModule,
+    ButtonsModule
   ]
 })
 export class DataOverviewModule { }
