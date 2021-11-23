@@ -1,0 +1,15 @@
+.content {
+    //position: relative;
+    //height: calc(100% - calc(var(--base-scale) * 4rem));
+    //display:flex;
+    flex-direction: row;
+}
+.inner-content {
+    background-color: #303030;
+}
+.img-data {
+    margin: 2px;
+    border: 2px solid #fff;
+    border-radius: 0;
+    width: 15%;
+}
