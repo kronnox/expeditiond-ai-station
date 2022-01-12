@@ -11,7 +11,7 @@ model = None
 
 
 def load_model():
-    model = model = tf.keras.models.load_model('model\model.h5')
+    model = model = tf.keras.models.load_model('\application\model\model.h5')
     print("Model loaded")
     return model
 

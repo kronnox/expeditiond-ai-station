@@ -12,11 +12,6 @@ app = FastAPI(title='Sketch Classification API', description=app_desc)
 
 
 
-@app.get("/", include_in_schema=False)
-async def index():
-    return RedirectResponse(url="/docs")
-
-
 @app.post("/predict/image")
 async def predict_api(file: UploadFile = File(...)):
     extension = file.filename.split(".")[-1] in ("jpg", "jpeg", "png")
