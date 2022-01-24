@@ -11,7 +11,7 @@ model = None
 
 
 def load_model():
-    model = model = tf.keras.models.load_model('\application\model\model.h5')
+    model = model = tf.keras.models.load_model('/code/application/model/model.h5')
     print("Model loaded")
     return model
 
@@ -24,11 +24,11 @@ def predict(image: Image.Image):
     image = np.asarray(image.resize((224, 224)))[..., :3]
     image = np.expand_dims(image, 0)
     image = image / 255
-    print(image.shape)
 
     result = model.predict(image)
     response = []
-    res = result
+    print(result)
+    res = np.delete(result,5)
     predicted_probs = res.tolist()
     labels = settings.categories
     predicted_class = labels[np.argmax(res)]
