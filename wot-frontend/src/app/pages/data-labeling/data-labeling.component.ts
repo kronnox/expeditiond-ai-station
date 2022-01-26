@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, OnInit, ViewChildren } from '@angular/core';
-import { CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { CdkDragDrop, CdkDropList, moveItemInArray, Point, transferArrayItem } from '@angular/cdk/drag-drop';
+import { ImgData } from './image_data';
 
 @Component({
   selector: 'app-data-labeling',
@@ -8,13 +9,20 @@ import { CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem } from '@a
 })
 export class DataLabelingComponent implements OnInit {
 
+  @ViewChild('dropZone') public dropZone: ElementRef;
+
   public images: string[] = [];
+  public data: ImgData[] = [];
   public label_classes = [{
     class: 'ufo',
     images: []
   },
   {
     class: 'astronaut',
+    images: []
+  },
+  {
+    class: 'comet',
     images: []
   }]
 
@@ -23,18 +31,35 @@ export class DataLabelingComponent implements OnInit {
   ngOnInit(): void {
     this.images = JSON.parse(localStorage.getItem('images') || '');
     for(let i = 0; i < 3; i++) {
-      this.images.push(this.images[i%3]);
+      let img = new ImgData(this.images[i%3], 'ufo');
+      this.data.push(img);
     }
   }
 
-  onDrop(event: any) {
+  public changePosition(event: any, item: ImgData): void {
     console.log(event);
+    console.log(item)
+    
     if(event.previousContainer !== event.container) {
-      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
+      transferArrayItem(event.previousContainer.data, event.container.data, this.data.indexOf(item), event.currentIndex);
     } else {
-      moveItemInArray(this.images, event.currentIndex, event.previousIndex);
+      //const rectZone=this.dropZone.nativeElement.getBoundingClientRect()
+      //const rectElement=event.item.element.nativeElement.getBoundingClientRect()
+      
+      let y=+item.y+event.distance.y;
+      let x=+item.x+event.distance.x;
+      //const out=y<0 || x<0 || (y>(rectZone.height-rectElement.height)) || (x>(rectZone.width-rectElement.width));
+      //if (!out)
+      //{
+        item.y=y;
+        item.x=x;
+      //}
     }
-    console.log(this.label_classes);
   }
 
+  public changeZIndex(item: ImgData): void {
+      for(let i of this.data) {
+        (i==item ? i.z = 1 : i.z = 0)
+      }
+  }
 }

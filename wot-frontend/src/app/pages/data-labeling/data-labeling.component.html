@@ -1,15 +1,18 @@
 <wot-header>
     <wot-header-title>
-        Unsere fleißigen Inder haben auch Bilder von UFOs gemalt:
+        Der Computer hat weitere Bilder gefunden. Klassifiziere diese.
     </wot-header-title>
 </wot-header>
-<div cdkDropListGroup class="content">
-    <div cdkDropList #board="cdkDropList" [cdkDropListData]="images">
-        <img *ngFor="let image of images" class="dragElement" draggable="true" src="{{image}}" cdkDrag/>
+<div cdkDropListGroup class="content" #dropZone>
+    <div cdkDropList class="drop-container" [cdkDropListSortingDisabled]="true" [cdkDropListData]="data">
+        <div *ngFor="let item of data" class="drag-container" [style.top.px]="item.y" [style.left.px]="item.x" [style.z-index]="item.z" (cdkDragDropped)="changePosition($event,item)" (cdkDragStarted)="changeZIndex(item)" cdkDrag>
+            <img src="{{item.image}}" class="drag-img"/>
+            <div *cdkDragPlaceholder></div>
+        </div>
     </div>
-    
-    <div class="footer">
-        <div *ngFor="let class of label_classes" cdkDropList [cdkDropListData]="class.images" (cdkDropListDropped)="onDrop($event)" class="dropElement">
+    <div class="footer content">
+        <div *ngFor="let class of label_classes" cdkDropList [cdkDropListSortingDisabled]="true" [cdkDropListData]="class.images" class="drop-folder">
+            <img src="assets/folder.png" style="width: 100%; height: 80%;"/>
             {{class.class}}
         </div>
     </div>
