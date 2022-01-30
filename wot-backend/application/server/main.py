@@ -2,13 +2,16 @@ import uvicorn
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import RedirectResponse
+import os
+import numpy as np
+import uuid
 
 from application.components import predict, read_imagefile
 from application.components.prediction import settings
 
 
 app_desc = """"""
-
+os.environ['Truck'] = 'application/model/'
 app = FastAPI(title='Sketch Classification API', description=app_desc)
 
 origins = ["*"]
@@ -19,6 +22,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+def save_image(image, prediction):
+    dir = os.environ.get('Truck')
+    folder = settings.categories[np.argmax(prediction["confidence"])]
+    image_dir = os.path.join(dir,folder)
+    if not(os.path.isdir(image_dir)):
+        os.mkdir(image_dir)
+    image.save(f"{image_dir}/{str(uuid.uuid1())}.png", format = "PNG")
+
 
 @app.post("/predict/image")
 async def predict_api(file: UploadFile = File(...)):
@@ -27,6 +38,8 @@ async def predict_api(file: UploadFile = File(...)):
         return "Image must be jpg or png format!"
     image = read_imagefile(await file.read())
     prediction = predict(image)
+    if(os.environ.get('Truck')!= None):
+        save_image(image, prediction)
 
     return prediction
 
@@ -39,3 +52,6 @@ async def get_categories():
 
 if __name__ == "__main__":
     uvicorn.run(app, debug=True)
+    
+
+

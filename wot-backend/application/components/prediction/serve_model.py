@@ -1,5 +1,5 @@
 from io import BytesIO
-
+import os
 import numpy as np
 import tensorflow as tf
 from PIL import Image
@@ -11,7 +11,9 @@ model = None
 
 
 def load_model():
+
     model = model = tf.keras.models.load_model('/code/application/model/model.h5')
+
     print("Model loaded")
     return model
 
@@ -26,21 +28,16 @@ def predict(image: Image.Image):
     image = image / 255
 
     result = model.predict(image)
-    response = []
-    print(result)
-    res = np.delete(result,5)
-    predicted_probs = res.tolist()
+    predicted_probs = result.tolist()
     labels = settings.categories
-    predicted_class = labels[np.argmax(res)]
+    predicted_class = labels[np.argmax(result)]
    
     resp = {}
     resp["class"] = predicted_class
-    resp["class_confidence"] = np.max(res).item()
-    resp["confidence"] =predicted_probs
-
-    response.append(resp)
-
-    return response
+    resp["class_confidence"] = np.max(result).item()
+    resp["confidence"] = predicted_probs
+    
+    return resp
 
 
 def read_imagefile(file) -> Image.Image:
