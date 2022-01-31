@@ -11,7 +11,6 @@ from application.components.prediction import settings
 
 
 app_desc = """"""
-os.environ['Truck'] = 'application/model/'
 app = FastAPI(title='Sketch Classification API', description=app_desc)
 
 origins = ["*"]
@@ -23,7 +22,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 def save_image(image, prediction):
-    dir = os.environ.get('Truck')
+    dir = os.getenv('WOT_SAVE_PATH')
     folder = settings.categories[np.argmax(prediction["confidence"])]
     image_dir = os.path.join(dir,folder)
     if not(os.path.isdir(image_dir)):
@@ -38,7 +37,8 @@ async def predict_api(file: UploadFile = File(...)):
         return "Image must be jpg or png format!"
     image = read_imagefile(await file.read())
     prediction = predict(image)
-    if(os.environ.get('Truck')!= None):
+    if(os.getenv('WOT_SAVE_PATH') != None):
+        print(os.getenv('WOT_SAVE_PATH'))
         save_image(image, prediction)
 
     return prediction
