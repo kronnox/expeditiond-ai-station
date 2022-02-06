@@ -6,7 +6,7 @@
 <div cdkDropListGroup class="content" #dropZone>
     <div cdkDropList class="drop-container" [cdkDropListSortingDisabled]="true" [cdkDropListData]="data">
         <div *ngFor="let item of data" class="drag-container" [style.top.px]="item.y" [style.left.px]="item.x" [style.z-index]="item.z" (cdkDragDropped)="changePosition($event,item)" (cdkDragStarted)="changeZIndex(item)" cdkDrag>
-            <img src="{{item.image}}" class="drag-img"/>
+            <div class="drag-img">{{item.image}}</div>
             <div *cdkDragPlaceholder></div>
         </div>
     </div>

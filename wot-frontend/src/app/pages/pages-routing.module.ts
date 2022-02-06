@@ -15,6 +15,10 @@ const routes: Routes = [
     loadChildren: () => import('./data-labeling/data-labeling.module').then(m => m.DataLabelingModule)
   },
   {
+    path: 'data-grouping',
+    loadChildren: () => import('./data-grouping/data-grouping.module').then(m => m.DataGroupingModule)
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'data-creation'
