@@ -35,7 +35,7 @@ def predict(image: Image.Image):
     resp = {}
     resp["class"] = predicted_class
     resp["class_confidence"] = np.max(result).item()
-    resp["confidence"] = predicted_probs
+    resp["confidence"] = predicted_probs[0]
     
     return resp
 
