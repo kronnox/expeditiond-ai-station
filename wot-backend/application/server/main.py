@@ -1,3 +1,4 @@
+from xmlrpc.client import Boolean
 import uvicorn
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
@@ -12,7 +13,7 @@ from application.components.prediction import settings
 
 app_desc = """"""
 app = FastAPI(title='Sketch Classification API', description=app_desc)
-
+os.environ["WOT_SAVE_PATH"] = "."
 origins = ["*"]
 app.add_middleware(
     CORSMiddleware,
@@ -31,13 +32,13 @@ def save_image(image, prediction):
 
 
 @app.post("/predict/image")
-async def predict_api(file: UploadFile = File(...)):
+async def predict_api(file: UploadFile = File(...), save_image: Boolean = False):
     extension = file.filename.split(".")[-1] in ("jpg", "jpeg", "png")
     if not extension:
         return "Image must be jpg or png format!"
     image = read_imagefile(await file.read())
     prediction = predict(image)
-    if(os.getenv('WOT_SAVE_PATH') != None):
+    if os.getenv('WOT_SAVE_PATH') != None & save_image == True:
         print(os.getenv('WOT_SAVE_PATH'))
         save_image(image, prediction)
 
