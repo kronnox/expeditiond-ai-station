@@ -9,7 +9,7 @@ import uuid
 
 from application.components import predict, read_imagefile
 from application.components.prediction import settings
-
+os.environ['WOT_SAVE_PATH'] = '.'
 
 app_desc = """"""
 app = FastAPI(title='Sketch Classification API', description=app_desc)
@@ -32,13 +32,13 @@ def save_image(image, prediction):
 
 
 @app.post("/predict/image")
-async def predict_api(file: UploadFile = File(...), save_image: Boolean = False):
+async def predict_api(file: UploadFile = File(...), save_image_flag: Boolean = False):
     extension = file.filename.split(".")[-1] in ("jpg", "jpeg", "png")
     if not extension:
         return "Image must be jpg or png format!"
     image = read_imagefile(await file.read())
     prediction = predict(image)
-    if os.getenv('WOT_SAVE_PATH') != None and save_image == True:
+    if os.getenv('WOT_SAVE_PATH') != None and save_image_flag == True:
         print(os.getenv('WOT_SAVE_PATH'))
         save_image(image, prediction)
 
