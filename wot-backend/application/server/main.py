@@ -9,7 +9,6 @@ import uuid
 
 from application.components import predict, read_imagefile
 from application.components.prediction import settings
-os.environ['WOT_SAVE_PATH'] = '.'
 
 app_desc = """"""
 app = FastAPI(title='Sketch Classification API', description=app_desc)
