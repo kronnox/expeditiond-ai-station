@@ -13,7 +13,7 @@ from application.components.prediction import settings
 
 app_desc = """"""
 app = FastAPI(title='Sketch Classification API', description=app_desc)
-os.environ["WOT_SAVE_PATH"] = "."
+
 origins = ["*"]
 app.add_middleware(
     CORSMiddleware,
@@ -38,7 +38,7 @@ async def predict_api(file: UploadFile = File(...), save_image: Boolean = False)
         return "Image must be jpg or png format!"
     image = read_imagefile(await file.read())
     prediction = predict(image)
-    if os.getenv('WOT_SAVE_PATH') != None & save_image == True:
+    if os.getenv('WOT_SAVE_PATH') != None and save_image == True:
         print(os.getenv('WOT_SAVE_PATH'))
         save_image(image, prediction)
 
