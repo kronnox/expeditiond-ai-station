@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { CdkDragDrop, CdkDropList, moveItemInArray, Point, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ImgData } from './image_data';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-data-grouping',
@@ -14,15 +15,19 @@ export class DataGroupingComponent implements OnInit {
   public images: string[] = ['UFO', 'Astronaut', 'Komet', 'Asteroid'];
   public data: ImgData[] = [];
   public label_classes = [{
-    class: 'gefahr',
+    class: 'Abschießen',
     images: []
   },
   {
-    class: 'keine gefahr',
+    class: 'Einsammeln',
+    images: []
+  },
+  {
+    class: 'Vorbeifliegen',
     images: []
   }]
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     for(let o of this.images) {
@@ -57,5 +62,9 @@ export class DataGroupingComponent implements OnInit {
       for(let i of this.data) {
         (i==item ? i.z = 1 : i.z = 0)
       }
+  }
+
+  public continue(): void {
+    this.router.navigate(['/game']);
   }
 }

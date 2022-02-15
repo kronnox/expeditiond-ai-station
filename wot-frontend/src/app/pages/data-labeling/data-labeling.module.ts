@@ -5,6 +5,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop'
 import { DataLabelingRoutingModule } from './data-labeling-routing.module';
 import { DataLabelingComponent } from './data-labeling.component';
 import { LayoutModule } from '../../common/layout/layout.module';
+import { ButtonsModule } from 'src/app/common/buttons/buttons.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { LayoutModule } from '../../common/layout/layout.module';
     CommonModule,
     DataLabelingRoutingModule,
     LayoutModule,
-    DragDropModule
+    DragDropModule,
+    ButtonsModule
   ]
 })
 export class DataLabelingModule { }

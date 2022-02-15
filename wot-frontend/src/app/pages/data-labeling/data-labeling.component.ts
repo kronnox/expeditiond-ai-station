@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { CdkDragDrop, CdkDropList, moveItemInArray, Point, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ImgData } from './image_data';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-data-labeling',
@@ -26,7 +27,7 @@ export class DataLabelingComponent implements OnInit {
     images: []
   }]
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.images = JSON.parse(localStorage.getItem('images') || '');
@@ -61,5 +62,9 @@ export class DataLabelingComponent implements OnInit {
       for(let i of this.data) {
         (i==item ? i.z = 1 : i.z = 0)
       }
+  }
+  
+  public continue(): void {
+    this.router.navigate(['/data-grouping']);
   }
 }
