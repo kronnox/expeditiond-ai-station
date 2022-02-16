@@ -6,6 +6,7 @@ import { DataGroupingRoutingModule } from './data-grouping-routing.module';
 import { LayoutModule } from '../../common/layout/layout.module';
 import { DragDropModule } from '@angular/cdk/drag-drop'
 import { ButtonsModule } from 'src/app/common/buttons/buttons.module';
+import { DragAndDropModule } from 'src/app/drag-and-drop/drag-and-drop.module';
 
 @NgModule({
   declarations: [
@@ -15,8 +16,8 @@ import { ButtonsModule } from 'src/app/common/buttons/buttons.module';
     CommonModule,
     DataGroupingRoutingModule,
     LayoutModule,
-    DragDropModule,
-    ButtonsModule
+    ButtonsModule,
+    DragAndDropModule
   ]
 })
 export class DataGroupingModule { }

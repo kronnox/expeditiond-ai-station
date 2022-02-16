@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewChildren }
 import { CdkDragDrop, CdkDropList, moveItemInArray, Point, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ImgData } from './image_data';
 import { Router } from '@angular/router';
+import { BackendService } from 'src/app/shared/backend.service';
 
 @Component({
   selector: 'app-data-grouping',
@@ -12,59 +13,24 @@ export class DataGroupingComponent implements OnInit {
 
   @ViewChild('dropZone') public dropZone: ElementRef;
 
-  public images: string[] = ['UFO', 'Astronaut', 'Komet', 'Asteroid'];
-  public data: ImgData[] = [];
-  public label_classes = [{
-    class: 'Abschießen',
-    images: []
-  },
-  {
-    class: 'Einsammeln',
-    images: []
-  },
-  {
-    class: 'Vorbeifliegen',
-    images: []
-  }]
+  public imagePaths: string[] = ['assets/game/objects/Asteroid/1643121594739.png', 'assets/game/objects/Astronaut/1643203956591.png', 'assets/game/objects/Envelope/6004.png'];
 
-  constructor(private router: Router) { }
+  public images: string[] = [];
+  public labelClasses: any[] = [];
+
+  constructor(private router: Router, private backendService: BackendService) { }
 
   ngOnInit(): void {
-    for(let o of this.images) {
-      console.log(this.images)
-      let img = new ImgData(o, '');
-      this.data.push(img);
-    }
-  }
-
-  public changePosition(event: any, item: ImgData): void {
-    console.log(event);
-    console.log(item)
-    
-    if(event.previousContainer !== event.container) {
-      transferArrayItem(event.previousContainer.data, event.container.data, this.data.indexOf(item), event.currentIndex);
-    } else {
-      //const rectZone=this.dropZone.nativeElement.getBoundingClientRect()
-      //const rectElement=event.item.element.nativeElement.getBoundingClientRect()
-      
-      let y=+item.y+event.distance.y;
-      let x=+item.x+event.distance.x;
-      //const out=y<0 || x<0 || (y>(rectZone.height-rectElement.height)) || (x>(rectZone.width-rectElement.width));
-      //if (!out)
-      //{
-        item.y=y;
-        item.x=x;
-      //}
-    }
-  }
-
-  public changeZIndex(item: ImgData): void {
-      for(let i of this.data) {
-        (i==item ? i.z = 1 : i.z = 0)
-      }
+    const types = ['shoot', 'collect', 'fly by'];
+    types.forEach(element => {
+      this.labelClasses.push({
+        'class': element,
+        'images': []
+      })
+    });
   }
 
   public continue(): void {
-    this.router.navigate(['/game']);
+    this.router.navigate(['/data-grouping']);
   }
 }

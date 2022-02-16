@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewChildren }
 import { CdkDragDrop, CdkDropList, moveItemInArray, Point, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ImgData } from './image_data';
 import { Router } from '@angular/router';
+import { BackendService } from 'src/app/shared/backend.service';
 
 @Component({
   selector: 'app-data-labeling',
@@ -12,58 +13,24 @@ export class DataLabelingComponent implements OnInit {
 
   @ViewChild('dropZone') public dropZone: ElementRef;
 
-  public images: string[] = [];
-  public data: ImgData[] = [];
-  public label_classes = [{
-    class: 'ufo',
-    images: []
-  },
-  {
-    class: 'astronaut',
-    images: []
-  },
-  {
-    class: 'comet',
-    images: []
-  }]
+  public imagePaths: string[] = ['assets/game/objects/Asteroid/1643121594739.png', 'assets/game/objects/Asteroid/1643121624151.png', 'assets/game/objects/Asteroid/1643121631723.png', 'assets/game/objects/Asteroid/1643204811895.png', 'assets/game/objects/Asteroid/1643208419666.png', 'assets/game/objects/Asteroid/1643208419750.png', 'assets/game/objects/Asteroid/1643208419777.png', 'assets/game/objects/Asteroid/1643208419888.png', 'assets/game/objects/Asteroid/1643208419999.png', 'assets/game/objects/Asteroid/1643208656695.png', 'assets/game/objects/Astronaut/1637760284691.png', 'assets/game/objects/Astronaut/1643203956591.png', 'assets/game/objects/Astronaut/1643203979031.png', 'assets/game/objects/Astronaut/1643204023982.png', 'assets/game/objects/Astronaut/1643204042596.png', 'assets/game/objects/Astronaut/1643204117649.png', 'assets/game/objects/Astronaut/1643313993186.png', 'assets/game/objects/Astronaut/1643314253862.png', 'assets/game/objects/Astronaut/obj-13.png', 'assets/game/objects/Astronaut/obj-7 (1).png', 'assets/game/objects/Envelope/6001.png', 'assets/game/objects/Envelope/6004.png', 'assets/game/objects/Envelope/6005.png', 'assets/game/objects/Envelope/6006.png', 'assets/game/objects/Envelope/6007.png', 'assets/game/objects/Envelope/6011.png', 'assets/game/objects/Envelope/6013.png', 'assets/game/objects/Envelope/6014.png'];
 
-  constructor(private router: Router) { }
+  public images: string[] = [];
+  public labelClasses: any[] = [];
+
+  constructor(private router: Router, private backendService: BackendService) { }
 
   ngOnInit(): void {
-    this.images = JSON.parse(localStorage.getItem('images') || '');
-    for(let i = 0; i < 3; i++) {
-      let img = new ImgData(this.images[i%3], 'ufo');
-      this.data.push(img);
-    }
+    this.backendService.getClasses().then(classes => {
+      classes.forEach(element => {
+        this.labelClasses.push({
+          'class': element,
+          'images': []
+        })
+      });
+    });
   }
 
-  public changePosition(event: any, item: ImgData): void {
-    console.log(event);
-    console.log(item)
-    
-    if(event.previousContainer !== event.container) {
-      transferArrayItem(event.previousContainer.data, event.container.data, this.data.indexOf(item), event.currentIndex);
-    } else {
-      //const rectZone=this.dropZone.nativeElement.getBoundingClientRect()
-      //const rectElement=event.item.element.nativeElement.getBoundingClientRect()
-      
-      let y=+item.y+event.distance.y;
-      let x=+item.x+event.distance.x;
-      //const out=y<0 || x<0 || (y>(rectZone.height-rectElement.height)) || (x>(rectZone.width-rectElement.width));
-      //if (!out)
-      //{
-        item.y=y;
-        item.x=x;
-      //}
-    }
-  }
-
-  public changeZIndex(item: ImgData): void {
-      for(let i of this.data) {
-        (i==item ? i.z = 1 : i.z = 0)
-      }
-  }
-  
   public continue(): void {
     this.router.navigate(['/data-grouping']);
   }
