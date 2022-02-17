@@ -4,6 +4,7 @@ import {SpaceObject} from './models/space-object.model';
 import {NgxDrawingCanvasComponent} from "../../ngx-drawing-canvas/ngx-drawing-canvas.component";
 import {GameObject} from "./models/game-object.model";
 import {Star} from "./models/star.model";
+import {Nebula} from "./models/nebula.model";
 
 @Component({
   selector: 'app-game',
@@ -52,6 +53,7 @@ export class GameComponent implements AfterViewInit {
       this.prevTime = time;
 
       this.truck = new SpaceObject(this, this._centerX, this._centerY, 0, 0, this.truckLoc, 600, 300);
+      this.initNebula();
       this.initStars(5000);
       this.tick();
       this.spawnSpaceObjects();
@@ -102,6 +104,12 @@ export class GameComponent implements AfterViewInit {
           ));
       }
   }
+
+    private initNebula(): void {
+        this.bgObjects.push(new Nebula(this, 0));
+        this.bgObjects.push(new Nebula(this, 20));
+        this.bgObjects.push(new Nebula(this, 40));
+    }
 
   private spawnSpaceObjects(){
       setInterval(() => {
