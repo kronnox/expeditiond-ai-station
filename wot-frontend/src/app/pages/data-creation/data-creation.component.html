@@ -14,7 +14,7 @@
   </div>
   <wot-sidebar>
     <div style="padding: 1rem 2rem 0 2rem" *ngFor="let image of images">
-      <img width="100%" style="border: 2px solid #fff; border-radius: 0" src="{{image}}"/>
+      <img width="100%" style="border: 2px solid #fff; border-radius: 0" src="{{image.imagePath}}"/>
     </div>
     <wot-toolbar>
       <wot-button slot="fill" [disabled]="images.length < 3" (click)="continue()" >Weiter ></wot-button>

@@ -13,13 +13,9 @@ export class DataOverviewComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.images = JSON.parse(localStorage.getItem('images') || '');
-    for(let i = 0; i < 100; i++) {
-      this.images.push(this.images[i%3]);
-    }
   }
 
   public continue(): void {
-    this.router.navigate(['/data-labeling']);
+    this.router.navigate(['/data-creation']);
   }
 }

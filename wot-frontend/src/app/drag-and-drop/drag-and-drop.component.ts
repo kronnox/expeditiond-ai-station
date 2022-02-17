@@ -1,7 +1,8 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { CdkDragDrop, CdkDropList, moveItemInArray, Point, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
-import { ImageObject } from '../model/objects/image-object';
+import { ImageObject } from '../model/image/image-object';
+import { DropLabel } from './model/drop-label';
 
 @Component({
   selector: 'app-drag-and-drop',
@@ -12,18 +13,13 @@ export class DragAndDropComponent implements OnInit {
   
   @ViewChild('dropZone') public dropZone: ElementRef;
 
-  public data: ImageObject[] = [];
 
-  @Input() public imagePaths: string[];
-  @Input() public labelClasses: any[];
+  @Input() public data: ImageObject[];
+  @Input() public labelClasses: DropLabel[];
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.imagePaths.forEach(img => {
-      this.data.push(new ImageObject(img));
-    })
-    //this.images = JSON.parse(localStorage.getItem('images') || '');
   }
 
   public changePosition(event: any, item: ImageObject): void {

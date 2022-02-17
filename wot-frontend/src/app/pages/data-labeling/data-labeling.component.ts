@@ -1,9 +1,11 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { CdkDragDrop, CdkDropList, moveItemInArray, Point, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDropList, DropListRef, moveItemInArray, Point, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ImgData } from './image_data';
 import { Router } from '@angular/router';
 import { BackendService } from 'src/app/shared/backend.service';
 import { DragAndDropComponent } from 'src/app/drag-and-drop/drag-and-drop.component';
+import { ImageObject } from 'src/app/model/image/image-object';
+import { DropLabel } from 'src/app/drag-and-drop/model/drop-label';
 
 @Component({
   selector: 'app-data-labeling',
@@ -14,26 +16,32 @@ export class DataLabelingComponent implements OnInit {
 
   @ViewChild('dropZone') public dropZone: ElementRef;
 
-  public imagePaths: string[] = ['assets/game/objects/Asteroid/1643121594739.png', 'assets/game/objects/Asteroid/1643121624151.png', 'assets/game/objects/Asteroid/1643121631723.png', 'assets/game/objects/Asteroid/1643204811895.png', 'assets/game/objects/Asteroid/1643208419666.png', 'assets/game/objects/Asteroid/1643208419750.png', 'assets/game/objects/Asteroid/1643208419777.png', 'assets/game/objects/Asteroid/1643208419888.png', 'assets/game/objects/Asteroid/1643208419999.png', 'assets/game/objects/Asteroid/1643208656695.png', 'assets/game/objects/Astronaut/1637760284691.png', 'assets/game/objects/Astronaut/1643203956591.png', 'assets/game/objects/Astronaut/1643203979031.png', 'assets/game/objects/Astronaut/1643204023982.png', 'assets/game/objects/Astronaut/1643204042596.png', 'assets/game/objects/Astronaut/1643204117649.png', 'assets/game/objects/Astronaut/1643313993186.png', 'assets/game/objects/Astronaut/1643314253862.png', 'assets/game/objects/Astronaut/obj-13.png', 'assets/game/objects/Astronaut/obj-7 (1).png', 'assets/game/objects/Envelope/6001.png', 'assets/game/objects/Envelope/6004.png', 'assets/game/objects/Envelope/6005.png', 'assets/game/objects/Envelope/6006.png', 'assets/game/objects/Envelope/6007.png', 'assets/game/objects/Envelope/6011.png', 'assets/game/objects/Envelope/6013.png', 'assets/game/objects/Envelope/6014.png'];
+  public imagePaths = [{'img': 'assets/game/objects/Asteroid/1643121594739.png', 'objClass': 0}, {'img': 'assets/game/objects/Astronaut/1637760284691.png', 'objClass': 1}, {'img': 'assets/game/objects/Envelope/6001.png', 'objClass': 2}, {'img': 'assets/game/objects/FlyingSaucer/6963.png', 'objClass': 3}, {'img': 'assets/game/objects/Lootbox/1637756179698.png', 'objClass': 4}, {'img': 'assets/game/objects/RaceCar/13361.png', 'objClass': 5}, {'img': 'assets/game/objects/Satellite/14081.png', 'objClass': 6}, {'img': 'assets/game/objects/SatelliteDish/14089.png', 'objClass': 7}, {'img': 'assets/game/objects/SpaceShuttle/15762.png', 'objClass': 8}];
 
-  public images: string[] = [];
-  public labelClasses: any[] = [];
+  public images: ImageObject[] = [];
+  public labelClasses: DropLabel[] = [];
 
   constructor(private router: Router, private backendService: BackendService) { }
 
   ngOnInit(): void {
+    this.images = JSON.parse(localStorage.getItem('created-data') || '');
+
+    this.imagePaths.forEach(element => {
+      this.images.push(new ImageObject(element.img, element.objClass));
+    })
+
     this.backendService.getClasses().then(classes => {
-      classes.forEach(element => {
-        this.labelClasses.push({
-          'class': element,
-          'images': []
-        })
+      let labels: DropLabel[] = [];
+      classes.forEach(function(element, i) {
+        labels.push(new DropLabel(i, element))
       });
+      this.labelClasses = labels;
     });
   }
 
   public continue(ddc :DragAndDropComponent): void {
     //TODO: save labels
+
     this.router.navigate(['/data-grouping']);
   }
 }

@@ -25,11 +25,13 @@ export class GameComponent implements AfterViewInit {
   spaceLoc: string = 'assets/game/space.jpg';
   private customImages: string[] = [];
 
-  private types: number[] = [0,2,1,0,2,1,0,2,1];
+  private grouping: number[];
 
   constructor(protected backendService: BackendService) { }
 
   public ngAfterViewInit() {
+      this.grouping = JSON.parse(localStorage.getItem('grouping') || '');
+
       this.canvasEl = this.canvas.nativeElement;
       this.ctx = <CanvasRenderingContext2D>this.canvasEl.getContext('2d');
 
@@ -107,7 +109,7 @@ export class GameComponent implements AfterViewInit {
           const confidence = Math.max(...res);
           spaceObject.predConfidence = confidence.toFixed(2);
           const classId = res.indexOf(confidence);
-          spaceObject.type = this.types[classId];
+          spaceObject.type = this.grouping[classId];
           spaceObject.predClass = this.backendService.classes[classId];
     });
   }
