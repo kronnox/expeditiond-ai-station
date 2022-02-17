@@ -3,6 +3,7 @@ import { CdkDragDrop, CdkDropList, moveItemInArray, Point, transferArrayItem } f
 import { ImgData } from './image_data';
 import { Router } from '@angular/router';
 import { BackendService } from 'src/app/shared/backend.service';
+import { DragAndDropComponent } from 'src/app/drag-and-drop/drag-and-drop.component';
 
 @Component({
   selector: 'app-data-labeling',
@@ -31,7 +32,8 @@ export class DataLabelingComponent implements OnInit {
     });
   }
 
-  public continue(): void {
+  public continue(ddc :DragAndDropComponent): void {
+    //TODO: save labels
     this.router.navigate(['/data-grouping']);
   }
 }
