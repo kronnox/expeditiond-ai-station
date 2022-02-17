@@ -17,7 +17,7 @@
       <img width="100%" style="border: 2px solid #fff; border-radius: 0" src="{{image}}"/>
     </div>
     <wot-toolbar>
-      <wot-button slot="fill" [disabled]="images.length < 3">Weiter ></wot-button>
+      <wot-button slot="fill" [disabled]="images.length < 3" (click)="continue()" >Weiter ></wot-button>
     </wot-toolbar>
   </wot-sidebar>
 </div>

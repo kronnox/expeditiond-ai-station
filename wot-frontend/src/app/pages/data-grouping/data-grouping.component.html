@@ -1,0 +1,9 @@
+<wot-header>
+    <wot-header-title>
+        Zeige dem Computer, welche Objekte eine Gefahr für den Truck darstellen.
+    </wot-header-title>
+</wot-header>
+<app-drag-and-drop [imagePaths]="imagePaths" [labelClasses]="labelClasses" #dragDrop></app-drag-and-drop>
+<wot-toolbar>
+    <wot-button (click)="continue(dragDrop)" >Weiter ></wot-button>
+</wot-toolbar>

@@ -1,0 +1,17 @@
+<wot-header>
+    <wot-header-title>
+        Unsere fleißigen Inder haben auch Bilder von UFOs gemalt:
+    </wot-header-title>
+</wot-header>
+<div class="content">
+    <div class="inner-content">
+        <span *ngFor="let image of images">
+            <img class="img-data" src="{{image}}"/>   
+        </span>
+    </div>
+</div>
+<wot-footer>
+    <wot-toolbar>
+      <wot-button slot="fill" (click)="continue()" >Weiter ></wot-button>
+    </wot-toolbar>
+</wot-footer>

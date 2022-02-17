@@ -7,6 +7,22 @@ const routes: Routes = [
     loadChildren: () => import('./data-creation/data-creation.module').then(m => m.DataCreationModule)
   },
   {
+    path: 'data-overview',
+    loadChildren: () => import('./data-overview/data-overview.module').then(m => m.DataOverviewModule)
+  },
+  {
+    path: 'data-labeling',
+    loadChildren: () => import('./data-labeling/data-labeling.module').then(m => m.DataLabelingModule)
+  },
+  {
+    path: 'data-grouping',
+    loadChildren: () => import('./data-grouping/data-grouping.module').then(m => m.DataGroupingModule)
+  },
+  {
+    path: 'game',
+    loadChildren: () => import('./game/game.module').then(m => m.GameModule)
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'data-creation'
