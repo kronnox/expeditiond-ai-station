@@ -34,11 +34,11 @@ export class Explosion extends GameObject {
         }
     }
 
-    public update(): void {
+    public update(delta: number): void {
         let activeSum = false;
         this.particles.forEach((particle, i, o) => {
             if (particle.isActive()) {
-                particle.update();
+                particle.update(delta);
                 activeSum = true;
             } else {
                 o.splice(i, 1);

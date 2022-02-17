@@ -28,7 +28,7 @@ export class Projectile extends GameObject {
         ctx.stroke();
     }
 
-    public update(): void {
+    public update(delta: number): void {
         this.x = this.x + this.velocityX;
         this.y = this.y + this.velocityY;
     }

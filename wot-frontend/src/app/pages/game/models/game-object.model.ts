@@ -13,7 +13,7 @@ export abstract class GameObject {
 
     public abstract draw(ctx: CanvasRenderingContext2D): void;
 
-    public abstract update(): void;
+    public abstract update(delta: number): void;
 
     public isActive() {
         return this.active;

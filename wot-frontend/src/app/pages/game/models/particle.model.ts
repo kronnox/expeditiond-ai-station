@@ -34,7 +34,7 @@ export class Particle extends GameObject {
         ctx.fill();
     }
 
-    public update(): void {
+    public update(delta: number): void {
         this.x += this.velocityX;
         this.y += this.velocityY;
         this.velocityY += this.gravity;
@@ -43,7 +43,7 @@ export class Particle extends GameObject {
         this.radius = Math.abs(this.radius - .3);
 
         // reset particle
-        if(this.radius <= .05) {
+        if (this.radius <= .1) {
             this.active = false;
         }
     }

@@ -60,13 +60,13 @@ export class SpaceObject extends GameObject {
         }
     }
 
-    public update(): void {
+    public update(delta: number): void {
         this.x = this.x + this.velocityX;
         this.y = this.y + this.velocityY;
 
         const dist = Math.hypot(this.game.getTruck().x - this.x, this.game.getTruck().y - this.y);
         if (this.projectile){
-            this.projectile.update();
+            this.projectile.update(delta);
             if (this.hitProjectile()) {
                 this.game.spawnObject(new Explosion(this.game, this.x, this.y));
                 this.active = false;
