@@ -21,9 +21,9 @@ export class Star extends GameObject {
         const x = this.get2DX();
         const y = this.get2DY();
         const d = (this.z / 1000.0)
-        const intensity = (1-d*d) * 255
+        const intensity = (1-d*d)
 
-        ctx.fillStyle = "rgb(" + intensity + "," + intensity + "," + intensity + ")";
+        ctx.fillStyle = "hsla(0,0%,100%,"+intensity+")";
         ctx.fillRect(x, y, 2, 2);
     }
 
