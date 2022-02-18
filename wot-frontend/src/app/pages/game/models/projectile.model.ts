@@ -29,7 +29,7 @@ export class Projectile extends GameObject {
     }
 
     public update(delta: number): void {
-        this.x = this.x + this.velocityX;
-        this.y = this.y + this.velocityY;
+        this.x = this.x + this.velocityX + this.velocityX * delta * 0.03;
+        this.y = this.y + this.velocityY + this.velocityY * delta * 0.03;
     }
 }

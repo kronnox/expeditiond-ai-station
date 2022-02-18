@@ -35,8 +35,8 @@ export class Particle extends GameObject {
     }
 
     public update(delta: number): void {
-        this.x += this.velocityX;
-        this.y += this.velocityY;
+        this.x += this.velocityX + this.velocityX * delta * 0.02;
+        this.y += this.velocityY + this.velocityY * delta * 0.02;
         this.velocityY += this.gravity;
 
         this.hue -= 0.2;

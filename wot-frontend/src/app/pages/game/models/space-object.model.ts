@@ -61,8 +61,8 @@ export class SpaceObject extends GameObject {
     }
 
     public update(delta: number): void {
-        this.x = this.x + this.velocityX;
-        this.y = this.y + this.velocityY;
+        this.x = this.x + this.velocityX + this.velocityX * delta * 0.03;
+        this.y = this.y + this.velocityY + this.velocityY * delta * 0.03;
 
         const dist = Math.hypot(this.game.getTruck().x - this.x, this.game.getTruck().y - this.y);
         if (this.projectile){
