@@ -40,7 +40,7 @@ export class Particle extends GameObject {
         this.velocityY += this.gravity;
 
         this.hue -= 0.2;
-        this.radius = Math.abs(this.radius - .3);
+        this.radius = this.radius - .3;
 
         // reset particle
         if (this.radius <= .1) {
