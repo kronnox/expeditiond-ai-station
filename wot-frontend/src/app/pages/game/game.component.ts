@@ -5,6 +5,7 @@ import {NgxDrawingCanvasComponent} from "../../ngx-drawing-canvas/ngx-drawing-ca
 import {GameObject} from "./models/game-object.model";
 import {Star} from "./models/star.model";
 import {Nebula} from "./models/nebula.model";
+import {Truck} from "./models/truck.model";
 
 @Component({
   selector: 'app-game',
@@ -24,8 +25,10 @@ export class GameComponent implements AfterViewInit {
   private _centerY: number;
 
   private bgObjects: GameObject[] = [];
-  private truck: SpaceObject;
+  private _truck: Truck;
   private objects: GameObject[] = [];
+
+  private _radarAngle: number = Math.PI;
 
   private prevTime: number;
   private prevSecond: number = 0;
@@ -53,7 +56,7 @@ export class GameComponent implements AfterViewInit {
 
       this.prevTime = 0;
 
-      this.truck = new SpaceObject(this, this._centerX, this._centerY, 0, 0, this.truckLoc, 600, 300);
+      this._truck = new Truck(this, this._centerX, this._centerY, 0, 0, this.truckLoc, 450, 225);
       this.initNebula();
       this.initStars(5000);
       window.requestAnimationFrame(this.tick.bind(this));
@@ -86,14 +89,19 @@ export class GameComponent implements AfterViewInit {
               obj.draw(this.ctx)
           });
 
-          this.truck.draw(this.ctx);
-          this.ctx.beginPath();
-          this.ctx.arc(this.canvasEl.width / 2, this.canvasEl.height / 2, 400, 0, 2 * Math.PI, false);
-          this.ctx.setLineDash([5, 10]);
-          this.ctx.lineWidth = 5;
-          this.ctx.strokeStyle = 'darkblue';
-          this.ctx.stroke();
-          this.ctx.setLineDash([]);
+          const imgRadar = new Image();
+          imgRadar.src = 'assets/game/radar.png';
+          this.ctx.save();
+          this.ctx.translate(this._truck.x , this._truck.y);
+          this.ctx.rotate(this._radarAngle -= 0.04);
+          if (this._radarAngle < -Math.PI) {
+              this._radarAngle += 2*Math.PI;
+          }
+          const radarWith = 800;
+          this.ctx.drawImage(imgRadar, -radarWith / 2, -radarWith / 2, radarWith, radarWith);
+          this.ctx.restore();
+
+          this._truck.draw(this.ctx);
 
           this.objects.forEach((obj, i, o) => {
               obj.update(elapsed);
@@ -128,7 +136,7 @@ export class GameComponent implements AfterViewInit {
       setInterval(() => {
           const width = 200;
           const height = 200;
-          const velocity = Math.random() * 2 + 1;
+          const velocity = Math.random() + 0.5;
 
           let x: number;
           let y: number;
@@ -139,7 +147,7 @@ export class GameComponent implements AfterViewInit {
               x = Math.random() * this.canvasEl.width;
               y = Math.random() < 0.5 ? 0 - height : this.canvasEl.height + height;
           }
-          const angle = Math.atan2(this.truck.y - y, this.truck.x - x);
+          const angle = Math.atan2(this._truck.y - y, this._truck.x - x);
           const vx = Math.cos(angle)*velocity;
           const vy = Math.sin(angle)*velocity;
 
@@ -193,7 +201,11 @@ export class GameComponent implements AfterViewInit {
       return this._centerX;
   }
 
-  public getTruck(): SpaceObject {
-      return this.truck;
+  get radarAngle(): number {
+      return this._radarAngle;
+  }
+
+  get truck(): Truck {
+      return this._truck;
   }
 }
