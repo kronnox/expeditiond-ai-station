@@ -1,5 +1,6 @@
 import {GameObject} from "./game-object.model";
 import {GameComponent} from "../game.component";
+import {GameConfig} from "../game-config";
 
 export class Truck extends GameObject {
     public x: number;
@@ -8,24 +9,18 @@ export class Truck extends GameObject {
     public width: number;
     public height: number;
 
-    private velocityX: number;
-    private velocityY: number;
-
-    public imagePath: string;
     private readonly image: HTMLImageElement;
 
-    constructor(game: GameComponent, x: number, y: number, velocityX: number, velocityY: number, imgPath: string, width: number, height: number){
+    constructor(game: GameComponent){
         super(game);
 
-        this.x = x;
-        this.y = y;
-        this.velocityX = velocityX;
-        this.velocityY = velocityY;
+        this.x = this.game.centerX;
+        this.y = this.game.centerY;
+
         this.image = new Image();
-        this.image.src = imgPath;
-        this.imagePath = imgPath;
-        this.width = width;
-        this.height = height;
+        this.image.src = 'assets/game/spacetruck.png';
+        this.width = GameConfig.truckSize;
+        this.height = GameConfig.truckSize / 2;
     }
 
     public draw(ctx: CanvasRenderingContext2D): void {

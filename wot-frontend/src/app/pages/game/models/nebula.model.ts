@@ -1,5 +1,6 @@
 import {GameObject} from "./game-object.model";
 import {GameComponent} from "../game.component";
+import {GameConfig} from "../game-config";
 
 export class Nebula extends GameObject {
 
@@ -23,7 +24,7 @@ export class Nebula extends GameObject {
 
     draw(ctx: CanvasRenderingContext2D): void {
         ctx.globalAlpha = this.opacity;
-        ctx.drawImage(this.image, this.y+this.p, this.y+this.p, 500-(this.p*2),500-(this.p*2), 0,0, this.game.width, this.game.height);
+        ctx.drawImage(this.image, this.y+this.p, this.y+this.p, 500-(this.p*2),500-(this.p*2), -GameConfig.shakeFactor,-GameConfig.shakeFactor, this.game.width + GameConfig.shakeFactor, this.game.height + GameConfig.shakeFactor);
         ctx.globalAlpha = 1;
     }
 

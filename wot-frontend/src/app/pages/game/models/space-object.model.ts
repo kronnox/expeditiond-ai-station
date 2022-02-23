@@ -2,6 +2,7 @@ import { Projectile } from "./projectile.model";
 import {GameObject} from "./game-object.model";
 import {GameComponent} from "../game.component";
 import {Explosion} from "./explosion.model";
+import {GameConfig} from "../game-config";
 
 export class SpaceObject extends GameObject {
     public x: number;
@@ -68,6 +69,7 @@ export class SpaceObject extends GameObject {
 
         console.log(this.angle+" "+this.game.radarAngle);
 
+        const range = GameConfig.radarRange + GameConfig.spaceObjectSize / 3;
         const dist = Math.hypot(this.game.truck.x - this.x, this.game.truck.y - this.y);
         if (this.projectile){
             this.projectile.update(delta);
@@ -75,9 +77,13 @@ export class SpaceObject extends GameObject {
                 this.game.spawnObject(new Explosion(this.game, this.x, this.y));
                 this.active = false;
             }
-        } else if (dist > 400) {
+        } else if (dist > range) {
             this.detected = false;
-        } else if (dist < 400 && this.angle > this.game.radarAngle-0.1 && this.angle < this.game.radarAngle+0.1 && !this.detected){
+        } else if (
+            dist < range
+            && this.angle > this.game.radarAngle-0.1 && this.angle < this.game.radarAngle+0.1
+            && !this.detected
+        ){
             this.detected = true;
             if (this.type === 0){
                 const vx = Math.cos(this.angle) * 6;
@@ -88,6 +94,7 @@ export class SpaceObject extends GameObject {
 
         if (this.hitTruck()) {
             this.active = false;
+            this.game.applyShake();
         }
     }
 

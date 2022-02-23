@@ -21,7 +21,7 @@ export class Particle extends GameObject {
         this.radius = Particle.rand(7, 2, true);
         this.hue = Particle.rand(50, 0, true);
         this.gravity = 0;
-        this.opacity = Math.random() + .2;
+        this.opacity = Math.random()*0.5 + .2;
 
         this.velocityX = Math.random() * 14 - 7;
         this.velocityY = Math.random() * 14 - 7;
