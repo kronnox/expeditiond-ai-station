@@ -20,6 +20,7 @@ export class DataCreationComponent implements OnInit {
 
   public async saveCanvas(canvas: NgxDrawingCanvasComponent) {
     const imgPath = canvas.canvas.nativeElement.toDataURL("image/jpeg");
+
     await fetch(imgPath).then(r => r.blob()).then(blob => this.backendService.predictBlob(blob)).then(res => {
       const confidence = Math.max(...res);
       const classId = res.indexOf(confidence);

@@ -1,54 +1,52 @@
-.content {
+.body {
     background-color: black;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
 }
-.footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: calc(var(--base-scale) * 10rem);
-    width: 100%;
-  
-    background: #303030;
-  
-    color: white;
 
-    display: inline-block;
+.footer {
+    height: calc(var(--base-scale) * 15rem);
+    width: 100%;
+    background: #303030;
+    color: white;
 }
-.drag-container {
-    background-color: blue;
+
+.drag-item {
     width: calc(var(--base-scale) * 10rem);
     height: calc(var(--base-scale) * 10rem);
-    
     position:absolute;
     border: solid 1px #ccc;
-    color: rgba(0, 0, 0, 0.87);
-    display: flex;
-    flex-direction: row;
+    color: white;
     align-items: center;
-    justify-content: space-between;
     box-sizing: border-box;
     cursor: move;
     background: black;
     font-size: 14px;
     z-index: 100;
 }
-.drop-folder {
+
+.drop-item {
     height: calc(var(--base-scale) * 10rem);
     width: calc(var(--base-scale) * 10rem);
     display: inline-block;
     margin-left: 5px;
     margin-right: 5px;
 }
-.drop-container {
-    position:relative;
-    flex-grow:1;
-    height: 500px;
-    width: 70%;
+
+.content {
+    flex-grow: 1;
+    width: 100%;
     z-index: 1;
 }
+
 .drag-img {
     width:100%;
     height:100%;
     object-fit:cover;
+}
+
+.class-label {
+    color: white;
+    font-size: larger;
 }

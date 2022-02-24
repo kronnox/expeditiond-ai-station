@@ -3,7 +3,7 @@
         Zeige dem Computer, welche Objekte eine Gefahr für den Truck darstellen.
     </wot-header-title>
 </wot-header>
-<app-drag-and-drop [data]="images" [labelClasses]="labelClasses" #dragDrop></app-drag-and-drop>
+<app-drag-and-drop [data]="images" [labels]="labels" #dragDrop></app-drag-and-drop>
 <wot-toolbar>
     <wot-button (click)="continue(dragDrop)" >Weiter ></wot-button>
 </wot-toolbar>

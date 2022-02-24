@@ -25,7 +25,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'data-creation'
+    redirectTo: 'data-overview'
   }
 ];
 

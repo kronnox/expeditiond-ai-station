@@ -6,6 +6,8 @@ import { BackendService } from 'src/app/shared/backend.service';
 import { DragAndDropComponent } from 'src/app/drag-and-drop/drag-and-drop.component';
 import { ImageObject } from 'src/app/model/image/image-object';
 import { DropLabel } from 'src/app/drag-and-drop/model/drop-label';
+import { ImageService } from 'src/app/shared/image.service';
+import { elementEventFullName } from '@angular/compiler/src/view_compiler/view_compiler';
 
 @Component({
   selector: 'app-data-grouping',
@@ -14,37 +16,45 @@ import { DropLabel } from 'src/app/drag-and-drop/model/drop-label';
 })
 export class DataGroupingComponent implements OnInit {
 
-  @ViewChild('dropZone') public dropZone: ElementRef;
-
-  public imagePaths = [{'img': 'assets/game/objects/Asteroid/1643121594739.png', 'objClass': 0}, {'img': 'assets/game/objects/Astronaut/1637760284691.png', 'objClass': 1}, {'img': 'assets/game/objects/Envelope/6001.png', 'objClass': 2}, {'img': 'assets/game/objects/FlyingSaucer/6963.png', 'objClass': 3}, {'img': 'assets/game/objects/Lootbox/1637756179698.png', 'objClass': 4}, {'img': 'assets/game/objects/RaceCar/13361.png', 'objClass': 5}, {'img': 'assets/game/objects/Satellite/14081.png', 'objClass': 6}, {'img': 'assets/game/objects/SatelliteDish/14089.png', 'objClass': 7}, {'img': 'assets/game/objects/SpaceShuttle/15762.png', 'objClass': 8}];
-
   public images: ImageObject[] = [];
-  public labelClasses: DropLabel[] = [];
+  public labels: DropLabel[] = [];
 
-  constructor(private router: Router, private backendService: BackendService) { }
+  private types: string[] = ['Abschießen', 'Einsammeln', 'Vorbeifliegen lassen'];
+
+  constructor(private router: Router, private backendService: BackendService, private imageService: ImageService) { }
 
   ngOnInit(): void {
-    const types = ['shoot', 'collect', 'fly by'];
+    let inserted: number[] = [];
+    const customImages: ImageObject[] = JSON.parse(localStorage.getItem('created-data') || '');
+    customImages.forEach(element => {
+      element.label = this.backendService.classes[element.objectClass];
+      inserted.push(element.objectClass);
+      this.images.push(element);
+    })
+    for(let i = 0; i < this.backendService.classes.length; i++) {
+      if(inserted.indexOf(i) === -1){
+        let io = this.imageService.getNImagesOfClass(1, i)[0];
+        io.label = this.backendService.classes[io.objectClass];
+        this.images.push(io);
+      }
+    }
+
     let labels: DropLabel[] = [];
-    types.forEach(function(element, i) {
+    this.types.forEach(function(element, i) {
       labels.push(new DropLabel(i, element));
     });
-    this.labelClasses = labels;
-
-    this.imagePaths.forEach(element => {
-      this.images.push(new ImageObject(element.img, element.objClass));
-    })
+    this.labels = labels;
   }
 
   public continue(ddc: DragAndDropComponent): void {
     let grouping: number[] = [];
-    ddc.labelClasses.forEach(type  => {
-      type.childs.forEach(objClass => {
-        grouping[objClass.objectClass] = type.labelID;
+    ddc.labels.forEach(element  => {
+      element.children.forEach(item => {
+        grouping[item.objectClass] = element.labelID;
       })
     })
-
     localStorage.setItem('grouping', JSON.stringify(grouping));
+    
     this.router.navigate(['/game']);
   }
 }

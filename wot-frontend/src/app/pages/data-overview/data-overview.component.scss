@@ -1,15 +1,15 @@
 .content {
-    //position: relative;
-    //height: calc(100% - calc(var(--base-scale) * 4rem));
-    //display:flex;
+    overflow: auto;
+    height: 100%;
     flex-direction: row;
 }
 .inner-content {
     background-color: black;
+    overflow-y: scroll;
 }
 .img-data {
-    margin: 2px;
-    border: 2px solid #fff;
+    margin-left: 2%;
+    border: 0px solid #fff;
     border-radius: 0;
-    width: 15%;
+    width: 8%;
 }

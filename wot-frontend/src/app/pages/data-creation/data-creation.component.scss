@@ -8,6 +8,10 @@
   background-color: #ffaa00;
   flex:1;
 }
+.drawing-canvas {
+  height: 600px;
+  width: 600px;
+}
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
 
@@ -29,4 +33,9 @@ body {
   box-sizing: border-box;
   height: 100%;
   width: 100%;
+}
+
+.image-list {
+  overflow: auto;
+  height: 100%;
 }
