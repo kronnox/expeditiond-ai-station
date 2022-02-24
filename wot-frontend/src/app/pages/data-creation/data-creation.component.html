@@ -7,7 +7,7 @@
   <div class="inner-content">
     <p *ngIf="images.length < 4">Zeichne vier von den Objekten Asteroid, Astronaut, Brief, Ufo, Versorgungsbox, Auto, Satellit, SatellitenschÃ¼ssel oder Raumschiff</p>
     <p *ngIf="images.length >= 4">Danke</p>
-    <div class="drawing-canvas" *ngIf="images.length >= 4">
+    <div class="drawing-canvas" *ngIf="images.length < 4">
       <ngx-drawing-canvas [width]="'100%'" [height]="'100%'" strokeColor="#fff" backgroundColor="#121212" #drawingCanvas></ngx-drawing-canvas>
       <div>
         <wot-button icon="arrow-undo" (click)="drawingCanvas.undoLast()" [disabled]="!drawingCanvas.canUndo()"></wot-button>
