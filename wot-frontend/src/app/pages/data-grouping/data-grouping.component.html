@@ -1,9 +1,16 @@
-<wot-header>
-    <wot-header-title>
-        Zeige dem Computer, welche Objekte eine Gefahr für den Truck darstellen.
-    </wot-header-title>
-</wot-header>
-<app-drag-and-drop [data]="images" [labels]="labels" #dragDrop></app-drag-and-drop>
-<wot-toolbar>
-    <wot-button (click)="continue(dragDrop)" >Weiter ></wot-button>
-</wot-toolbar>
+<wot-page>
+  <wot-step-info>
+    <wot-step-title>
+      Schritt 4: Gruppieren
+    </wot-step-title>
+    <wot-step-description>
+      Zeige dem Computer, welche Objekte eine Gefahr für den Truck darstellen.
+    </wot-step-description>
+  </wot-step-info>
+  <wot-row>
+    <app-drag-and-drop [data]="images" [labels]="labels" #dragDrop></app-drag-and-drop>
+  </wot-row>
+  <wot-row>
+    <wot-button slot="right" (click)="continue(dragDrop)">Zum nächsten Schritt</wot-button>
+  </wot-row>
+</wot-page>
