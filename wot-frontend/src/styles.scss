@@ -6,6 +6,7 @@
 
   --base-font: 'Ubuntu', sans-serif;
 
+  --color-background: #00030B;
   --color-primary: #90be6d
 }
 
@@ -19,4 +20,5 @@ body {
   padding: 0;
   height: 100%;
   overflow: hidden;
+  background-color: var(--color-background);
 }

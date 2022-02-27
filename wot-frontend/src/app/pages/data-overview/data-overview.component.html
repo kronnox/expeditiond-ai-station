@@ -1,3 +1,28 @@
+<wot-page>
+  <wot-step-info>
+    <wot-step-title>
+      Schritt 1: Übersicht
+    </wot-step-title>
+    <wot-step-description>
+      Der Computer hat Bilder von Objekten gesammelt, die uns in vergangenen Missionen begegnet sind:
+    </wot-step-description>
+  </wot-step-info>
+  <wot-row>
+    <wot-container>
+      <div class="image-container">
+        <div class="image-inner-container">
+          <span *ngFor="let image of images">
+              <img class="img-data" src="{{image.imagePath}}"/>
+          </span>
+        </div>
+      </div>
+    </wot-container>
+  </wot-row>
+  <wot-row>
+    <wot-button slot="right" (click)="continue()" >Zum nächsten Schritt</wot-button>
+  </wot-row>
+</wot-page>
+<!--
 <wot-header>
     <wot-header-title>
         Der Computer hat Bilder von Objekten gesammelt, die uns in vergangenen Missionen begegnet sind:
@@ -6,7 +31,7 @@
 <div class="content">
     <div class="inner-content">
         <span *ngFor="let image of images">
-            <img class="img-data" src="{{image.imagePath}}"/>   
+            <img class="img-data" src="{{image.imagePath}}"/>
         </span>
     </div>
 </div>
@@ -15,3 +40,4 @@
       <wot-button slot="fill" (click)="continue()" >Weiter ></wot-button>
     </wot-toolbar>
 </wot-footer>
+-->
