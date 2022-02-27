@@ -1,41 +1,37 @@
-.content {
-  position: relative;
-  height: calc(100% - calc(var(--base-scale) * 4rem));
-  display:flex;
+.inner-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: white;
+}
+
+.canvas-group {
+  display: flex;
   flex-direction: row;
 }
-.inner-content {
-  background-color: #ffaa00;
-  flex:1;
-}
+
 .drawing-canvas {
-  height: 600px;
-  width: 600px;
+  height: fit-content;
+  width: fit-content;
+  border: #7F7764 solid 1px;
 }
 
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
-
-//colors
-$red: #E1332D;
-$white: #fff;
-
-//base styles
-
-* {
-  box-sizing: inherit;
-  transition-property: all;
-  transition-duration: .6s;
-  transition-timing-function: ease;
-}
-
-html,
-body {
-  box-sizing: border-box;
-  height: 100%;
-  width: 100%;
+.canvas-buttons {
+  padding: 0.6rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .image-list {
-  overflow: auto;
-  height: 100%;
+  height: 518px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  float: right;
+}
+
+.image-item {
+  width: calc(512px / 3 - 8px);
+  margin-bottom: 7px;
+  border: #7F7764 solid 1px;
 }
