@@ -1,52 +1,66 @@
 .body {
-    background-color: black;
-    display: flex;
-    height: 100%;
-    flex-direction: column;
+  display: flex;
+  width: 1600px;
+  height: 580px;
+  flex-direction: row;
 }
 
-.footer {
-    height: calc(var(--base-scale) * 15rem);
-    width: 100%;
-    background: #303030;
-    color: white;
+.categories {
+  color: white;
+}
+
+.category {
+  width: 20rem;
+  margin: 0.8rem 0;
+  padding: 1rem;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  background: linear-gradient(45deg, #014B59, #023947);
+  overflow: hidden;
+  display: flex;
+}
+
+.category:hover {
+  transform: translateY(0);
+  background-image: linear-gradient(45deg, #005C6B, #0e97aa);
+}
+
+ion-icon {
+  --ionicon-stroke-width: 64px;
+  font-size: 16px;
+  margin: 1px 10px 0 0;
 }
 
 .drag-item {
-    width: calc(var(--base-scale) * 10rem);
-    height: calc(var(--base-scale) * 10rem);
-    position:absolute;
-    border: solid 1px #ccc;
-    color: white;
-    align-items: center;
-    box-sizing: border-box;
-    cursor: move;
-    background: black;
-    font-size: 14px;
-    z-index: 100;
-}
-
-.drop-item {
-    height: calc(var(--base-scale) * 10rem);
-    width: calc(var(--base-scale) * 10rem);
-    display: inline-block;
-    margin-left: 5px;
-    margin-right: 5px;
+  width: calc(var(--base-scale) * 6rem);
+  height: calc(var(--base-scale) * 6rem);
+  position: absolute;
+  color: white;
+  align-items: center;
+  box-sizing: border-box;
+  cursor: move;
+  font-size: 14px;
+  z-index: 100;
+  background: linear-gradient(45deg, #020D17, #023947);
+  border: #7F7764 solid 1px;
 }
 
 .content {
-    flex-grow: 1;
-    width: 100%;
-    z-index: 1;
+  flex-grow: 1;
+  width: 100%;
+  z-index: 1;
 }
 
 .drag-img {
-    width:100%;
-    height:100%;
-    object-fit:cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .class-label {
-    color: white;
-    font-size: larger;
+  color: white;
+  font-size: larger;
 }

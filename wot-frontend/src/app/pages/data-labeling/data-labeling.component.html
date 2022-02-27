@@ -1,9 +1,16 @@
-<wot-header>
-    <wot-header-title>
+<wot-page>
+  <wot-step-info>
+    <wot-step-title>
+      Schritt 2: Labeling
+    </wot-step-title>
+    <wot-step-description>
         Der Computer hat weitere Bilder gefunden. Klassifiziere diese.
-    </wot-header-title>
-</wot-header>
-<app-drag-and-drop [data]="images" [labels]="labels" #dragDrop></app-drag-and-drop>
-<wot-toolbar>
-    <wot-button (click)="continue(dragDrop)" >Weiter ></wot-button>
-</wot-toolbar>
+    </wot-step-description>
+  </wot-step-info>
+  <wot-row>
+    <app-drag-and-drop [data]="images" [labels]="labels" #dragDrop></app-drag-and-drop>
+  </wot-row>
+  <wot-row>
+    <wot-button slot="right" (click)="continue(dragDrop)">Zum nächsten Schritt</wot-button>
+  </wot-row>
+</wot-page>
