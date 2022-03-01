@@ -18,7 +18,7 @@
         <div class="canvas-buttons">
           <wot-button icon="arrow-undo" (click)="drawingCanvas.undoLast()" [disabled]="!drawingCanvas.canUndo()"></wot-button>
           <wot-button icon="arrow-redo" (click)="drawingCanvas.redoLast()" [disabled]="!drawingCanvas.canRedo()"></wot-button>
-          <wot-button icon="checkmark" (click)="saveCanvas(drawingCanvas)" [disabled]="images.length >= 3"></wot-button>
+          <wot-button icon="checkmark" (click)="saveCanvas(drawingCanvas)" [disabled]="images.length >= 4"></wot-button>
         </div>
       </div>
 
@@ -32,7 +32,7 @@
     </div>
   </wot-row>
   <wot-row>
-    <wot-button slot="right" [disabled]="images.length < 3" (press)="done()">Schritt abschließen</wot-button>
+    <wot-button slot="right" [disabled]="images.length < 4" (press)="done()">Schritt abschließen</wot-button>
   </wot-row>
 </wot-page>
 

@@ -24,14 +24,13 @@
 
 .image-list {
   height: 518px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  float: right;
+  display: grid;
+  grid-template-columns: repeat(2, 252px);
+  grid-template-rows: repeat(2, 252px);
+  grid-gap: 10px;
 }
 
 .image-item {
-  width: calc(512px / 3 - 8px);
-  margin-bottom: 7px;
+  margin-bottom: -3px;
   border: #7F7764 solid 1px;
 }
