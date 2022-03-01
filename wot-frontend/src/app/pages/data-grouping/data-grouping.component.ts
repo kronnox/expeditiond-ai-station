@@ -8,6 +8,7 @@ import { ImageObject } from 'src/app/model/image/image-object';
 import { DropLabel } from 'src/app/drag-and-drop/model/drop-label';
 import { ImageService } from 'src/app/shared/image.service';
 import { elementEventFullName } from '@angular/compiler/src/view_compiler/view_compiler';
+import {WotSuccessOverlayComponent} from "../../common/layout/wot-success-overlay/wot-success-overlay.component";
 
 @Component({
   selector: 'app-data-grouping',
@@ -15,6 +16,8 @@ import { elementEventFullName } from '@angular/compiler/src/view_compiler/view_c
   styleUrls: ['./data-grouping.component.scss']
 })
 export class DataGroupingComponent implements OnInit {
+
+  @ViewChild('successOverlay') public successOverlay: WotSuccessOverlayComponent;
 
   public images: ImageObject[] = [];
   public labels: DropLabel[] = [];
@@ -46,7 +49,7 @@ export class DataGroupingComponent implements OnInit {
     this.labels = labels;
   }
 
-  public continue(ddc: DragAndDropComponent): void {
+  public done(ddc: DragAndDropComponent): void {
     let grouping: number[] = [];
     ddc.labels.forEach(element  => {
       element.children.forEach(item => {
@@ -54,7 +57,10 @@ export class DataGroupingComponent implements OnInit {
       })
     })
     localStorage.setItem('grouping', JSON.stringify(grouping));
-    
+    this.successOverlay.setVisible();
+  }
+
+  public continue(): void {
     this.router.navigate(['/game']);
   }
 }

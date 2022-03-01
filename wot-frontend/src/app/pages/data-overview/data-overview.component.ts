@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { ImageObject } from 'src/app/model/image/image-object';
 import { BackendService } from 'src/app/shared/backend.service';
 import { ImageService } from 'src/app/shared/image.service';
+import {WotSuccessOverlayComponent} from "../../common/layout/wot-success-overlay/wot-success-overlay.component";
 
 @Component({
   selector: 'app-data-overview',
@@ -10,6 +11,8 @@ import { ImageService } from 'src/app/shared/image.service';
   styleUrls: ['./data-overview.component.scss']
 })
 export class DataOverviewComponent implements OnInit {
+
+  @ViewChild('successOverlay') public successOverlay: WotSuccessOverlayComponent;
 
   public images: ImageObject[] = [];
 
@@ -22,6 +25,10 @@ export class DataOverviewComponent implements OnInit {
       this.images.push(imgs[index]);
       imgs.splice(index, 1);
     }
+  }
+
+  public done(): void {
+    this.successOverlay.setVisible();
   }
 
   public continue(): void {

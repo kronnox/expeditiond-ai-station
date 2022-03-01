@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NgxDrawingCanvasComponent} from "../../ngx-drawing-canvas/ngx-drawing-canvas.component";
 import { Router } from '@angular/router';
 import { BackendService } from 'src/app/shared/backend.service';
 import { ImageObject } from 'src/app/model/image/image-object';
+import {WotSuccessOverlayComponent} from "../../common/layout/wot-success-overlay/wot-success-overlay.component";
 
 @Component({
   selector: 'app-data-creation',
@@ -10,6 +11,8 @@ import { ImageObject } from 'src/app/model/image/image-object';
   styleUrls: ['./data-creation.component.scss']
 })
 export class DataCreationComponent implements OnInit {
+
+  @ViewChild('successOverlay') public successOverlay: WotSuccessOverlayComponent;
 
   public images: ImageObject[] = [];
 
@@ -30,8 +33,12 @@ export class DataCreationComponent implements OnInit {
     canvas.clear();
   }
 
-  public continue(): void {
+  public done(): void {
     localStorage.setItem('created-data', JSON.stringify(this.images));
+    this.successOverlay.setVisible();
+  }
+
+  public continue(): void {
     this.router.navigate(['/data-labeling']);
   }
 }

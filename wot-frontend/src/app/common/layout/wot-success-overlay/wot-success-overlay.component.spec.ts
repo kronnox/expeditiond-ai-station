@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WotStepTitleComponent } from './wot-step-title.component';
+import { WotSuccessOverlayComponent } from './wot-success-overlay.component';
 
-describe('WotStepTitleComponent', () => {
-  let component: WotStepTitleComponent;
-  let fixture: ComponentFixture<WotStepTitleComponent>;
+describe('WotSuccessOverlayComponent', () => {
+  let component: WotSuccessOverlayComponent;
+  let fixture: ComponentFixture<WotSuccessOverlayComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WotStepTitleComponent ]
+      declarations: [ WotSuccessOverlayComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WotStepTitleComponent);
+    fixture = TestBed.createComponent(WotSuccessOverlayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,11 +1,11 @@
 <wot-page>
   <wot-step-info>
-    <wot-step-title>
+    <h1>
       Schritt 2: Datensatz-Erstellung
-    </wot-step-title>
-    <wot-step-description>
+    </h1>
+    <p>
       Zeichne Objekte, um den Computer zu zeigen, wie diese aussehen. Zeichne vier von den Objekten Asteroid, Astronaut, Brief, Ufo, Versorgungsbox, Auto, Satellit, Satellitenschüssel oder Raumschiff
-    </wot-step-description>
+    </p>
   </wot-step-info>
   <wot-row>
     <div class="inner-content">
@@ -32,6 +32,10 @@
     </div>
   </wot-row>
   <wot-row>
-    <wot-button slot="right" [disabled]="images.length < 3" (click)="continue()">Zum nächsten Schritt</wot-button>
+    <wot-button slot="right" [disabled]="images.length < 3" (press)="done()">Schritt abschließen</wot-button>
   </wot-row>
 </wot-page>
+
+<wot-success-overlay (continue)="continue()" #successOverlay>
+  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+</wot-success-overlay>

@@ -9,8 +9,8 @@ import { WotStepInfoComponent } from './wot-step-info/wot-step-info.component';
 import { WotRowComponent } from './wot-row/wot-row.component';
 import { WotContainerComponent } from './wot-container/wot-container.component';
 import { WotPageComponent } from './wot-page/wot-page.component';
-import { WotStepTitleComponent } from './wot-step-title/wot-step-title.component';
-import { WotStepDescriptionComponent } from './wot-step-description/wot-step-description.component';
+import { WotSuccessOverlayComponent } from './wot-success-overlay/wot-success-overlay.component';
+import {ButtonsModule} from "../buttons/buttons.module";
 
 
 @NgModule({
@@ -24,24 +24,23 @@ import { WotStepDescriptionComponent } from './wot-step-description/wot-step-des
         WotRowComponent,
         WotContainerComponent,
         WotPageComponent,
-        WotStepTitleComponent,
-        WotStepDescriptionComponent
+        WotSuccessOverlayComponent
     ],
-  exports: [
-    WotContainerComponent,
-    WotHeaderComponent,
-    WotHeaderTitleComponent,
-    WotSidebarComponent,
-    WotToolbarComponent,
-    WotFooterComponent,
-    WotRowComponent,
-    WotPageComponent,
-    WotStepInfoComponent,
-    WotStepDescriptionComponent,
-    WotStepTitleComponent
-  ],
-    imports: [
-        CommonModule
-    ]
+    exports: [
+        WotContainerComponent,
+        WotHeaderComponent,
+        WotHeaderTitleComponent,
+        WotSidebarComponent,
+        WotToolbarComponent,
+        WotFooterComponent,
+        WotRowComponent,
+        WotPageComponent,
+        WotStepInfoComponent,
+        WotSuccessOverlayComponent
+    ],
+  imports: [
+    CommonModule,
+    ButtonsModule
+  ]
 })
 export class LayoutModule { }

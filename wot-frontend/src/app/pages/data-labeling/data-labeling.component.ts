@@ -7,6 +7,7 @@ import { DragAndDropComponent } from 'src/app/drag-and-drop/drag-and-drop.compon
 import { ImageObject } from 'src/app/model/image/image-object';
 import { DropLabel } from 'src/app/drag-and-drop/model/drop-label';
 import { ImageService } from 'src/app/shared/image.service';
+import {WotSuccessOverlayComponent} from "../../common/layout/wot-success-overlay/wot-success-overlay.component";
 
 @Component({
   selector: 'app-data-labeling',
@@ -14,6 +15,8 @@ import { ImageService } from 'src/app/shared/image.service';
   styleUrls: ['./data-labeling.component.scss']
 })
 export class DataLabelingComponent implements OnInit {
+
+  @ViewChild('successOverlay') public successOverlay: WotSuccessOverlayComponent;
 
   public images: ImageObject[] = [];
   public labels: DropLabel[] = [];
@@ -33,7 +36,7 @@ export class DataLabelingComponent implements OnInit {
     this.labels = labels;
   }
 
-  public continue(ddc :DragAndDropComponent): void {
+  public done(ddc :DragAndDropComponent): void {
     ddc.labels.forEach(element => {
       element.children.forEach(item => {
         if(element.labelID != item.objectClass){
@@ -41,7 +44,10 @@ export class DataLabelingComponent implements OnInit {
         }
       })
     })
+    this.successOverlay.setVisible();
+  }
 
+  public continue(): void {
     this.router.navigate(['/data-grouping']);
   }
 }
