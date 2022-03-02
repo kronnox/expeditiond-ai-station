@@ -27,7 +27,10 @@ export class DataCreationComponent implements OnInit {
     await fetch(imgPath).then(r => r.blob()).then(blob => this.backendService.predictBlob(blob)).then(res => {
       const confidence = Math.max(...res);
       const classId = res.indexOf(confidence);
-      this.images.push(new ImageObject(imgPath, classId));
+      let io = new ImageObject(imgPath, true);
+      io.prediction = res;
+      io.predictedClass = classId;
+      this.images.push(io);
     });
 
     canvas.clear();

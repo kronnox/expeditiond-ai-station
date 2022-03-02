@@ -37,14 +37,30 @@ export class DataLabelingComponent implements OnInit {
   }
 
   public done(ddc :DragAndDropComponent): void {
+    let imageObjects: ImageObject[] = [];
     ddc.labels.forEach(element => {
       element.children.forEach(item => {
-        if(element.labelID != item.objectClass){
-
+        item.imageObject.labeledClass = element.labelID;
+        item.imageObject.label = this.backendService.classes[element.labelID];
+        let indexDouble = -1;
+        for(let i = 0; i < imageObjects.length; i++) {
+          if(imageObjects[i].labeledClass === item.imageObject.labeledClass) {
+            indexDouble = i
+            break;
+          }
+        }
+        if(indexDouble != -1) {
+          if(item.imageObject.custom) {
+            imageObjects.splice(indexDouble, 1);
+            imageObjects.push(item.imageObject);
+          }
+        } else {
+          imageObjects.push(item.imageObject);
         }
       })
-    })
+    });
     this.successOverlay.setVisible();
+    localStorage.setItem('labeled-data', JSON.stringify(imageObjects));
   }
 
   public continue(): void {

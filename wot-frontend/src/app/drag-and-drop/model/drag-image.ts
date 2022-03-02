@@ -1,6 +1,6 @@
 import { ImageObject } from "src/app/model/image/image-object";
 
-export class DragImage extends ImageObject {
+export class DragImage {
 
     public x: number;
     public y: number;
@@ -9,12 +9,14 @@ export class DragImage extends ImageObject {
     public height: number;
     public width: number;
 
+    public imageObject: ImageObject;
+
     constructor(imageObject: ImageObject, x: number, y: number, size: number){
-        super(imageObject.imagePath, imageObject.objectClass);
-        this.label = imageObject.label;
+        this.imageObject = imageObject;
         this.x = x;
         this.y = y;
         this.height = size;
         this.width = size;
+        this.z = 0;
     }
 }

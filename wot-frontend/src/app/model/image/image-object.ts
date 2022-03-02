@@ -2,12 +2,18 @@ export class ImageObject {
 
     public imagePath: string;
 
-    public objectClass: number;
+    public labeledClass: number;
+
+    public prediction: number[];
+    public predictedClass: number;
 
     public label?: string;
 
-    constructor(img: string, objClass: number, label?: string) {
+    public custom: boolean;
+
+    constructor(img: string, custom: boolean) {
         this.imagePath = img;
-        this.objectClass = objClass;
+        this.custom = custom;
+        this.prediction = new Array(9).fill(9);
     }
 }
