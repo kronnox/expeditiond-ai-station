@@ -1,4 +1,4 @@
-.landing-page {
+.wot-overlay {
   position: fixed;
   width: 100%;
   height: 100%;
@@ -13,11 +13,11 @@
   flex-direction: row;
 }
 
-.landing-page ::ng-deep h1,h2,h3,h4,h5,h6 {
+.wot-overlay ::ng-deep h1,h2,h3,h4,h5,h6 {
   margin: 6px 0;
 }
 
-.landing-page ::ng-deep p {
+.wot-overlay ::ng-deep p {
   margin: 6px 0;
   font-size: 1.5em;
 }
