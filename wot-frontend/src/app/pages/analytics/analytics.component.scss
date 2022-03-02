@@ -2,7 +2,7 @@
 .image-list {
     height: 518px;
     width: 200px;
-    overflow: scroll;
+    overflow: auto;
 
     --mask-height: 48px;
     --mask-image-content: linear-gradient(
@@ -29,4 +29,34 @@
     background: linear-gradient(45deg, #020D17, #023947);
     border: #7F7764 solid 1px;
 }
-  
+
+.inner-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: white;
+}
+
+.analysis {
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.class-prediction {
+    width: 20rem;
+    margin: 0.4rem 0;
+    padding: 1rem;
+    background: linear-gradient(45deg, var(--color-bg-lighter), var(--color-bg-light));
+    overflow: hidden;
+    display: flex;
+}
+
+.class-value {
+    margin-left: auto; 
+    margin-right: 0;
+}

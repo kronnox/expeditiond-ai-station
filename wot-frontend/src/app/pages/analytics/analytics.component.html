@@ -11,15 +11,19 @@
       <div class="inner-content">
 
         <div class="image-list">
-          <div class="image-item" *ngFor="let image of images">
+          <div class="image-item" *ngFor="let image of images" (click)="imageSelected(image)">
             <wot-container>
               <img width="100%" src="{{image.imagePath}}"/>
             </wot-container>
           </div>
         </div>
 
-        <div class="analysis">
-          
+        <div class="analysis" *ngIf="selectedImage">
+          <div *ngFor="let c of classes; index as i" [style.color]="getClassColor(i)" class="class-prediction">
+            <span class="class-name">{{c}}:</span>
+            <span class="class-value">{{selectedImage.prediction[i].toFixed(2)}}</span>
+          </div>
+          Du hast gesagt das ist ein {{selectedImage.label}}
         </div>
   
       </div>

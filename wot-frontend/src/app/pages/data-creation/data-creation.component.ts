@@ -28,6 +28,7 @@ export class DataCreationComponent implements OnInit {
       const confidence = Math.max(...res);
       const classId = res.indexOf(confidence);
       let io = new ImageObject(imgPath, true);
+      
       io.prediction = res;
       io.predictedClass = classId;
       this.images.push(io);
@@ -42,6 +43,6 @@ export class DataCreationComponent implements OnInit {
   }
 
   public continue(): void {
-    this.router.navigate(['/analytics']);
+    this.router.navigate(['/data-labeling']);
   }
 }

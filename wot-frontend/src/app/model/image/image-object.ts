@@ -14,6 +14,6 @@ export class ImageObject {
     constructor(img: string, custom: boolean) {
         this.imagePath = img;
         this.custom = custom;
-        this.prediction = new Array(9).fill(9);
+        this.prediction = new Array(9).fill(0);
     }
 }
