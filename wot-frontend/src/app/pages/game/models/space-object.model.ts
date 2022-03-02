@@ -67,8 +67,6 @@ export class SpaceObject extends GameObject {
         this.x = this.x + this.velocityX + this.velocityX * delta * 0.03;
         this.y = this.y + this.velocityY + this.velocityY * delta * 0.03;
 
-        console.log(this.angle+" "+this.game.radarAngle);
-
         const range = GameConfig.radarRange + GameConfig.spaceObjectSize / 3;
         const dist = Math.hypot(this.game.truck.x - this.x, this.game.truck.y - this.y);
         if (this.projectile){
