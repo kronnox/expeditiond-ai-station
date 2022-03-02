@@ -38,7 +38,7 @@ export class NgxDrawingCanvasComponent implements AfterViewInit {
     this.cx.lineWidth = this.strokeWidth;
     this.cx.lineCap = 'round';
     this.cx.strokeStyle = this.strokeColor;
-
+    this.clearCanvas();
     this.captureEvents(canvasEl);
   }
 
@@ -71,15 +71,15 @@ export class NgxDrawingCanvasComponent implements AfterViewInit {
     const $pointerDown = fromEvent(canvasEl, 'pointerdown');
     const $pointerUp = fromEvent(canvasEl, 'pointerup').pipe(mergeWith(fromEvent(canvasEl, 'pointerleave')));
     const $pointerMove = $pointerDown.pipe(
-        switchMap((e) => {
-          return fromEvent(canvasEl, 'pointermove')
-            .pipe(
-              // @ts-ignore
-              takeUntil($pointerUp),
-              pairwise()
-            ) as Observable<[MouseEvent, MouseEvent]>
-        })
-      );
+      switchMap((e) => {
+        return fromEvent(canvasEl, 'pointermove')
+          .pipe(
+            // @ts-ignore
+            takeUntil($pointerUp),
+            pairwise()
+          ) as Observable<[MouseEvent, MouseEvent]>
+      })
+    );
 
     $pointerUp.subscribe(() => {
       if (this.currentStroke.paths.length < 1) return;
@@ -109,6 +109,8 @@ export class NgxDrawingCanvasComponent implements AfterViewInit {
 
   public clearCanvas(): void {
     this.cx.clearRect(0, 0, this.realWidth, this.realHeight);
+    this.cx.fillStyle = this.backgroundColor;
+    this.cx.fillRect(0, 0, this.realWidth, this.realHeight);
   }
 
   public canUndo(): boolean {

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'wot-button',
@@ -10,6 +10,17 @@ export class WotButtonComponent implements OnInit {
   @Input() public slot: string = 'inline';
   @Input() public disabled: boolean = false;
   @Input() public icon: string;
+
+  @Output() press = new EventEmitter();
+  @HostListener('click', ['$event'])
+  onClick(e: MouseEvent) {
+    if (this.disabled){
+      e.preventDefault();
+      e.stopPropagation();
+    } else {
+      this.press.next(e);
+    }
+  }
 
   constructor() { }
 
@@ -33,8 +44,22 @@ export class WotButtonComponent implements OnInit {
 
   public getColorStyle(): string {
     if (this.disabled) {
-      return '#555';
+      return 'var(--color-lightgray)';
     }
     return '#fff';
+  }
+
+  public getBackground(): string {
+    if (this.disabled) {
+      return 'linear-gradient(45deg, var(--color-gray), var(--color-darkgray))'
+    }
+    return '';
+  }
+
+  public getCursor() {
+    if (this.disabled) {
+      return 'not-allowed'
+    }
+    return 'pointer';
   }
 }

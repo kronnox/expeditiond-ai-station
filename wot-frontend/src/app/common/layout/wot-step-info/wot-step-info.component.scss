@@ -1,0 +1,19 @@
+.wot-step-info {
+  padding: 64px 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.wot-step-info ::ng-deep h1,h2,h3,h4,h5,h6 {
+  margin: 6px;
+  text-align: center;
+}
+
+.wot-step-info ::ng-deep p {
+  margin: 6px;
+  text-align: center;
+  font-size: 1.5em;
+}
+

@@ -1,32 +1,36 @@
-.content {
-  position: relative;
-  height: calc(100% - calc(var(--base-scale) * 4rem));
-  display:flex;
+.inner-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: white;
+}
+
+.canvas-group {
+  display: flex;
   flex-direction: row;
 }
-.inner-content {
-  background-color: #ffaa00;
-  flex:1;
+
+.drawing-canvas {
+  height: fit-content;
+  width: fit-content;
+  border: #7F7764 solid 1px;
 }
 
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,100,900);
-
-//colors
-$red: #E1332D;
-$white: #fff;
-
-//base styles
-
-* {
-  box-sizing: inherit;
-  transition-property: all;
-  transition-duration: .6s;
-  transition-timing-function: ease;
+.canvas-buttons {
+  padding: 0.6rem;
+  display: flex;
+  flex-direction: column;
 }
 
-html,
-body {
-  box-sizing: border-box;
-  height: 100%;
-  width: 100%;
+.image-list {
+  height: 518px;
+  display: grid;
+  grid-template-columns: repeat(2, 252px);
+  grid-template-rows: repeat(2, 252px);
+  grid-gap: 10px;
+}
+
+.image-item {
+  margin-bottom: -3px;
+  border: #7F7764 solid 1px;
 }

@@ -1,9 +1,20 @@
-<wot-header>
-    <wot-header-title>
-        Der Computer hat weitere Bilder gefunden. Klassifiziere diese.
-    </wot-header-title>
-</wot-header>
-<app-drag-and-drop [imagePaths]="imagePaths" [labelClasses]="labelClasses" #dragDrop></app-drag-and-drop>
-<wot-toolbar>
-    <wot-button (click)="continue(dragDrop)" >Weiter ></wot-button>
-</wot-toolbar>
+<wot-page>
+  <wot-step-info>
+    <h1>
+      Schritt 3: Labeling
+    </h1>
+    <p>
+      Der Computer hat weitere Bilder gefunden. Klassifiziere diese.
+    </p>
+  </wot-step-info>
+  <wot-row>
+    <app-drag-and-drop [data]="images" [labels]="labels" #dragDrop></app-drag-and-drop>
+  </wot-row>
+  <wot-row>
+    <wot-button slot="right" (click)="done(dragDrop)">Schritt abschließen</wot-button>
+  </wot-row>
+</wot-page>
+
+<wot-success-overlay (continue)="continue()" #successOverlay>
+  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+</wot-success-overlay>

@@ -1,6 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NgxDrawingCanvasComponent} from "../../ngx-drawing-canvas/ngx-drawing-canvas.component";
 import { Router } from '@angular/router';
+import { BackendService } from 'src/app/shared/backend.service';
+import { ImageObject } from 'src/app/model/image/image-object';
+import {WotSuccessOverlayComponent} from "../../common/layout/wot-success-overlay/wot-success-overlay.component";
 
 @Component({
   selector: 'app-data-creation',
@@ -9,19 +12,33 @@ import { Router } from '@angular/router';
 })
 export class DataCreationComponent implements OnInit {
 
-  public images: string[] = [];
+  @ViewChild('successOverlay') public successOverlay: WotSuccessOverlayComponent;
 
-  constructor(private router: Router) { }
+  public images: ImageObject[] = [];
+
+  constructor(private router: Router, private backendService: BackendService) { }
 
   ngOnInit(): void {
   }
 
-  public saveCanvas(canvas: NgxDrawingCanvasComponent): void {
-    this.images.push(canvas.canvas.nativeElement.toDataURL("image/jpeg"));
-    localStorage.setItem('images', JSON.stringify(this.images));
+  public async saveCanvas(canvas: NgxDrawingCanvasComponent) {
+    const imgPath = canvas.canvas.nativeElement.toDataURL("image/png");
+
+    await fetch(imgPath).then(r => r.blob()).then(blob => this.backendService.predictBlob(blob)).then(res => {
+      const confidence = Math.max(...res);
+      const classId = res.indexOf(confidence);
+      this.images.push(new ImageObject(imgPath, classId));
+    });
+
+    canvas.clear();
+  }
+
+  public done(): void {
+    localStorage.setItem('created-data', JSON.stringify(this.images));
+    this.successOverlay.setVisible();
   }
 
   public continue(): void {
-    this.router.navigate(['/data-overview']);
+    this.router.navigate(['/data-labeling']);
   }
 }

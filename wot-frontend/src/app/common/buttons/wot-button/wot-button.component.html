@@ -1,4 +1,14 @@
-<a class="btn" [style.padding]="icon ? '0.7rem' : '1rem'" [style.display]="getDisplayStyle()" [style.float]="getFloatStyle()" [style.color]="getColorStyle()" [style.border-color]="getColorStyle()">
-  <ng-content *ngIf="!icon"></ng-content>
-  <ion-icon name="{{icon}}" class="btn-icon" *ngIf="icon"></ion-icon>
+<a href="#" onclick="return false;" class="btn butn butn__new"
+   [style.padding]="icon ? '0.7rem' : '1rem'"
+   [style.display]="getDisplayStyle()"
+   [style.float]="getFloatStyle()"
+   [style.background]="getBackground()"
+   [style.color]="getColorStyle()"
+   [style.border-color]="getColorStyle()"
+   [style.cursor]="getCursor()"
+>
+  <span>
+    <ng-content *ngIf="!icon"></ng-content>
+    <ion-icon name="{{icon}}" class="btn-icon" *ngIf="icon"></ion-icon>
+  </span>
 </a>

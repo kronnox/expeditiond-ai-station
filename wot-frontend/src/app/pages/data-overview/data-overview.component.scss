@@ -1,15 +1,42 @@
-.content {
-    //position: relative;
-    //height: calc(100% - calc(var(--base-scale) * 4rem));
-    //display:flex;
-    flex-direction: row;
+.image-container {
+  width: fit-content;
+  height: 600px;
+  overflow-y: scroll;
+
+  --mask-height: 48px;
+  --mask-image-content: linear-gradient(
+      to bottom,
+      transparent,
+      var(--color-bg-darker) var(--mask-height),
+      var(--color-bg-darker) calc(100% - var(--mask-height)),
+      transparent
+  );
+  mask-image: var(--mask-image-content);
+  mask-size: 100%;
+  mask-position: 0 0, 100% 0;
+  mask-repeat: no-repeat, no-repeat;
 }
-.inner-content {
-    background-color: black;
+
+.image-inner-container {
+  width: fit-content;
+  padding: 48px;
+  display:grid;
+  grid-template-columns: repeat(10, 20fr);
+  grid-column-gap: 12px;
+  grid-row-gap: 12px;
 }
+
 .img-data {
-    margin: 2px;
-    border: 2px solid #fff;
-    border-radius: 0;
-    width: 15%;
+  border-radius: 0;
+  width: 148px;
+  background: linear-gradient(45deg, var(--color-bg-dark), var(--color-bg));
+  border: var(--color-text) solid 1px;
+}
+
+.img-data:hover {
+  background: linear-gradient(45deg, var(--color-bg-dark), var(--color-bg-light));
+}
+
+.image-container::-webkit-scrollbar {
+  display: none;
 }

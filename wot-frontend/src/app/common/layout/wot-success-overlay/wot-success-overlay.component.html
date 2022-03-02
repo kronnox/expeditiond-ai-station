@@ -1,0 +1,19 @@
+<div class="wot-overlay" *ngIf="visible">
+  <div class="success-checkmark">
+    <div class="check-icon">
+      <span class="icon-line line-tip"></span>
+      <span class="icon-line line-long"></span>
+      <div class="icon-circle"></div>
+      <div class="icon-fix"></div>
+    </div>
+  </div>
+  <div class="success-info">
+    <h1>Bravo!</h1>
+    <wot-row>
+      <p><ng-content></ng-content></p>
+    </wot-row>
+    <wot-row>
+      <wot-button (press)="continue.emit(null)">Zum nächsten Schritt</wot-button>
+    </wot-row>
+  </div>
+</div>

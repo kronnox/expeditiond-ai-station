@@ -1,17 +1,28 @@
-<wot-header>
-    <wot-header-title>
-        Unsere fleißigen Inder haben auch Bilder von UFOs gemalt:
-    </wot-header-title>
-</wot-header>
-<div class="content">
-    <div class="inner-content">
-        <span *ngFor="let image of images">
-            <img class="img-data" src="{{image}}"/>   
-        </span>
-    </div>
-</div>
-<wot-footer>
-    <wot-toolbar>
-      <wot-button slot="fill" (click)="continue()" >Weiter ></wot-button>
-    </wot-toolbar>
-</wot-footer>
+<wot-page width='fit-content'>
+  <wot-step-info>
+    <h1>
+      Schritt 1: Übersicht
+    </h1>
+    <p>
+      Der Computer hat Bilder von Objekten gesammelt, die uns in vergangenen Missionen begegnet sind:
+    </p>
+  </wot-step-info>
+  <wot-row>
+    <wot-container>
+      <div class="image-container">
+        <div class="image-inner-container">
+          <span *ngFor="let image of images">
+              <img class="img-data" src="{{image.imagePath}}"/>
+          </span>
+        </div>
+      </div>
+    </wot-container>
+  </wot-row>
+  <wot-row>
+    <wot-button slot="right" (click)="done()">Schritt abschließen</wot-button>
+  </wot-row>
+</wot-page>
+
+<wot-success-overlay (continue)="continue()" #successOverlay>
+  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+</wot-success-overlay>

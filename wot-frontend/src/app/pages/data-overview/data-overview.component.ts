@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
+import { ImageObject } from 'src/app/model/image/image-object';
+import { BackendService } from 'src/app/shared/backend.service';
+import { ImageService } from 'src/app/shared/image.service';
+import {WotSuccessOverlayComponent} from "../../common/layout/wot-success-overlay/wot-success-overlay.component";
 
 @Component({
   selector: 'app-data-overview',
@@ -8,18 +12,26 @@ import { Router } from '@angular/router';
 })
 export class DataOverviewComponent implements OnInit {
 
-  public images: string[] = [];
+  @ViewChild('successOverlay') public successOverlay: WotSuccessOverlayComponent;
 
-  constructor(private router: Router) { }
+  public images: ImageObject[] = [];
+
+  constructor(private router: Router, private imageService: ImageService) { }
 
   ngOnInit(): void {
-    this.images = JSON.parse(localStorage.getItem('images') || '');
-    for(let i = 0; i < 100; i++) {
-      this.images.push(this.images[i%3]);
+    let imgs = this.imageService.getNImagesOfEach(10);
+    while(imgs.length > 0) {
+      const index = Math.trunc(Math.random()*imgs.length);
+      this.images.push(imgs[index]);
+      imgs.splice(index, 1);
     }
   }
 
+  public done(): void {
+    this.successOverlay.setVisible();
+  }
+
   public continue(): void {
-    this.router.navigate(['/data-labeling']);
+    this.router.navigate(['/data-creation']);
   }
 }

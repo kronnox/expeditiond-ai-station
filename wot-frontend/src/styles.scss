@@ -6,11 +6,23 @@
 
   --base-font: 'Ubuntu', sans-serif;
 
-  --color-primary: #90be6d
-}
+  --color-bg-darker: #00030B;
+  --color-bg-dark: #020D17;
+  --color-bg: #041623;
+  --color-bg-light: #023947;
+  --color-bg-lighter: #014B59;
 
-* {
-  font-family: var(--base-font);
+  --color-text: #7F7764;
+  --color-heading: #9F7426;
+
+  --color-primary: #014B59;
+  --color-primary-light: #0e97aa;
+  --color-secondary: #023947;
+  --color-secondary-light: #005C6B;
+
+  --color-lightgray: #717171;
+  --color-gray: #5a5953;
+  --color-darkgray: #1d1e25;
 }
 
 html,
@@ -19,4 +31,17 @@ body {
   padding: 0;
   height: 100%;
   overflow: hidden;
+  background-color: var(--color-bg-darker);
+}
+
+* {
+  font-family: var(--base-font);
+}
+
+* h1,h2,h3,h4,h5,h6 {
+  color: var(--color-heading);
+}
+
+* p {
+  color: var(--color-text);
 }

@@ -1,59 +1,77 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, NgZone, OnInit, ViewChild, ChangeDetectorRef, AfterViewChecked, AfterContentInit } from '@angular/core';
 import { CdkDragDrop, CdkDropList, moveItemInArray, Point, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
-import { ImageObject } from '../model/objects/image-object';
+import { ImageObject } from '../model/image/image-object';
+import { DropLabel } from './model/drop-label';
+import { DragImage } from './model/drag-image';
 
 @Component({
   selector: 'app-drag-and-drop',
   templateUrl: './drag-and-drop.component.html',
   styleUrls: ['./drag-and-drop.component.scss']
 })
-export class DragAndDropComponent implements OnInit {
-  
+export class DragAndDropComponent implements AfterViewInit {
+
   @ViewChild('dropZone') public dropZone: ElementRef;
+  @ViewChild('dragZone') public dragZone: ElementRef;
 
-  public data: ImageObject[] = [];
+  @Input() public data: ImageObject[];
 
-  @Input() public imagePaths: string[];
-  @Input() public labelClasses: any[];
+  public dragObjects: DragImage[] = [];
+  @Input() public labels: DropLabel[];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private cdRef: ChangeDetectorRef) { }
 
-  ngOnInit(): void {
-    this.imagePaths.forEach(img => {
-      this.data.push(new ImageObject(img));
-    })
-    //this.images = JSON.parse(localStorage.getItem('images') || '');
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      const size = 150;
+      const rectZone = this.dragZone.nativeElement.getBoundingClientRect();
+      this.data.forEach(element => {
+        const y = Math.random() * (rectZone.height - size) + (rectZone.y);
+        const x = Math.random() * (rectZone.width - size) + (rectZone.x);
+        this.dragObjects = [...this.dragObjects, new DragImage(element, x, y, size)];
+      })
+      this.cdRef.detectChanges();
+    }, 0);
+
   }
 
-  public changePosition(event: any, item: ImageObject): void {
-    console.log(event);
-    console.log(item)
-    
-    if(event.previousContainer !== event.container) {
-      transferArrayItem(event.previousContainer.data, event.container.data, this.data.indexOf(item), event.currentIndex);
+  public changePosition(event: any, item: DragImage): void {
+
+    if (event.previousContainer !== event.container) {
+      transferArrayItem(event.previousContainer.data, event.container.data, this.dragObjects.indexOf(item), event.currentIndex);
     } else {
-      //const rectZone=this.dropZone.nativeElement.getBoundingClientRect()
-      //const rectElement=event.item.element.nativeElement.getBoundingClientRect()
-      
-      let y=+item.y+event.distance.y;
-      let x=+item.x+event.distance.x;
-      //const out=y<0 || x<0 || (y>(rectZone.height-rectElement.height)) || (x>(rectZone.width-rectElement.width));
-      //if (!out)
-      //{
-        item.y=y;
-        item.x=x;
-      //}
+      const rectZone = this.dropZone.nativeElement.getBoundingClientRect();
+      const rectElement = event.item.element.nativeElement.getBoundingClientRect()
+
+      let y =+ item.y + event.distance.y;
+      let x =+ item.x + event.distance.x;
+
+      if(y < rectZone.top) {
+        y = rectZone.top;
+      }
+      if(x < rectZone.left) {
+        x = rectZone.left;
+      }
+      if(y > (rectZone.bottom - rectElement.height)) {
+        y = rectZone.bottom - rectElement.height;
+      }
+      if(x > (rectZone.right - rectElement.width)) {
+        x = rectZone.right - rectElement.width;
+      }
+
+      item.y = y;
+      item.x = x;
     }
   }
 
-  public changeZIndex(item: ImageObject): void {
-      for(let i of this.data) {
-        (i==item ? i.z = 1 : i.z = 0)
+  public changeZIndex(item: DragImage): void {
+      for(let i of this.dragObjects) {
+        (i == item ? i.z = 1 : i.z = 0)
       }
   }
-  
+
   public continue(): void {
-    this.router.navigate(['/data-grouping']);
+    void this.router.navigate(['/data-grouping']);
   }
 }

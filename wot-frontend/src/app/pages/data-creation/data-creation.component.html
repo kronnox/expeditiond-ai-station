@@ -1,23 +1,41 @@
-<wot-header>
-  <wot-header-title>
-    Schritt 1: Zeichne UFOs, um den Computer zu zeigen, wie diese aussehen.
-  </wot-header-title>
-</wot-header>
-<div class="content">
-  <div class="inner-content">
-    <ngx-drawing-canvas [width]="'100%'" [height]="'100%'" strokeColor="#fff" backgroundColor="#121212" #drawingCanvas></ngx-drawing-canvas>
-    <wot-toolbar>
-      <wot-button icon="arrow-undo" (click)="drawingCanvas.undoLast()" [disabled]="!drawingCanvas.canUndo()"></wot-button>
-      <wot-button icon="arrow-redo" (click)="drawingCanvas.redoLast()" [disabled]="!drawingCanvas.canRedo()"></wot-button>
-      <wot-button icon="checkmark" (click)="saveCanvas(drawingCanvas)" (click)="drawingCanvas.clear()" [disabled]="images.length >= 3"></wot-button>
-    </wot-toolbar>
-  </div>
-  <wot-sidebar>
-    <div style="padding: 1rem 2rem 0 2rem" *ngFor="let image of images">
-      <img width="100%" style="border: 2px solid #fff; border-radius: 0" src="{{image}}"/>
+<wot-page>
+  <wot-step-info>
+    <h1>
+      Schritt 2: Datensatz-Erstellung
+    </h1>
+    <p>
+      Zeichne Objekte, um den Computer zu zeigen, wie diese aussehen. Zeichne vier von den Objekten Asteroid, Astronaut, Brief, Ufo, Versorgungsbox, Auto, Satellit, Satellitenschüssel oder Raumschiff
+    </p>
+  </wot-step-info>
+  <wot-row>
+    <div class="inner-content">
+      <div class="canvas-group">
+        <div class="drawing-canvas">
+          <wot-container>
+            <ngx-drawing-canvas [width]="'512'" [height]="'512'" strokeColor="#fff" backgroundColor="rgba(0, 0, 0, 0)" #drawingCanvas></ngx-drawing-canvas>
+          </wot-container>
+        </div>
+        <div class="canvas-buttons">
+          <wot-button icon="arrow-undo" (click)="drawingCanvas.undoLast()" [disabled]="!drawingCanvas.canUndo()"></wot-button>
+          <wot-button icon="arrow-redo" (click)="drawingCanvas.redoLast()" [disabled]="!drawingCanvas.canRedo()"></wot-button>
+          <wot-button icon="checkmark" (click)="saveCanvas(drawingCanvas)" [disabled]="images.length >= 4"></wot-button>
+        </div>
+      </div>
+
+      <div class="image-list">
+        <div class="image-item" *ngFor="let image of images">
+          <wot-container>
+            <img width="100%" src="{{image.imagePath}}"/>
+          </wot-container>
+        </div>
+      </div>
     </div>
-    <wot-toolbar>
-      <wot-button slot="fill" [disabled]="images.length < 3" (click)="continue()" >Weiter ></wot-button>
-    </wot-toolbar>
-  </wot-sidebar>
-</div>
+  </wot-row>
+  <wot-row>
+    <wot-button slot="right" [disabled]="images.length < 4" (press)="done()">Schritt abschließen</wot-button>
+  </wot-row>
+</wot-page>
+
+<wot-success-overlay (continue)="continue()" #successOverlay>
+  Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+</wot-success-overlay>
