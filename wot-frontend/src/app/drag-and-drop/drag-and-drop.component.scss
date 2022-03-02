@@ -22,14 +22,14 @@
   font-size: 16px;
   letter-spacing: .08em;
   text-transform: uppercase;
-  background: linear-gradient(45deg, #014B59, #023947);
+  background: linear-gradient(45deg, var(--color-bg-lighter), var(--color-bg-light));
   overflow: hidden;
   display: flex;
 }
 
 .category:hover {
   transform: translateY(0);
-  background-image: linear-gradient(45deg, #005C6B, #0e97aa);
+  background-image: linear-gradient(45deg, var(--color-secondary-light), var(--color-primary-light));
 }
 
 ion-icon {
@@ -48,8 +48,8 @@ ion-icon {
   cursor: move;
   font-size: 14px;
   z-index: 100;
-  background: linear-gradient(45deg, #020D17, #023947);
-  border: #7F7764 solid 1px;
+  background: linear-gradient(45deg, var(--color-bg-dark), var(--color-bg-light));
+  border: var(--color-text) solid 1px;
 }
 
 .content {
