@@ -64,6 +64,6 @@ export class DataLabelingComponent implements OnInit {
   }
 
   public continue(): void {
-    this.router.navigate(['/analytics']);
+    this.router.navigate(['/data-grouping']);
   }
 }
