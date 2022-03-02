@@ -1,0 +1,34 @@
+<wot-page>
+    <wot-step-info>
+      <h1>
+        Schritt 8: Datensatz-Erstellung
+      </h1>
+      <p>
+        Zeichne Objekte, um den Computer zu zeigen, wie diese aussehen. Zeichne vier von den Objekten Asteroid, Astronaut, Brief, Ufo, Versorgungsbox, Auto, Satellit, Satellitenschüssel oder Raumschiff
+      </p>
+    </wot-step-info>
+    <wot-row>
+      <div class="inner-content">
+
+        <div class="image-list">
+          <div class="image-item" *ngFor="let image of images">
+            <wot-container>
+              <img width="100%" src="{{image.imagePath}}"/>
+            </wot-container>
+          </div>
+        </div>
+
+        <div class="analysis">
+          
+        </div>
+  
+      </div>
+    </wot-row>
+    <wot-row>
+      <wot-button slot="right" (press)="done()">Beenden</wot-button>
+    </wot-row>
+</wot-page>
+  
+  <wot-success-overlay (continue)="continue()" #successOverlay>
+    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+  </wot-success-overlay>

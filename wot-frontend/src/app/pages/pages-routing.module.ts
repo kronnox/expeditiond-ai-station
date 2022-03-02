@@ -23,9 +23,13 @@ const routes: Routes = [
     loadChildren: () => import('./game/game.module').then(m => m.GameModule)
   },
   {
+    path: 'analytics',
+    loadChildren: () => import('./analytics/analytics.module').then(m => m.AnalyticsModule)
+  },
+  {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'data-overview'
+    redirectTo: 'data-creation'
   }
 ];
 

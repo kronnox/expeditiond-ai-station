@@ -42,6 +42,6 @@ export class DataCreationComponent implements OnInit {
   }
 
   public continue(): void {
-    this.router.navigate(['/data-labeling']);
+    this.router.navigate(['/analytics']);
   }
 }
