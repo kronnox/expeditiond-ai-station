@@ -1,0 +1,32 @@
+
+.image-list {
+    height: 518px;
+    width: 200px;
+    overflow: scroll;
+
+    --mask-height: 48px;
+    --mask-image-content: linear-gradient(
+        to bottom,
+        transparent,
+        #00030B var(--mask-height),
+        #00030B calc(100% - var(--mask-height)),
+        transparent
+    );
+    mask-image: var(--mask-image-content);
+    mask-size: 100%;
+    mask-position: 0 0, 100% 0;
+    mask-repeat: no-repeat, no-repeat;
+
+    padding: 48px;
+}
+
+.image-item {
+    margin-bottom: 5px;
+    border: #7F7764 solid 1px;
+}
+
+.image-item:hover {
+    background: linear-gradient(45deg, #020D17, #023947);
+    border: #7F7764 solid 1px;
+}
+  
