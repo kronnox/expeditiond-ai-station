@@ -20,6 +20,8 @@ export class DragAndDropComponent implements AfterViewInit {
   public dragObjects: DragImage[] = [];
   @Input() public labels: DropLabel[];
 
+  private topZ: number = 1;
+
   constructor(private router: Router, private cdRef: ChangeDetectorRef) { }
 
   ngAfterViewInit(): void {
@@ -33,11 +35,9 @@ export class DragAndDropComponent implements AfterViewInit {
       })
       this.cdRef.detectChanges();
     }, 0);
-
   }
 
   public changePosition(event: any, item: DragImage): void {
-
     if (event.previousContainer !== event.container) {
       transferArrayItem(event.previousContainer.data, event.container.data, this.dragObjects.indexOf(item), event.currentIndex);
     } else {
@@ -62,13 +62,16 @@ export class DragAndDropComponent implements AfterViewInit {
 
       item.y = y;
       item.x = x;
+
+      console.log(item)
+      console.log(x)
+      console.log(y)
     }
   }
 
   public changeZIndex(item: DragImage): void {
-      for(let i of this.dragObjects) {
-        (i == item ? i.z = 1 : i.z = 0)
-      }
+      item.z = this.topZ;
+      this.topZ++;
   }
 
   public continue(): void {

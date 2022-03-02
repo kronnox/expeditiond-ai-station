@@ -27,7 +27,7 @@ export class DataGroupingComponent implements OnInit {
   constructor(private router: Router, private backendService: BackendService, private imageService: ImageService) { }
 
   ngOnInit(): void {
-    let inserted: number[] = [];
+    /*let inserted: number[] = [];
     const customImages: ImageObject[] = JSON.parse(localStorage.getItem('created-data') || '');
     customImages.forEach(element => {
       element.label = this.backendService.classes[element.objectClass];
@@ -40,7 +40,8 @@ export class DataGroupingComponent implements OnInit {
         io.label = this.backendService.classes[io.objectClass];
         this.images.push(io);
       }
-    }
+    }*/
+    this.images = JSON.parse(localStorage.getItem('labeled-data') || '');
 
     let labels: DropLabel[] = [];
     this.types.forEach(function(element, i) {
@@ -53,7 +54,7 @@ export class DataGroupingComponent implements OnInit {
     let grouping: number[] = [];
     ddc.labels.forEach(element  => {
       element.children.forEach(item => {
-        grouping[item.objectClass] = element.labelID;
+        grouping[item.imageObject.labeledClass] = element.labelID;
       })
     })
     localStorage.setItem('grouping', JSON.stringify(grouping));

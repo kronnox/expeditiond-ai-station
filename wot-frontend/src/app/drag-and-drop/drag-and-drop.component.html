@@ -1,15 +1,18 @@
 <div cdkDropListGroup class="body" #dropZone>
   <div class="content" cdkDropList [cdkDropListSortingDisabled]="true" [cdkDropListData]="dragObjects" #dragZone>
     <div *ngFor="let item of dragObjects" class="drag-item" cdkDragBoundary=".body" [style.top.px]="item.y" [style.left.px]="item.x" [style.z-index]="item.z" (cdkDragDropped)="changePosition($event,item)" (cdkDragStarted)="changeZIndex(item)" [style]="'height: ' + item.height + 'px; width: ' + item.width+'px;'" cdkDrag>
-      <img src="{{item.imagePath}}" class="drag-img"/>
-      <p class="class-label">{{item.label}}</p>
+      <img src="{{item.imageObject.imagePath}}" class="drag-img"/>
+      <p class="class-label">{{item.imageObject.label}}</p>
       <div *cdkDragPlaceholder></div>
     </div>
   </div>
   <div class="categories">
     <div *ngFor="let class of labels" cdkDropList [cdkDropListSortingDisabled]="true" [cdkDropListData]="class.children" class="category">
-      <ion-icon name="folder-open-outline" class="btn-icon"></ion-icon>
-      {{class.labelName}}
+      <div class="icon-count">
+        <ion-icon name="folder-open-outline" class="btn-icon"></ion-icon>
+        <p class="p-count">{{class.children.length}}</p>
+      </div>
+      <p class="p-label">{{class.labelName}}</p>
     </div>
   </div>
 </div>

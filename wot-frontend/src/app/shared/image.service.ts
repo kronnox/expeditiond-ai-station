@@ -15,8 +15,11 @@ export class ImageService {
     for(let i = 0; i < imgs.length; i++){
       let temp_imgs: ImageObject[] = [];
       while (temp_imgs.length < num && imgs[i].length > 0){
-        const index = Math.trunc(Math.random() * imgs[i].length)
-        temp_imgs.push(new ImageObject(imgs[i][index].img, imgs[i][index].objClass));
+        const index = Math.trunc(Math.random() * imgs[i].length);
+        let io = new ImageObject(imgs[i][index].img, false);
+        io.prediction[imgs[i][index].objClass] = 1;
+        io.predictedClass = imgs[i][index].objClass;
+        temp_imgs.push(io);
         imgs[i].splice(index, 1);
       }
       ret_imgs = ret_imgs.concat(temp_imgs);
@@ -30,7 +33,10 @@ export class ImageService {
     let ret_imgs: ImageObject[] = [];
     while (ret_imgs.length < num && cat_imgs.length > 0){
       const index = Math.trunc(Math.random() * cat_imgs.length)
-      ret_imgs.push(new ImageObject(cat_imgs[index].img, cat_imgs[index].objClass));
+      let io = new ImageObject(cat_imgs[index].img, false);
+      io.prediction[cat_imgs[index].objClass] = 1;
+      io.predictedClass = cat_imgs[index].objClass;
+      ret_imgs.push(io);
       cat_imgs.splice(index, 1);
     }
     return ret_imgs;
