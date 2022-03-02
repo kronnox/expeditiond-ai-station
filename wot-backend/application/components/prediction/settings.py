@@ -1,3 +1,3 @@
-categories = ['Asteroid', 'Astronaut', 'Brief', 'Ufo', 'Lootbox',
-       'Auto', 'Satellit ', 'Satellitenschüssel',
+categories = ['Asteroid', 'Astronaut', 'Brief', 'Ufo', 'Versorgungsbox',
+       'Auto', 'Satellit', 'Satellitenschüssel',
        'Raumschiff']

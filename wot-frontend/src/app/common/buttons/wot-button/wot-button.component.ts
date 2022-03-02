@@ -44,14 +44,14 @@ export class WotButtonComponent implements OnInit {
 
   public getColorStyle(): string {
     if (this.disabled) {
-      return '#717171';
+      return 'var(--color-lightgray)';
     }
     return '#fff';
   }
 
   public getBackground(): string {
     if (this.disabled) {
-      return 'linear-gradient(45deg, #5a5953, #1d1e25)'
+      return 'linear-gradient(45deg, var(--color-gray), var(--color-darkgray))'
     }
     return '';
   }

@@ -2,6 +2,7 @@ import { Projectile } from "./projectile.model";
 import {GameObject} from "./game-object.model";
 import {GameComponent} from "../game.component";
 import {Explosion} from "./explosion.model";
+import {GameConfig} from "../game-config";
 
 export class SpaceObject extends GameObject {
     public x: number;
@@ -16,6 +17,7 @@ export class SpaceObject extends GameObject {
 
     private velocityX: number;
     private velocityY: number;
+    private angle: number;
 
     public imagePath: string;
     private image: HTMLImageElement;
@@ -32,6 +34,7 @@ export class SpaceObject extends GameObject {
         this.y = y;
         this.velocityX = velocityX;
         this.velocityY = velocityY;
+        this.angle = Math.atan2(this.y - this.game.truck.y, this.x - this.game.truck.x);
         this.image = new Image();
         this.image.src = imgPath;
         this.imagePath = imgPath;
@@ -60,38 +63,42 @@ export class SpaceObject extends GameObject {
         }
     }
 
-    public update(): void {
-        this.x = this.x + this.velocityX;
-        this.y = this.y + this.velocityY;
+    public update(delta: number): void {
+        this.x = this.x + this.velocityX + this.velocityX * delta * 0.03;
+        this.y = this.y + this.velocityY + this.velocityY * delta * 0.03;
 
-        const dist = Math.hypot(this.game.getTruck().x - this.x, this.game.getTruck().y - this.y);
+        const range = GameConfig.radarRange + GameConfig.spaceObjectSize / 3;
+        const dist = Math.hypot(this.game.truck.x - this.x, this.game.truck.y - this.y);
         if (this.projectile){
-            this.projectile.update();
+            this.projectile.update(delta);
             if (this.hitProjectile()) {
                 this.game.spawnObject(new Explosion(this.game, this.x, this.y));
                 this.active = false;
             }
-        } else if (dist > 400) {
+        } else if (dist > range) {
             this.detected = false;
-        } else if (dist < 400 && !this.detected){
+        } else if (
+            dist < range
+            && this.angle > this.game.radarAngle-0.1 && this.angle < this.game.radarAngle+0.1
+            && !this.detected
+        ){
             this.detected = true;
             if (this.type === 0){
-                const angle = Math.atan2(this.y - this.game.getTruck().y, this.x - this.game.getTruck().x);
-
-                const vx = Math.cos(angle) * 6;
-                const vy = Math.sin(angle) * 6;
-                this.projectile = new Projectile(this.game, this.game.getTruck().x, this.game.getTruck().y, vx, vy);
+                const vx = Math.cos(this.angle) * 6;
+                const vy = Math.sin(this.angle) * 6;
+                this.projectile = new Projectile(this.game, this.game.truck.x, this.game.truck.y, vx, vy);
             }
         }
 
         if (this.hitTruck()) {
             this.active = false;
+            this.game.applyShake();
         }
     }
 
     public hitTruck(): boolean {
-        const dist = Math.hypot(this.x - this.game.getTruck().x, this.y - this.game.getTruck().y);
-        return (dist < this.game.getTruck().height/2 && this.type != 2);
+        const dist = Math.hypot(this.x - this.game.truck.x, this.y - this.game.truck.y);
+        return (dist < this.game.truck.height/2 && this.type != 2);
     }
 
     public hitProjectile(): boolean {

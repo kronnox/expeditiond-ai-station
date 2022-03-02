@@ -8,3 +8,11 @@
     border: 2px,2px,2px,2px;
     border-color: darkblue;
 }
+
+#canvas {
+    background: -webkit-linear-gradient(#000000 1%, #0a0918);
+    background: -moz-linear-gradient(#000000 1%, #0a0918);
+    background: -o-linear-gradient(#000000 1%, #0a0918);
+    background: linear-gradient(#000000 1%, #0a0918);
+    overflow: hidden;
+}

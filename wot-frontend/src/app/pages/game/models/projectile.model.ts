@@ -28,8 +28,8 @@ export class Projectile extends GameObject {
         ctx.stroke();
     }
 
-    public update(): void {
-        this.x = this.x + this.velocityX;
-        this.y = this.y + this.velocityY;
+    public update(delta: number): void {
+        this.x = this.x + this.velocityX + this.velocityX * delta * 0.03;
+        this.y = this.y + this.velocityY + this.velocityY * delta * 0.03;
     }
 }

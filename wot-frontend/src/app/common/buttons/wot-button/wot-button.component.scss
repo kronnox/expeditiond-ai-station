@@ -6,7 +6,7 @@
   letter-spacing: .08em;
   text-transform: uppercase;
   cursor: pointer;
-  background: linear-gradient(45deg, #014B59, #023947);
+  background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
   overflow: hidden;
   transition: all 0.3s ease-in-out;
 }
@@ -44,7 +44,7 @@ ion-icon {
 
 .btn:hover {
   transform: translateY(0);
-  background-image: linear-gradient(45deg, #005C6B, #0e97aa);
+  background-image: linear-gradient(45deg, var(--color-primary-light), var(--color-secondary-light));
 }
 
 .btn:active::before {

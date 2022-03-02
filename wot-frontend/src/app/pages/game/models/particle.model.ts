@@ -21,7 +21,7 @@ export class Particle extends GameObject {
         this.radius = Particle.rand(7, 2, true);
         this.hue = Particle.rand(50, 0, true);
         this.gravity = 0;
-        this.opacity = Math.random() + .2;
+        this.opacity = Math.random()*0.5 + .2;
 
         this.velocityX = Math.random() * 14 - 7;
         this.velocityY = Math.random() * 14 - 7;
@@ -34,16 +34,16 @@ export class Particle extends GameObject {
         ctx.fill();
     }
 
-    public update(): void {
-        this.x += this.velocityX;
-        this.y += this.velocityY;
+    public update(delta: number): void {
+        this.x += this.velocityX + this.velocityX * delta * 0.02;
+        this.y += this.velocityY + this.velocityY * delta * 0.02;
         this.velocityY += this.gravity;
 
         this.hue -= 0.2;
-        this.radius = Math.abs(this.radius - .3);
+        this.radius = this.radius - .3;
 
         // reset particle
-        if(this.radius <= .05) {
+        if (this.radius <= .1) {
             this.active = false;
         }
     }

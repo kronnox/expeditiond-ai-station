@@ -7,8 +7,8 @@
   --mask-image-content: linear-gradient(
       to bottom,
       transparent,
-      #00030B var(--mask-height),
-      #00030B calc(100% - var(--mask-height)),
+      var(--color-bg-darker) var(--mask-height),
+      var(--color-bg-darker) calc(100% - var(--mask-height)),
       transparent
   );
   mask-image: var(--mask-image-content);
@@ -29,13 +29,12 @@
 .img-data {
   border-radius: 0;
   width: 148px;
-  background: linear-gradient(45deg, #020D17, #041623);
-  border: #7F7764 solid 1px;
+  background: linear-gradient(45deg, var(--color-bg-dark), var(--color-bg));
+  border: var(--color-text) solid 1px;
 }
 
 .img-data:hover {
-  background: linear-gradient(45deg, #020D17, #023947);
-  border: #7F7764 solid 1px;
+  background: linear-gradient(45deg, var(--color-bg-dark), var(--color-bg-light));
 }
 
 .image-container::-webkit-scrollbar {

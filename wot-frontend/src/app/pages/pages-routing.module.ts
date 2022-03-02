@@ -3,6 +3,10 @@ import {RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
   {
+    path: 'landing',
+    loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule)
+  },
+  {
     path: 'data-creation',
     loadChildren: () => import('./data-creation/data-creation.module').then(m => m.DataCreationModule)
   },
@@ -29,7 +33,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'data-creation'
+    redirectTo: 'landing'
   }
 ];
 
