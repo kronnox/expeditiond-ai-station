@@ -7,7 +7,7 @@ import { ImageObject } from '../model/image/image-object';
   providedIn: 'root'
 })
 export class BackendService {
-  public classes: string[] = ["Asteroid","Astronaut","Brief","Ufo","Versorgungsbox","Auto","Satellit ","SatellitenschÃ¼ssel","Raumschiff"];
+  public classes: string[] = ["Asteroid","Astronaut","Brief","Ufo","Versorgungsbox","Auto","Satellit","Satellitenschüssel","Raumschiff"];
 
   constructor(private httpClient: HttpClient) {
     this.httpClient.get<any>("http://85.235.67.211:8000/categories", {}).pipe(take(1)).subscribe(
