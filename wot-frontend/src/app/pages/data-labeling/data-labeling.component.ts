@@ -39,6 +39,12 @@ export class DataLabelingComponent implements OnInit {
   public done(ddc :DragAndDropComponent): void {
     let imageObjects: ImageObject[] = [];
     ddc.labels.forEach(element => {
+      if(element.children.length === 0) {
+        let io = this.imageService.getNImagesOfClass(1,element.labelID)[0];
+        io.label = element.labelName;
+        io.labeledClass = element.labelID;
+        imageObjects.push(io);
+      }
       element.children.forEach(item => {
         item.imageObject.labeledClass = element.labelID;
         item.imageObject.label = this.backendService.classes[element.labelID];

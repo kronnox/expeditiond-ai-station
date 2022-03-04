@@ -1,5 +1,5 @@
 <canvas id="canvas" #canvas></canvas>
 <div class="bottomright drawingCanvas">
-    <ngx-drawing-canvas [width]="'400'" [height]="'400'" strokeColor="#fff" backgroundColor="rgba(0, 0, 0, 0)" #drawingCanvas></ngx-drawing-canvas>
+    <ngx-drawing-canvas [width]="'400'" [height]="'400'" strokeColor="#fff" [strokeWidth]="4" backgroundColor="rgba(0, 0, 0, 0)" #drawingCanvas></ngx-drawing-canvas>
     <wot-button class="bottomright" icon="checkmark" (click)="saveCanvas(drawingCanvas)"></wot-button>
 </div>
