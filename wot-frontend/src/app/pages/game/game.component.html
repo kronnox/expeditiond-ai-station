@@ -3,3 +3,11 @@
     <ngx-drawing-canvas [width]="'400'" [height]="'400'" strokeColor="#fff" [strokeWidth]="4" backgroundColor="rgba(0, 0, 0, 0)" #drawingCanvas></ngx-drawing-canvas>
     <wot-button class="bottomright" icon="checkmark" (click)="saveCanvas(drawingCanvas)"></wot-button>
 </div>
+<div *ngIf="truck" class="health-bar">
+    <wot-progress-bar [progress]="truck.health" [total]="3" [height]="32" [width]="400"></wot-progress-bar>
+</div>
+
+<wot-success-overlay (continue)="continue()" #successOverlay>
+    Game Over
+</wot-success-overlay>
+  

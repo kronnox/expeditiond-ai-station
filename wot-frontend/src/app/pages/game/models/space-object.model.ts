@@ -3,6 +3,7 @@ import {GameObject} from "./game-object.model";
 import {GameComponent} from "../game.component";
 import {Explosion} from "./explosion.model";
 import {GameConfig} from "../game-config";
+import { ImageObject } from "src/app/model/image/image-object";
 
 export class SpaceObject extends GameObject {
     public x: number;
@@ -13,21 +14,18 @@ export class SpaceObject extends GameObject {
 
     public detected: boolean;
     public projectile: Projectile;
-    public prediciton: number;
 
     private velocityX: number;
     private velocityY: number;
     private angle: number;
 
-    public imagePath: string;
     private image: HTMLImageElement;
 
-    public predConfidence: string;
-    public predClass: string;
+    public imageObject: ImageObject;
 
-    public type: number = 0; //0: shoot, 1: collect, 2: fly by
+    public action: number = 0; //0: shoot, 1: collect, 2: fly by
 
-    constructor(game: GameComponent, x: number, y: number, velocityX: number, velocityY: number, imgPath: string, width: number, height: number){
+    constructor(game: GameComponent, x: number, y: number, velocityX: number, velocityY: number, imgO: ImageObject, width: number, height: number){
         super(game);
 
         this.x = x;
@@ -36,8 +34,8 @@ export class SpaceObject extends GameObject {
         this.velocityY = velocityY;
         this.angle = Math.atan2(this.y - this.game.truck.y, this.x - this.game.truck.x);
         this.image = new Image();
-        this.image.src = imgPath;
-        this.imagePath = imgPath;
+        this.image.src = imgO.imagePath;
+        this.imageObject = imgO;
         this.width = width;
         this.height = height;
     }
@@ -48,12 +46,12 @@ export class SpaceObject extends GameObject {
         if (this.detected){
             ctx.beginPath();
             ctx.rect(this.x-0.5*this.width, this.y-0.5*this.height, this.width, this.height);
-            ctx.strokeStyle = (this.type === 0) ? "red" : "#00FF00";
+            ctx.strokeStyle = (this.action === 0) ? "red" : "#00FF00";
             ctx.lineWidth = 3;
             ctx.stroke();
             ctx.font = "20px Consolas";
-            ctx.fillStyle = (this.type === 0) ? "red" : "#00FF00";
-            const msg = this.predClass + " " + this.predConfidence;
+            ctx.fillStyle = (this.action === 0) ? "red" : "#00FF00";
+            const msg = this.imageObject.label || '';
             ctx.fillText(msg, this.x-0.5*this.width, (this.y-0.5*this.height)-5);
             ctx.stroke();
         }
@@ -72,6 +70,7 @@ export class SpaceObject extends GameObject {
         if (this.projectile){
             this.projectile.update(delta);
             if (this.hitProjectile()) {
+                this.checkDemage();
                 this.game.spawnObject(new Explosion(this.game, this.x, this.y));
                 this.active = false;
             }
@@ -83,7 +82,7 @@ export class SpaceObject extends GameObject {
             && !this.detected
         ){
             this.detected = true;
-            if (this.type === 0){
+            if (this.action === 0){
                 const vx = Math.cos(this.angle) * 6;
                 const vy = Math.sin(this.angle) * 6;
                 this.projectile = new Projectile(this.game, this.game.truck.x, this.game.truck.y, vx, vy);
@@ -91,14 +90,28 @@ export class SpaceObject extends GameObject {
         }
 
         if (this.hitTruck()) {
-            this.active = false;
-            this.game.applyShake();
+            this.checkDemage();
+        }
+    }
+
+    private checkDemage(): void {
+        if(!this.imageObject.custom) {
+            const demage = this.game.demage[this.imageObject.labeledClass][this.action];
+            if(demage === 0) {
+                if(this.action === 1) {
+                    this.active = false;
+                }
+            } else {
+                this.active = false;
+                this.game.truck.health -= demage;
+                this.game.applyShake();
+            }
         }
     }
 
     public hitTruck(): boolean {
         const dist = Math.hypot(this.x - this.game.truck.x, this.y - this.game.truck.y);
-        return (dist < this.game.truck.height/2 && this.type != 2);
+        return (dist < this.game.truck.height/2);
     }
 
     public hitProjectile(): boolean {

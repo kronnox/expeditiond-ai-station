@@ -17,3 +17,11 @@
     background: linear-gradient(#000000 1%, #0a0918);
     overflow: hidden;
 }
+
+.health-bar {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+}
