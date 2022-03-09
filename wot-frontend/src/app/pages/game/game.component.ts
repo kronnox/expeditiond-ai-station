@@ -62,7 +62,7 @@ export class GameComponent implements AfterViewInit {
 
       this._truck = new Truck(this);
       this.initNebula();
-      this.initStars(5000);
+      this.initStars(1000);
       window.requestAnimationFrame(this.loop.bind(this));
       this.spawnSpaceObjects();
   }
