@@ -11,15 +11,14 @@ model = None
 
 
 def load_model():
-
+    global model
     model = tf.keras.models.load_model('/code/application/model/model.h5')
-
     print("Model loaded")
     return model
 
 
 def predict(image: Image.Image):
-    
+    global model
     if model is None:
         model = load_model()
 
@@ -28,7 +27,9 @@ def predict(image: Image.Image):
     image = image / 255
 
     result = model.predict(image)
-    result = result[settings.order]
+    print(result)
+    print(settings.order)
+    result = result[0,settings.order]
     predicted_probs = result.tolist()
     labels = settings.categories
     predicted_class = labels[np.argmax(result)]
@@ -36,7 +37,7 @@ def predict(image: Image.Image):
     resp = {}
     resp["class"] = predicted_class
     resp["class_confidence"] = np.max(result).item()
-    resp["confidence"] = predicted_probs[0]
+    resp["confidence"] = predicted_probs
     
     return resp
 
