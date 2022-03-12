@@ -13,7 +13,7 @@ from application.components.prediction import settings
 
 app_desc = """"""
 app = FastAPI(title='Sketch Classification API', description=app_desc)
-
+load_model()
 origins = ["*"]
 app.add_middleware(
     CORSMiddleware,
@@ -22,6 +22,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+print("test")
 def save_image(image, prediction):
     dir = os.getenv('WOT_SAVE_PATH')
     folder = settings.categories[np.argmax(prediction["confidence"])]
