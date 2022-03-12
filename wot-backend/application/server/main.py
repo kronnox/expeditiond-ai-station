@@ -1,4 +1,5 @@
 from xmlrpc.client import Boolean
+from application.components.prediction.serve_model import load_model
 import uvicorn
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
@@ -7,7 +8,7 @@ import os
 import numpy as np
 import uuid
 
-from application.components import predict, read_imagefile
+from application.components import predict, read_imagefile, load_model
 from application.components.prediction import settings
 
 app_desc = """"""
@@ -51,6 +52,7 @@ async def get_categories():
 
 
 if __name__ == "__main__":
+    load_model()
     uvicorn.run(app, debug=True)
     
 
