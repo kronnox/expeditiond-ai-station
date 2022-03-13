@@ -62,7 +62,7 @@ export class GameComponent implements AfterViewInit {
       this.prevTime = 0;
 
       this._truck = new Truck(this);
-      this.initStars(5000);
+      this.initStars(2000);
       window.requestAnimationFrame(this.loop.bind(this));
       this.spawnSpaceObjects();
   }
@@ -147,12 +147,7 @@ export class GameComponent implements AfterViewInit {
 
   private initStars(count: number): void {
       for (let i = 0; i < count; i++){
-          this.bgObjects.push(new Star(
-              this,
-              Math.random()*1600-800,
-              Math.random()*900-450,
-              Math.random()*1000
-          ));
+          this.bgObjects.push(new Star(this));
       }
   }
 
