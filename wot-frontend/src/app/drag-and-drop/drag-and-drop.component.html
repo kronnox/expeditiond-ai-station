@@ -14,5 +14,12 @@
       </div>
       <p class="p-label">{{class.labelName}}</p>
     </div>
+
+    <div *ngIf="lastIndex" class="category" (click)="undo()">
+      <div class="icon-count">
+        <ion-icon name="arrow-undo" class="btn-icon"></ion-icon>
+      </div>
+      <p class="p-label">Korrigieren</p>
+    </div>
   </div>
 </div>
