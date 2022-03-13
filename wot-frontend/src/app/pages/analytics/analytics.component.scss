@@ -48,15 +48,18 @@
 }
 
 .class-prediction {
-    width: 20rem;
+    width: 500px;
     margin: 0.4rem 0;
     padding: 1rem;
     background: linear-gradient(45deg, var(--color-bg-lighter), var(--color-bg-light));
-    overflow: hidden;
     display: flex;
 }
 
 .class-value {
     margin-left: auto; 
     margin-right: 0;
+}
+
+.class-name {
+    width: 250px;
 }

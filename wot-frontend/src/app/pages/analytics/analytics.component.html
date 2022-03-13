@@ -20,8 +20,11 @@
 
         <div class="analysis" *ngIf="selectedImage">
           <div *ngFor="let c of classes; index as i" [style.color]="getClassColor(i)" class="class-prediction">
-            <span class="class-name">{{c}}:</span>
-            <span class="class-value">{{selectedImage.prediction[i].toFixed(2)}}</span>
+            <div class="class-name">{{c}}:</div>
+            <div class="class-value">
+              <wot-progress-bar [height]="10" [width]="400" [progress]="selectedImage.prediction[i]" [total]="1"></wot-progress-bar>
+              {{selectedImage.prediction[i].toFixed(2)}}
+            </div>
           </div>
           Du hast gesagt das ist ein {{selectedImage.label}}
         </div>
