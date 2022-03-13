@@ -4,7 +4,6 @@ import {SpaceObject} from './models/space-object.model';
 import {NgxDrawingCanvasComponent} from "../../ngx-drawing-canvas/ngx-drawing-canvas.component";
 import {GameObject} from "./models/game-object.model";
 import {Star} from "./models/star.model";
-import {Nebula} from "./models/nebula.model";
 import {Truck} from "./models/truck.model";
 import {GameConfig} from "./game-config";
 
@@ -42,7 +41,7 @@ export class GameComponent implements AfterViewInit {
 
   private grouping: number[];
 
-  public gameover: boolean = true;
+  public gameover: boolean = false;
 
   constructor(protected backendService: BackendService) { }
 
@@ -63,7 +62,6 @@ export class GameComponent implements AfterViewInit {
       this.prevTime = 0;
 
       this._truck = new Truck(this);
-      this.initNebula();
       this.initStars(5000);
       window.requestAnimationFrame(this.loop.bind(this));
       this.spawnSpaceObjects();
@@ -157,12 +155,6 @@ export class GameComponent implements AfterViewInit {
           ));
       }
   }
-
-    private initNebula(): void {
-        this.bgObjects.push(new Nebula(this, 0));
-        this.bgObjects.push(new Nebula(this, 20));
-        this.bgObjects.push(new Nebula(this, 40));
-    }
 
   private spawnSpaceObjects(){
       setInterval(() => {

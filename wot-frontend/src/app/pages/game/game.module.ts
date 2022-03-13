@@ -7,12 +7,14 @@ import { NgxDrawingCanvasModule } from 'src/app/ngx-drawing-canvas/ngx-drawing-c
 import { ButtonsModule } from 'src/app/common/buttons/buttons.module';
 import { GameoverOverlayComponent } from './gameover-overlay/gameover-overlay.component';
 import {LayoutModule} from "../../common/layout/layout.module";
+import { NebulaComponent } from './nebula/nebula.component';
 
 
 @NgModule({
   declarations: [
     GameComponent,
-    GameoverOverlayComponent
+    GameoverOverlayComponent,
+    NebulaComponent
   ],
   imports: [
     CommonModule,
