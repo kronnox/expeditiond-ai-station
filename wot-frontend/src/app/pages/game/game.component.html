@@ -4,7 +4,7 @@
     <wot-button class="bottomright" icon="checkmark" (click)="saveCanvas(drawingCanvas)"></wot-button>
 </div>
 <div *ngIf="truck" class="health-bar">
-    <wot-progress-bar [progress]="truck.health" [total]="3" [height]="32" [width]="400"></wot-progress-bar>
+    <wot-life-bar [maxLifes]="3" [lifes]="truck.health"></wot-life-bar>
 </div>
 
 <wot-success-overlay (continue)="continue()" #successOverlay>

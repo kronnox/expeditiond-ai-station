@@ -6,6 +6,7 @@ import { GameComponent } from './game.component';
 import { NgxDrawingCanvasModule } from 'src/app/ngx-drawing-canvas/ngx-drawing-canvas.module';
 import { ButtonsModule } from 'src/app/common/buttons/buttons.module';
 import { LayoutModule } from 'src/app/common/layout/layout.module';
+import { BarsModule } from 'src/app/common/bars/bars.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { LayoutModule } from 'src/app/common/layout/layout.module';
     GameRoutingModule,
     NgxDrawingCanvasModule,
     ButtonsModule,
-    LayoutModule
+    LayoutModule,
+    BarsModule
   ]
 })
 export class GameModule { }
