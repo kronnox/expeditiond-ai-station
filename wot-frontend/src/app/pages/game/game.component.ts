@@ -42,6 +42,8 @@ export class GameComponent implements AfterViewInit {
 
   private grouping: number[];
 
+  public gameover: boolean = true;
+
   constructor(protected backendService: BackendService) { }
 
   public ngAfterViewInit() {
@@ -107,6 +109,8 @@ export class GameComponent implements AfterViewInit {
           }
           obj.draw(this.ctx)
       });
+
+      if (this.gameover) return;
 
       // radar
       const imgRadar = new Image();

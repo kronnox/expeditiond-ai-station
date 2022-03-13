@@ -1,5 +1,6 @@
 <canvas id="canvas" #canvas></canvas>
-<div class="bottomright drawingCanvas">
+<div class="bottomright drawingCanvas" *ngIf="!gameover">
     <ngx-drawing-canvas [width]="'400'" [height]="'400'" strokeColor="#fff" backgroundColor="rgba(0, 0, 0, 0)" #drawingCanvas></ngx-drawing-canvas>
     <wot-button class="bottomright" icon="checkmark" (click)="saveCanvas(drawingCanvas)"></wot-button>
 </div>
+<gameover-overlay *ngIf="gameover"></gameover-overlay>
