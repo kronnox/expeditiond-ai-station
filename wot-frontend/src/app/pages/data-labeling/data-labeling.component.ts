@@ -8,6 +8,7 @@ import { ImageObject } from 'src/app/model/image/image-object';
 import { DropLabel } from 'src/app/drag-and-drop/model/drop-label';
 import { ImageService } from 'src/app/shared/image.service';
 import {WotSuccessOverlayComponent} from "../../common/layout/wot-success-overlay/wot-success-overlay.component";
+import { elementEventFullName } from '@angular/compiler/src/view_compiler/view_compiler';
 
 @Component({
   selector: 'app-data-labeling',
@@ -37,8 +38,31 @@ export class DataLabelingComponent implements OnInit {
   }
 
   public done(ddc :DragAndDropComponent): void {
+    let worldFormular: number[][] = [];
+    for(let i = 0; i < 9; i++) {
+      worldFormular[i] = [];
+      for(let j = 0; j < 9; j++) {
+        worldFormular[i][j] = 0;
+      }
+    }
+    const weightA = 0.3;
+    const weightB = 0.3;
     let imageObjects: ImageObject[] = [];
     ddc.labels.forEach(element => {
+      if(element.children.length === 0) {
+
+        for(let i = 0; i < worldFormular.length; i++) {
+          for(let j = 0; j < worldFormular[i].length; j++) {
+            worldFormular[i][j] += (weightA/8);
+          }
+          worldFormular[i][element.labelID] -= weightA;
+        }
+
+        let io = this.imageService.getNImagesOfClass(1,element.labelID)[0];
+        io.label = element.labelName;
+        io.labeledClass = element.labelID;
+        imageObjects.push(io);
+      }
       element.children.forEach(item => {
         item.imageObject.labeledClass = element.labelID;
         item.imageObject.label = this.backendService.classes[element.labelID];
@@ -57,10 +81,17 @@ export class DataLabelingComponent implements OnInit {
         } else {
           imageObjects.push(item.imageObject);
         }
+
+        if(item.imageObject.predictedClass != item.imageObject.labeledClass) {
+          worldFormular[item.imageObject.labeledClass][item.imageObject.predictedClass] += weightB;
+          worldFormular[item.imageObject.labeledClass][item.imageObject.labeledClass] -= weightB;
+          console.log(worldFormular);
+        }
       })
     });
     this.successOverlay.setVisible();
     localStorage.setItem('labeled-data', JSON.stringify(imageObjects));
+    localStorage.setItem('world-formular', JSON.stringify(worldFormular));
   }
 
   public continue(): void {

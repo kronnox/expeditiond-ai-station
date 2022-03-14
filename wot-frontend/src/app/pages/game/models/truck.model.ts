@@ -9,10 +9,14 @@ export class Truck extends GameObject {
     public width: number;
     public height: number;
 
+    public health: number;
+
     private readonly image: HTMLImageElement;
 
     constructor(game: GameComponent){
         super(game);
+
+        this.health = 3;
 
         this.x = this.game.centerX;
         this.y = this.game.centerY;

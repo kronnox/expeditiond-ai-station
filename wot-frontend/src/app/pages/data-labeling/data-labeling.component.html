@@ -11,7 +11,7 @@
     <app-drag-and-drop [data]="images" [labels]="labels" #dragDrop></app-drag-and-drop>
   </wot-row>
   <wot-row>
-    <wot-button slot="right" [disabled]="dragDrop.dragObjects.length > 0" (click)="done(dragDrop)">Schritt abschließen</wot-button>
+    <wot-button slot="right" [disabled]="dragDrop.dragObjects.length > 0" (press)="done(dragDrop)">Schritt abschließen</wot-button>
   </wot-row>
 </wot-page>
 
