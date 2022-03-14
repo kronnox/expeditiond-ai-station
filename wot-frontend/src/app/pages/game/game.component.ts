@@ -4,7 +4,6 @@ import {SpaceObject} from './models/space-object.model';
 import {NgxDrawingCanvasComponent} from "../../ngx-drawing-canvas/ngx-drawing-canvas.component";
 import {GameObject} from "./models/game-object.model";
 import {Star} from "./models/star.model";
-import {Nebula} from "./models/nebula.model";
 import {Truck} from "./models/truck.model";
 import {GameConfig} from "./game-config";
 
@@ -42,6 +41,8 @@ export class GameComponent implements AfterViewInit {
 
   private grouping: number[];
 
+  public gameover: boolean = false;
+
   constructor(protected backendService: BackendService) { }
 
   public ngAfterViewInit() {
@@ -61,8 +62,7 @@ export class GameComponent implements AfterViewInit {
       this.prevTime = 0;
 
       this._truck = new Truck(this);
-      this.initNebula();
-      this.initStars(5000);
+      this.initStars(2000);
       window.requestAnimationFrame(this.loop.bind(this));
       this.spawnSpaceObjects();
   }
@@ -108,6 +108,8 @@ export class GameComponent implements AfterViewInit {
           obj.draw(this.ctx)
       });
 
+      if (this.gameover) return;
+
       // radar
       const imgRadar = new Image();
       imgRadar.src = 'assets/game/radar.png';
@@ -145,20 +147,9 @@ export class GameComponent implements AfterViewInit {
 
   private initStars(count: number): void {
       for (let i = 0; i < count; i++){
-          this.bgObjects.push(new Star(
-              this,
-              Math.random()*1600-800,
-              Math.random()*900-450,
-              Math.random()*1000
-          ));
+          this.bgObjects.push(new Star(this));
       }
   }
-
-    private initNebula(): void {
-        this.bgObjects.push(new Nebula(this, 0));
-        this.bgObjects.push(new Nebula(this, 20));
-        this.bgObjects.push(new Nebula(this, 40));
-    }
 
   private spawnSpaceObjects(){
       setInterval(() => {

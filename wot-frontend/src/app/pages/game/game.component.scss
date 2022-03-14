@@ -1,19 +1,19 @@
 .bottomright{
-    position:absolute;
-    bottom:0;
-    right:0;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
 }
 .drawingCanvas{
-    border-style: solid;
-    border: 2px,2px,2px,2px;
-    border-color: darkblue;
-    background-color: black;
+  border-style: solid;
+  border: 2px;
+  border-color: darkblue;
+  background-color: black;
 }
 
 #canvas {
-    background: -webkit-linear-gradient(#000000 1%, #0a0918);
-    background: -moz-linear-gradient(#000000 1%, #0a0918);
-    background: -o-linear-gradient(#000000 1%, #0a0918);
-    background: linear-gradient(#000000 1%, #0a0918);
-    overflow: hidden;
+  position: fixed;
+  overflow: hidden;
+  z-index: 1;
+  //visibility: hidden;
 }
