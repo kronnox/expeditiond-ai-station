@@ -23,6 +23,7 @@ export class DataCreationComponent implements OnInit {
 
   public async saveCanvas(canvas: NgxDrawingCanvasComponent) {
     const imgPath = canvas.canvas.nativeElement.toDataURL("image/png");
+    canvas.clear();
 
     await fetch(imgPath).then(r => r.blob()).then(blob => this.backendService.predictBlob(blob)).then(res => {
       const confidence = Math.max(...res);
@@ -33,8 +34,6 @@ export class DataCreationComponent implements OnInit {
       io.predictedClass = classId;
       this.images.push(io);
     });
-
-    canvas.clear();
   }
 
   public done(): void {

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, DoCheck, ElementRef, Input, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
 import {fromEvent, mergeWith, Observable, pairwise, switchMap, takeUntil} from "rxjs";
 import {Vector} from "../model/vector/vector";
 import {Path} from "../model/path/path";
@@ -9,7 +9,7 @@ import {Stroke} from "../model/stroke/stroke";
   templateUrl: './ngx-drawing-canvas.component.html',
   styleUrls: ['./ngx-drawing-canvas.component.scss']
 })
-export class NgxDrawingCanvasComponent implements AfterViewInit {
+export class NgxDrawingCanvasComponent implements AfterViewInit, DoCheck {
 
   @ViewChild('canvas') public canvas!: ElementRef;
 
@@ -29,6 +29,8 @@ export class NgxDrawingCanvasComponent implements AfterViewInit {
   private strokes: Stroke[] = [];
   private redoStrokes: Stroke[] = [];
 
+  public empty: boolean = true;
+
   public ngAfterViewInit() {
     const canvasEl: HTMLCanvasElement = this.canvas.nativeElement;
     this.cx = <CanvasRenderingContext2D>canvasEl.getContext('2d');
@@ -40,6 +42,11 @@ export class NgxDrawingCanvasComponent implements AfterViewInit {
     this.cx.strokeStyle = this.strokeColor;
     this.clearCanvas();
     this.captureEvents(canvasEl);
+  }
+
+  ngDoCheck(): void {
+    this.empty = this.strokes.length === 0;
+    console.log(this.empty);
   }
 
   private updateSize(): void {
