@@ -1,0 +1,6 @@
+<div>
+    <div *ngFor="let f of [].constructor(maxLifes); let i = index" class="life-container">
+        <ion-icon name="heart" class="btn-icon" *ngIf="lifes >= (i+1)" [ngStyle]="{'color': 'red'}"></ion-icon>
+        <ion-icon name="heart-outline" class="btn-icon" *ngIf="lifes < (i+1)" [ngStyle]="{'color': 'white'}"></ion-icon>
+    </div>
+</div>
