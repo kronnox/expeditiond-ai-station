@@ -1,3 +1,4 @@
+<nebula></nebula>
 <canvas id="canvas" #canvas></canvas>
 <div class="bottomright drawingCanvas">
     <ngx-drawing-canvas [width]="'400'" [height]="'400'" strokeColor="#fff" [strokeWidth]="4" backgroundColor="rgba(0, 0, 0, 0)" #drawingCanvas></ngx-drawing-canvas>
@@ -6,8 +7,4 @@
 <div *ngIf="truck" class="health-bar">
     <wot-life-bar [maxLifes]="3" [lifes]="truck.health"></wot-life-bar>
 </div>
-
-<wot-success-overlay (continue)="continue()" #successOverlay>
-    Game Over
-</wot-success-overlay>
-  
+<gameover-overlay *ngIf="gameover"></gameover-overlay>

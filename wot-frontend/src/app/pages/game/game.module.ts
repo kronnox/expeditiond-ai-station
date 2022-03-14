@@ -5,13 +5,17 @@ import { GameRoutingModule } from './game-routing.module';
 import { GameComponent } from './game.component';
 import { NgxDrawingCanvasModule } from 'src/app/ngx-drawing-canvas/ngx-drawing-canvas.module';
 import { ButtonsModule } from 'src/app/common/buttons/buttons.module';
-import { LayoutModule } from 'src/app/common/layout/layout.module';
 import { BarsModule } from 'src/app/common/bars/bars.module';
+import { GameoverOverlayComponent } from './gameover-overlay/gameover-overlay.component';
+import { LayoutModule } from "../../common/layout/layout.module";
+import { NebulaComponent } from './nebula/nebula.component';
 
 
 @NgModule({
   declarations: [
-    GameComponent
+    GameComponent,
+    GameoverOverlayComponent,
+    NebulaComponent
   ],
   imports: [
     CommonModule,
