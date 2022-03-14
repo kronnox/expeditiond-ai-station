@@ -18,8 +18,6 @@ import { WotSuccessOverlayComponent } from 'src/app/common/layout/wot-success-ov
 export class GameComponent implements AfterViewInit {
 
   @ViewChild('canvas') public canvas!: ElementRef;
-  @ViewChild('successOverlay') public successOverlay: WotSuccessOverlayComponent;
-
 
   private ctx!: CanvasRenderingContext2D;
   private canvasEl: HTMLCanvasElement;
@@ -111,7 +109,7 @@ export class GameComponent implements AfterViewInit {
 
       if(this.truck.health <= 0 || this.survivedObjects >= 50) {
           window.cancelAnimationFrame(req);
-          this.gameOver();
+          this.gameover = true;
       }
 
   }
@@ -252,10 +250,6 @@ export class GameComponent implements AfterViewInit {
   public saveCanvas(canvas: NgxDrawingCanvasComponent): void {
       this.customImages.push(new ImageObject(canvas.canvas.nativeElement.toDataURL("image/png"), true));
       canvas.clear();
-  }
-
-  private gameOver(): void {
-    this.successOverlay.setVisible();
   }
 
   public continue(): void {
