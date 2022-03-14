@@ -9,9 +9,9 @@
   </wot-step-info>
   <wot-row>
     <wot-container>
-      <div class="image-container">
+      <div class="image-container" (scroll)="handleScroll()">
         <div class="image-inner-container">
-          <span *ngFor="let image of images">
+          <span *ngFor="let image of images" (click)="showInfo($event)">
               <img class="img-data" src="{{image.imagePath}}"/>
           </span>
         </div>
@@ -26,3 +26,5 @@
 <wot-success-overlay (continue)="continue()" #successOverlay>
   Super! Ihr habt euch mit den verschiedenen Objekten im Weltall vertraut gemacht. Nun könnt ihr das Erkennungssystem entwickeln.
 </wot-success-overlay>
+
+<wot-popover [text]="currentDescription" #popover></wot-popover>
