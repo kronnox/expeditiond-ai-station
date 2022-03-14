@@ -50,14 +50,12 @@ export class DataLabelingComponent implements OnInit {
     let imageObjects: ImageObject[] = [];
     ddc.labels.forEach(element => {
       if(element.children.length === 0) {
-
         for(let i = 0; i < worldFormular.length; i++) {
           for(let j = 0; j < worldFormular[i].length; j++) {
             worldFormular[i][j] += (weightA/8);
           }
           worldFormular[i][element.labelID] -= weightA;
         }
-
         let io = this.imageService.getNImagesOfClass(1,element.labelID)[0];
         io.label = element.labelName;
         io.labeledClass = element.labelID;
