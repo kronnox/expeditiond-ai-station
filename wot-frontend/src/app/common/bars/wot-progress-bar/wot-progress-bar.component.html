@@ -1,0 +1,11 @@
+<div class="progress-bar-wrapper" [style.font-size]="labelSize">
+  <div class="progress-bar-container" [style.width]="width">
+    <div class="progress-bar"
+         [style.width]="getNormedProgress()+'%'"
+         [style.height]="height"
+         [style.background]="getBackground()"
+    >
+    </div>
+  </div>
+  <span class="progress-bar-label">{{label}}</span>
+</div>
