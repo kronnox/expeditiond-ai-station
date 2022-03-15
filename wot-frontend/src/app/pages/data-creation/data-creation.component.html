@@ -18,7 +18,7 @@
         <div class="canvas-buttons">
           <wot-button icon="arrow-undo" (press)="drawingCanvas.undoLast()" [disabled]="!drawingCanvas.canUndo()"></wot-button>
           <wot-button icon="arrow-redo" (press)="drawingCanvas.redoLast()" [disabled]="!drawingCanvas.canRedo()"></wot-button>
-          <wot-button icon="checkmark" (press)="saveCanvas(drawingCanvas)" [disabled]="images.length >= 4 || drawingCanvas.empty"></wot-button>
+          <wot-button icon="checkmark" (press)="saveCanvas(drawingCanvas)" [disabled]="images.length >= 4 || drawingCanvas.strokes.length === 0"></wot-button>
         </div>
       </div>
 
