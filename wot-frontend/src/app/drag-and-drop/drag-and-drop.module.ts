@@ -2,6 +2,7 @@ import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DragAndDropComponent } from './drag-and-drop.component';
+import { ButtonsModule } from '../common/buttons/buttons.module';
 
 
 
@@ -11,7 +12,8 @@ import { DragAndDropComponent } from './drag-and-drop.component';
   ],
   imports: [
     CommonModule,
-    DragDropModule
+    DragDropModule,
+    ButtonsModule
   ],
   exports: [
     DragAndDropComponent
