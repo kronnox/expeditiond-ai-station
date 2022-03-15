@@ -49,7 +49,7 @@ export class AnalyticsComponent implements OnInit {
     });
     console.log(this.sortedClasses);
     this.predictionIndex = imageObject.predictedClass;
-    this.selectedColor = (imageObject.predictedClass === imageObject.labeledClass) ? 'lightgreen' : 'red';
+    this.selectedColor = (imageObject.predictedClass === imageObject.labeledClass) ? 'var(--color-success)' : 'var(--color-danger)';
   }
 
   public getClassColor(index: number) {
