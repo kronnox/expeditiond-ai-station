@@ -12,3 +12,23 @@
   align-items: center;
   flex-direction: row;
 }
+
+.image-container {
+  width: 312px;
+  height: 648px;
+  padding: 48px;
+}
+
+.image-inner-container {
+  display:grid;
+  grid-template-columns: repeat(2, 20fr);
+  grid-column-gap: 12px;
+  grid-row-gap: 12px;
+}
+
+.img-data {
+  border-radius: 0;
+  width: 148px;
+  background: linear-gradient(45deg, var(--color-bg-dark), var(--color-bg));
+  border: var(--color-text) solid 1px;
+}

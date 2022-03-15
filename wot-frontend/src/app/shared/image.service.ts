@@ -51,4 +51,12 @@ export class ImageService {
     io.labeledClass = randCat;
     return io;
   }
+
+  public getRandomImages(num: number): ImageObject[] {
+    const ret: ImageObject[] = [];
+    for (let i = 0; i < num; i++) {
+      ret.push(this.getRandomImage());
+    }
+    return ret;
+  }
 }

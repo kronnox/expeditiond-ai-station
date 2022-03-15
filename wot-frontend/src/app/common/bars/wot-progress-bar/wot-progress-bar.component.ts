@@ -1,9 +1,21 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {animate, keyframes, query, stagger, state, style, transition, trigger} from "@angular/animations";
+
+export const progressAnimation = trigger('progressAnimation', [
+  state('*', style({ width: '{{width}}' }), { params: { width: "0" } }),
+  transition('* => 0', [
+    style({ width: '0' })
+  ]),
+  transition('* => *', [
+    animate('{{animationSpeed}}ms', style({ width: '{{width}}' }))
+  ], { params: { width: "0", animationSpeed: "2000"} }),
+]);
 
 @Component({
   selector: 'wot-progress-bar',
   templateUrl: './wot-progress-bar.component.html',
-  styleUrls: ['./wot-progress-bar.component.scss']
+  styleUrls: ['./wot-progress-bar.component.scss'],
+  animations: [progressAnimation]
 })
 export class WotProgressBarComponent {
 
@@ -15,6 +27,8 @@ export class WotProgressBarComponent {
 
   @Input() width: string = '100%';
   @Input() height: string = '24px';
+
+  @Input() animationSpeed: number = 2000;
 
   @Input('background') bgMode: string = 'linear-gradient(45deg, var(--color-primary-light), var(--color-secondary-light))';
 

@@ -1,4 +1,29 @@
 <div class="wot-overlay">
-  <p>training works!</p>
-  <wot-progress-bar height="24px" width="400px" label="Epoche 10: Analysiere Bilder" [progress]="0.5" [total]="1"></wot-progress-bar>
+  <wot-container>
+    <div class="image-container" [@.disabled]="epoch > 10">
+      <div class="image-inner-container" [@imageAnimation]="{value: images, params: {time: this.delayFactor*0.1}}">
+        <span *ngFor="let image of images; let i=index;">
+            <img class="img-data" src="{{image.imagePath}}" [@colorAnimation]="ratings[i]"/>
+        </span>
+      </div>
+    </div>
+  </wot-container>
+  <wot-container>
+    <neural-net-sim #neuralNet></neural-net-sim>
+  </wot-container>
+  <wot-column>
+    <wot-row>
+      <wot-progress-bar height="24px" width="400px" [label]="'Epoche '+this.epoch+'/1000'" [progress]="this.epoch" [total]="1000" [animationSpeed]="1000*delayFactor"></wot-progress-bar>
+    </wot-row>
+    <wot-row>
+      <wot-progress-bar height="24px" width="400px" [label]="getStepLabel()" [progress]="this.step" [total]="4" [animationSpeed]="1000*delayFactor"></wot-progress-bar>
+    </wot-row>
+    <wot-row>
+      <wot-button slot="fill" (press)="startTraining()" [disabled]="stage != 0" *ngIf="stage < 2">Training Starten</wot-button>
+      <wot-button slot="fill" (press)="continueTraining()" [disabled]="stage != 2" *ngIf="stage >= 2">Training Fortsetzen</wot-button>
+    </wot-row>
+    <wot-row>
+      <h1>Genauigkeit: {{accuracy | number: '1.0-2'}}%</h1>
+    </wot-row>
+  </wot-column>
 </div>
