@@ -105,10 +105,9 @@ export class GameComponent implements AfterViewInit {
           this.postTick(elapsed);
       }
 
-      const req = window.requestAnimationFrame(this.loop.bind(this));
+      window.requestAnimationFrame(this.loop.bind(this));
 
       if(this.truck.health <= 0 || this.survivedObjects >= 50) {
-          window.cancelAnimationFrame(req);
           this.gameover = true;
       }
 
@@ -227,7 +226,7 @@ export class GameComponent implements AfterViewInit {
           spaceObject.imageObject.prediction = result;
           spaceObject.imageObject.predictedClass = classId;
           spaceObject.imageObject.label = (this.backendService.classes[classId] + " " + confidence.toFixed(2));
-          
+
           spaceObject.action = this.grouping[classId];
     });
   }

@@ -1,10 +1,10 @@
 <nebula></nebula>
 <canvas id="canvas" #canvas></canvas>
-<div class="bottomright drawingCanvas">
+<div class="bottomright drawingCanvas" *ngIf="!gameover">
     <ngx-drawing-canvas [width]="'400'" [height]="'400'" strokeColor="#fff" [strokeWidth]="4" backgroundColor="rgba(0, 0, 0, 0)" #drawingCanvas></ngx-drawing-canvas>
     <wot-button class="bottomright" icon="checkmark" (press)="saveCanvas(drawingCanvas)" [disabled]="drawingCanvas.strokes.length === 0"></wot-button>
 </div>
-<div *ngIf="truck" class="health-bar" style="z-index: 100;">
+<div *ngIf="!gameover && truck" class="health-bar" style="z-index: 100;">
     <wot-life-bar [maxLifes]="3" [lifes]="truck.health"></wot-life-bar>
 </div>
 <gameover-overlay *ngIf="gameover"></gameover-overlay>
