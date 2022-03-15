@@ -27,6 +27,15 @@
   display: block;
 }
 
+.undo-div {
+  width: 118px;
+  height: 118px;
+}
+
+.undo-btn {
+  margin: 0 10px;
+}
+
 .category:hover {
   transform: translateY(0);
   background-image: linear-gradient(45deg, var(--color-secondary-light), var(--color-primary-light));

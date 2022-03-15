@@ -18,8 +18,6 @@ import { WotSuccessOverlayComponent } from 'src/app/common/layout/wot-success-ov
 export class GameComponent implements AfterViewInit {
 
   @ViewChild('canvas') public canvas!: ElementRef;
-  @ViewChild('successOverlay') public successOverlay: WotSuccessOverlayComponent;
-
 
   private ctx!: CanvasRenderingContext2D;
   private canvasEl: HTMLCanvasElement;
@@ -50,13 +48,13 @@ export class GameComponent implements AfterViewInit {
   public demage: number[][] = [
     [0,1,1],
     [1,0,1],
+    [0,0,0],
     [1,0,1],
+    [1,1,0],
+    [1,1,0],
+    [0,0,0],
     [0,1,1],
-    [1,0,1],
-    [0,0,0],
-    [1,0,0],
-    [0,0,0],
-    [1,0,0]
+    [0,1,0]
   ];
 
   private survivedObjects: number = 0;
@@ -111,7 +109,7 @@ export class GameComponent implements AfterViewInit {
 
       if(this.truck.health <= 0 || this.survivedObjects >= 50) {
           window.cancelAnimationFrame(req);
-          this.gameOver();
+          this.gameover = true;
       }
 
   }
@@ -215,7 +213,6 @@ export class GameComponent implements AfterViewInit {
 
   private async predictObject(spaceObject: SpaceObject){
       await fetch(spaceObject.imageObject.imagePath).then(r => r.blob()).then(blob => this.backendService.predictBlob(blob)).then(res => {
-          res.pop(); //WIRD GELÖSCHT
           const tempClass = res.indexOf(Math.max(...res));
           for(let i = 0; i < res.length; i++) {
               res[i] = res[i] + this.worldFormular[tempClass][i];
@@ -252,10 +249,6 @@ export class GameComponent implements AfterViewInit {
   public saveCanvas(canvas: NgxDrawingCanvasComponent): void {
       this.customImages.push(new ImageObject(canvas.canvas.nativeElement.toDataURL("image/png"), true));
       canvas.clear();
-  }
-
-  private gameOver(): void {
-    this.successOverlay.setVisible();
   }
 
   public continue(): void {

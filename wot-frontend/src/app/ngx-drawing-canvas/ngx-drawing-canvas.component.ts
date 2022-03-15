@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Input, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, DoCheck, ElementRef, Input, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
 import {fromEvent, mergeWith, Observable, pairwise, switchMap, takeUntil} from "rxjs";
 import {Vector} from "../model/vector/vector";
 import {Path} from "../model/path/path";
@@ -26,7 +26,7 @@ export class NgxDrawingCanvasComponent implements AfterViewInit {
   private cx!: CanvasRenderingContext2D;
 
   private currentStroke: Stroke = new Stroke();
-  private strokes: Stroke[] = [];
+  public strokes: Stroke[] = [];
   private redoStrokes: Stroke[] = [];
 
   public ngAfterViewInit() {
