@@ -5,6 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { HttpClient } from '@angular/common/http';
+import { ButtonsModule } from './common/buttons/buttons.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { HttpClient } from '@angular/common/http';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ButtonsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
