@@ -10,7 +10,7 @@ import uuid
 
 from application.components import predict, read_imagefile, load_model
 from application.components.prediction import settings
-
+os.environ['WOT_SAVE_PATH'] = 'out'
 app_desc = """"""
 app = FastAPI(title='Sketch Classification API', description=app_desc)
 load_model()
@@ -23,8 +23,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-print("test")
 def save_image(image, prediction):
     dir = os.getenv('WOT_SAVE_PATH')
     folder = settings.categories[np.argmax(prediction["confidence"])]
@@ -56,7 +54,7 @@ async def get_categories():
 
 if __name__ == "__main__":
     load_model()
-    uvicorn.run(app, debug=True)
+    uvicorn.run(app, debug=False)
     
 
 
