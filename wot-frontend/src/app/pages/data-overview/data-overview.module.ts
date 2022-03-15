@@ -4,6 +4,7 @@ import { DataOverviewComponent } from './data-overview.component';
 import {DataOverviewRoutingModule} from './data-overview-routing.module';
 import {LayoutModule} from "../../common/layout/layout.module";
 import { ButtonsModule } from 'src/app/common/buttons/buttons.module';
+import { PopoverModule } from 'src/app/common/popover/popover.module';
 
 
 
@@ -15,7 +16,8 @@ import { ButtonsModule } from 'src/app/common/buttons/buttons.module';
     CommonModule,
     DataOverviewRoutingModule,
     LayoutModule,
-    ButtonsModule
+    ButtonsModule,
+    PopoverModule
   ]
 })
 export class DataOverviewModule { }
