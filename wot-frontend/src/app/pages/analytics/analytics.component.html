@@ -1,41 +1,43 @@
 <wot-page>
     <wot-step-info>
       <h1>
-        Schritt 8: Datensatz-Erstellung
+        Schritt X: Analyse
       </h1>
       <p>
-        Zeichne Objekte, um den Computer zu zeigen, wie diese aussehen. Zeichne vier von den Objekten Asteroid, Astronaut, Brief, Ufo, Versorgungsbox, Auto, Satellit, Satellitenschüssel oder Raumschiff
+        Auf dieser Seite siehst du wie eure selbstgezeichneten Bilder erkannt wurden.
       </p>
     </wot-step-info>
     <wot-row>
       <div class="inner-content">
 
         <div class="image-list">
-          <div class="image-item" *ngFor="let image of images" (click)="imageSelected(image)">
-            <wot-container>
+          <div class="image-item" *ngFor="let image of images" (click)="imageSelected(image)" [ngStyle]="{'border': (selectedImage===image) ? '3px solid var(--color-primary-light)' : '0px'}">
+            <div>
               <img width="100%" src="{{image.imagePath}}"/>
-            </wot-container>
-          </div>
-        </div>
-
-        <div class="analysis" *ngIf="selectedImage">
-          <div *ngFor="let c of classes; index as i" [style.color]="getClassColor(i)" class="class-prediction">
-            <div class="class-name">{{c}}:</div>
-            <div class="class-value">
-              <wot-progress-bar [height]="10" [width]="400" [progress]="selectedImage.prediction[i]" [total]="1"></wot-progress-bar>
-              {{selectedImage.prediction[i].toFixed(2)}}
             </div>
           </div>
-          Du hast gesagt das ist ein {{selectedImage.label}}
         </div>
-  
+        <div class="analysis" *ngIf="selectedImage">
+          <table class="prediction-table">
+            <tr>
+              <th>Klasse</th>
+              <th>Konfidenz</th>
+            </tr>
+            <tr *ngFor="let class of sortedClasses" class="prediction-row">
+              <td class="class-column">{{classes[class]}}</td>
+              <td>
+                <div class="prediction-column">
+                  <wot-progress-bar class="prediction-bar" [height]="20" [width]="400" [progress]="selectedImage.prediction[class]" [total]="1"></wot-progress-bar>
+                  <div class="prediction-value">{{selectedImage.prediction[class].toFixed(2)}}</div>
+                </div>
+              </td>
+            </tr>
+          </table>
+          Du hast das Objekt als <span [style.color]="selectedColor" >{{selectedImage.label}}</span> klassifiziert.
+        </div>
       </div>
     </wot-row>
     <wot-row>
-      <wot-button slot="right" (press)="done()">Beenden</wot-button>
+      <wot-button slot="right" (press)="continue()">Beenden</wot-button>
     </wot-row>
 </wot-page>
-  
-  <wot-success-overlay (continue)="continue()" #successOverlay>
-    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-  </wot-success-overlay>
