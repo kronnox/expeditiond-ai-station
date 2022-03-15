@@ -3,6 +3,7 @@
 }
 .progress-bar {
     width: 0;
+    background-color: var(--color-primary-light);
 }
 .progress-bar.green {
     background-color: green;

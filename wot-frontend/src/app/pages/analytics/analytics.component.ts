@@ -1,3 +1,4 @@
+import { TransitiveCompileNgModuleMetadata } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { WotSuccessOverlayComponent } from 'src/app/common/layout/wot-success-overlay/wot-success-overlay.component';
 import { ImageObject } from 'src/app/model/image/image-object';
@@ -15,7 +16,10 @@ export class AnalyticsComponent implements OnInit {
   public images: ImageObject[] = [];
 
   public selectedImage: ImageObject;
+  public selectedColor: string = 'white';
   public predictionIndex: number;
+
+  public sortedClasses: number[] = [];
 
   public classes: string[] = [];
 
@@ -29,22 +33,27 @@ export class AnalyticsComponent implements OnInit {
         this.images.push(element);
       }
     })
-
     this.classes = this.backendService.classes;
+    this.imageSelected(this.images[0]);
   }
 
   public imageSelected(imageObject: ImageObject) {
+    this.sortedClasses = [];
     this.selectedImage = imageObject;
+    const sortedPredictions = imageObject.prediction.slice()
+    sortedPredictions.sort((a,b) => b - a);
+    console.log(sortedPredictions);
+    sortedPredictions.forEach(val => {
+      this.sortedClasses.push(imageObject.prediction.indexOf(val));
+    });
+    console.log(this.sortedClasses);
     this.predictionIndex = imageObject.predictedClass;
+    this.selectedColor = (imageObject.predictedClass === imageObject.labeledClass) ? 'lightgreen' : 'red';
   }
 
   public getClassColor(index: number) {
     if (index != this.predictionIndex) return 'white';
     return 'red';
-  }
-
-  public done(): void {
-    this.successOverlay.setVisible();
   }
 
   public continue(): void {
