@@ -12,9 +12,9 @@
 
         <div class="image-list">
           <div class="image-item" *ngFor="let image of images" (click)="imageSelected(image)" [ngStyle]="{'border': (selectedImage===image) ? '3px solid var(--color-primary-light)' : '0px'}">
-            <wot-container>
+            <div>
               <img width="100%" src="{{image.imagePath}}"/>
-            </wot-container>
+            </div>
           </div>
         </div>
         <div class="analysis" *ngIf="selectedImage">

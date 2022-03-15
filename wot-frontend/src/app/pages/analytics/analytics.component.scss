@@ -26,13 +26,12 @@
 }
 
 .image-item {
-    margin-bottom: 5px;
-    border: #7F7764 solid 1px;
+    margin-bottom: 10px;
+    background-color: var(--color-bg);
 }
 
 .image-item:hover {
-    background: linear-gradient(45deg, #020D17, #023947);
-    border: #7F7764 solid 1px;
+    background: linear-gradient(45deg, var(--color-bg-dark), var(--color-bg-light));
 }
 
 .inner-content {
