@@ -11,7 +11,7 @@
     <wot-container>
       <div class="image-container" (scroll)="handleScroll()">
         <div class="image-inner-container">
-          <span *ngFor="let image of images" (click)="showInfo($event)">
+          <span *ngFor="let image of images" (click)="showInfo($event, image)">
               <img class="img-data" src="{{image.imagePath}}"/>
           </span>
         </div>
