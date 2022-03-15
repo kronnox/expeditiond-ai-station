@@ -48,13 +48,13 @@ export class GameComponent implements AfterViewInit {
   public demage: number[][] = [
     [0,1,1],
     [1,0,1],
+    [0,0,0],
     [1,0,1],
+    [1,1,0],
+    [1,1,0],
+    [0,0,0],
     [0,1,1],
-    [1,0,1],
-    [0,0,0],
-    [1,0,0],
-    [0,0,0],
-    [1,0,0]
+    [0,1,0]
   ];
 
   private survivedObjects: number = 0;
@@ -213,7 +213,6 @@ export class GameComponent implements AfterViewInit {
 
   private async predictObject(spaceObject: SpaceObject){
       await fetch(spaceObject.imageObject.imagePath).then(r => r.blob()).then(blob => this.backendService.predictBlob(blob)).then(res => {
-          res.pop(); //WIRD GELÖSCHT
           const tempClass = res.indexOf(Math.max(...res));
           for(let i = 0; i < res.length; i++) {
               res[i] = res[i] + this.worldFormular[tempClass][i];
