@@ -1,5 +1,6 @@
 import { TransitiveCompileNgModuleMetadata } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { WotSuccessOverlayComponent } from 'src/app/common/layout/wot-success-overlay/wot-success-overlay.component';
 import { ImageObject } from 'src/app/model/image/image-object';
 import { BackendService } from 'src/app/shared/backend.service';
@@ -23,7 +24,7 @@ export class AnalyticsComponent implements OnInit {
 
   public classes: string[] = [];
 
-  constructor(private backendService: BackendService) { }
+  constructor(private backendService: BackendService, private router: Router) { }
 
   ngOnInit(): void {
     const imgs: ImageObject[] = JSON.parse(localStorage.getItem('labeled-data') || '');
@@ -57,5 +58,6 @@ export class AnalyticsComponent implements OnInit {
   }
 
   public continue(): void {
+    this.router.navigate(['/landing']);
   }
 }
