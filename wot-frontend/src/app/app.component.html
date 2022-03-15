@@ -1,1 +1,7 @@
 <router-outlet></router-outlet>
+<wot-button *ngIf="router.url != '/landing'" icon="close" (press)="confirmRestart()" class="close-btn"></wot-button>
+<div class="confirm-overlay confirm-text" *ngIf="showResetOverlay">
+    Willst du wirklich abbrechen?    
+    <wot-button (press)="restart()" class="confirm-btn">Ja</wot-button>
+    <wot-button (press)="decline()" class="confirm-btn">Nein</wot-button>
+</div>

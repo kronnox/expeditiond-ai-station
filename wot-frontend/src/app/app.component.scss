@@ -1,1 +1,25 @@
+.close-btn {
+    position: fixed;
+    top: 0;
+    right: 0;
+}
 
+.confirm-overlay {
+    position: fixed;
+    display: flex;
+    top: 0;
+    right: 0;
+    background-color: var(--color-bg-darker);;
+    padding: 5px;
+    vertical-align: middle;
+    align-items: center;
+}
+.confirm-text {
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    top:0;
+}
+.confirm-btn {
+    margin: 5px;
+}
