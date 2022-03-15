@@ -46,11 +46,11 @@ export class SpaceObject extends GameObject {
         if (this.detected){
             ctx.beginPath();
             ctx.rect(this.x-0.5*this.width, this.y-0.5*this.height, this.width, this.height);
-            ctx.strokeStyle = (this.action === 0) ? "red" : "#00FF00";
+            ctx.strokeStyle = (this.action === 0) ? "#e63946" : "#90be6d";
             ctx.lineWidth = 3;
             ctx.stroke();
             ctx.font = "20px Consolas";
-            ctx.fillStyle = (this.action === 0) ? "red" : "#00FF00";
+            ctx.fillStyle = (this.action === 0) ? "#e63946" : "#90be6d";
             const msg = this.imageObject.label || '';
             ctx.fillText(msg, this.x-0.5*this.width, (this.y-0.5*this.height)-5);
             ctx.stroke();

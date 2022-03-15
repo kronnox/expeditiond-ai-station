@@ -18,6 +18,7 @@ export class Edge {
   }
 
   public draw(ctx: CanvasRenderingContext2D): void {
+    ctx.strokeStyle = '#005C6B';
     ctx.lineWidth = this.weight;
     ctx.globalAlpha = this.weight/10;
     ctx.beginPath();

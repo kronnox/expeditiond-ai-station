@@ -110,6 +110,20 @@ export class NeuralNetSimComponent implements AfterViewInit {
     this.edges.forEach(e => e.updateWeight(epoch));
   }
 
+  public async showPulse(delayFactor: number): Promise<void> {
+    let totalCount = 0;
+    for (let c = 0; c < this.layout.length; c++) {
+      for (let r = 0; r < this.layout[c]; r++) {
+        this.nodes[totalCount+r].glow = true;
+      }
+      await new Promise(resolve => setTimeout(resolve, 100*delayFactor));
+      for (let r = 0; r < this.layout[c]; r++) {
+        this.nodes[totalCount+r].glow = false;
+      }
+      totalCount += this.layout[c];
+    }
+  }
+
   get height(): number {
     return this._height;
   }

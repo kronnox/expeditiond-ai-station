@@ -13,10 +13,12 @@
   flex-direction: row;
 }
 
-.image-container {
-  width: 312px;
+.container {
   height: 648px;
   padding: 48px;
+}
+.container.img {
+  width: 312px;
 }
 
 .image-inner-container {

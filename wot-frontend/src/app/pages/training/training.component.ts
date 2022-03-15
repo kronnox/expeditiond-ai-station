@@ -113,24 +113,24 @@ export class TrainingComponent implements OnInit {
     this.epoch += this.skip;
     this.step = 0;
     this.updateImages();
-    await this.delay(1000*this.delayFactor);
-    this.step = 1;
-    await this.delay(2000*this.delayFactor);
-    this.generateRatings();
-    this.step = 2;
     await this.delay(500*this.delayFactor);
-    this.accuracy = (this.targetAccuracy * Math.log(this.epoch)) / Math.log(1000);
+    this.step = 1;
+    await this.neuralNet.showPulse(this.delayFactor);
+    await this.delay(1000*this.delayFactor);
+    this.step = 2;
+    this.generateRatings();
+    await this.delay(2000*this.delayFactor);
     this.step = 3;
-    this.neuralNet.update(this.epoch);
     this.weltformel_2_0();
     await this.delay(1000*this.delayFactor);
     this.step = 4;
+    this.neuralNet.update(this.epoch);
     await this.delay(1000*this.delayFactor);
     this.resetRatings();
   }
 
   private delay(ms: number): Promise<void> {
-    return new Promise( resolve => setTimeout(resolve, ms) );
+    return new Promise( resolve => setTimeout(resolve, ms));
   }
 
   private weltformel_2_0(): void {
