@@ -23,6 +23,10 @@ const routes: Routes = [
     loadChildren: () => import('./data-grouping/data-grouping.module').then(m => m.DataGroupingModule)
   },
   {
+    path: 'training',
+    loadChildren: () => import('./training/training.module').then(m => m.TrainingModule)
+  },
+  {
     path: 'game',
     loadChildren: () => import('./game/game.module').then(m => m.GameModule)
   },

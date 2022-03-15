@@ -27,7 +27,7 @@
               <td class="class-column">{{classes[class]}}</td>
               <td>
                 <div class="prediction-column">
-                  <wot-progress-bar class="prediction-bar" [height]="20" [width]="400" [progress]="selectedImage.prediction[class]" [total]="1"></wot-progress-bar>
+                  <wot-progress-bar height="10px" width="400px" background="auto" [progress]="selectedImage.prediction[i]" [total]="1"></wot-progress-bar>
                   <div class="prediction-value">{{selectedImage.prediction[class].toFixed(2)}}</div>
                 </div>
               </td>
