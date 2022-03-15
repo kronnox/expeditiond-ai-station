@@ -9,7 +9,7 @@ import {Stroke} from "../model/stroke/stroke";
   templateUrl: './ngx-drawing-canvas.component.html',
   styleUrls: ['./ngx-drawing-canvas.component.scss']
 })
-export class NgxDrawingCanvasComponent implements AfterViewInit, DoCheck {
+export class NgxDrawingCanvasComponent implements AfterViewInit {
 
   @ViewChild('canvas') public canvas!: ElementRef;
 
@@ -26,10 +26,8 @@ export class NgxDrawingCanvasComponent implements AfterViewInit, DoCheck {
   private cx!: CanvasRenderingContext2D;
 
   private currentStroke: Stroke = new Stroke();
-  private strokes: Stroke[] = [];
+  public strokes: Stroke[] = [];
   private redoStrokes: Stroke[] = [];
-
-  public empty: boolean = true;
 
   public ngAfterViewInit() {
     const canvasEl: HTMLCanvasElement = this.canvas.nativeElement;
@@ -42,11 +40,6 @@ export class NgxDrawingCanvasComponent implements AfterViewInit, DoCheck {
     this.cx.strokeStyle = this.strokeColor;
     this.clearCanvas();
     this.captureEvents(canvasEl);
-  }
-
-  ngDoCheck(): void {
-    this.empty = this.strokes.length === 0;
-    console.log(this.empty);
   }
 
   private updateSize(): void {
