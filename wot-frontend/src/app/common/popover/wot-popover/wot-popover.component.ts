@@ -1,4 +1,4 @@
-import { Component, DoCheck, Input, NgZone, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, DoCheck, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'wot-popover',
@@ -7,13 +7,16 @@ import { Component, DoCheck, Input, NgZone, OnInit, ViewChild } from '@angular/c
 })
 export class WotPopoverComponent implements OnInit {
 
+  @ViewChild('popover') popover: ElementRef;
+
   public top: number = 0;
   public left: number = 0;
 
-  public heigth: number = 120;
-  public width: number = 180;
+  @Input() public width: number = 200;
+  
+  public padding: number = 15;
 
-  @Input() public text: string = '';
+  public text: string = '';
 
   public active: boolean = false;
 
@@ -22,13 +25,17 @@ export class WotPopoverComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public setVisible(element: Element): void {
-
-    const targetDomRect = element.getBoundingClientRect();
-
-    this.top = targetDomRect.y - (this.heigth + 20);
-    this.left = (targetDomRect.x + (targetDomRect.width / 2)) - ((this.width+10) / 2);
+  public setVisible(element: Element, txt: string): void {
+    this.text = txt;
     this.active = true;
+    setTimeout(()=> {
+      const popoverDomRect = this.popover.nativeElement.getBoundingClientRect();
+      const targetDomRect = element.getBoundingClientRect();
+      console.log(popoverDomRect.height);
+      console.log(targetDomRect);
+      this.top = targetDomRect.y - (popoverDomRect.height + 10);
+      this.left = (targetDomRect.x + (targetDomRect.width / 2)) - ((popoverDomRect.width) / 2);
+    }, 0);
   }
 
   public setInvisible(): void {

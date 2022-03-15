@@ -1,4 +1,4 @@
 
-<div *ngIf="active" [ngStyle]="{'top': top + 'px', 'left': left + 'px', 'height': heigth + 'px', 'width': width + 'px'}" class="popover">
+<div [ngStyle]="{'top': top + 'px', 'left': left + 'px', 'width': width + 'px', 'padding': padding + 'px', 'visibility': active ? 'visible' : 'hidden'}" class="popover" #popover>
     {{text}}
 </div>

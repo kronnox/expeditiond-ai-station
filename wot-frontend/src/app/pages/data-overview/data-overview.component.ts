@@ -93,6 +93,6 @@ export class DataOverviewComponent implements OnInit {
     this.popover.setInvisible();
     this.currentDescription = this.descriptions[imageObject.predictedClass][Math.trunc(Math.random()*this.descriptions[imageObject.predictedClass].length)];
     const target: Element = event.target as Element;
-    this.popover.setVisible(target);
+    this.popover.setVisible(target, this.currentDescription);
   }
 }
