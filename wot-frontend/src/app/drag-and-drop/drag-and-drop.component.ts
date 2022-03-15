@@ -22,7 +22,7 @@ export class DragAndDropComponent implements AfterViewInit {
 
   private topZ: number = 1;
 
-  public lastIndex: number;
+  public lastIndex: number = 0;
 
   constructor(private router: Router, private cdRef: ChangeDetectorRef) { }
 
@@ -79,6 +79,7 @@ export class DragAndDropComponent implements AfterViewInit {
     if(dragObject) {
       this.dragObjects.push(dragObject);
     }
+    this.lastIndex = 0;
   }
 
   public changeZIndex(item: DragImage): void {
