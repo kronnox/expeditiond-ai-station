@@ -48,14 +48,14 @@ export class NeuralNetSimComponent implements AfterViewInit {
     this.ctx = <CanvasRenderingContext2D>this.canvasEl.getContext('2d');
 
     this.canvasEl.width = 600;
-    this.canvasEl.height = 600;
+    this.canvasEl.height = 500;
 
     this._width = this.canvasEl.width;
     this._height = this.canvasEl.height;
     this._centerX = this._width/2;
     this._centerY = this._height/2;
 
-    this.spaceBetweenNodes = this._height / 6;
+    this.spaceBetweenNodes = this._height / 5;
 
     this.prevTime = 0;
 
