@@ -83,7 +83,6 @@ export class DataLabelingComponent implements OnInit {
         if(item.imageObject.predictedClass != item.imageObject.labeledClass) {
           worldFormular[item.imageObject.labeledClass][item.imageObject.predictedClass] += weightB;
           worldFormular[item.imageObject.labeledClass][item.imageObject.labeledClass] -= weightB;
-          console.log(worldFormular);
         }
       })
     });

@@ -11,9 +11,7 @@ export class AppComponent {
 
   public showResetOverlay: boolean = false;
 
-  constructor(public router: Router) {
-    console.log(this.router.url)
-   }
+  constructor(public router: Router) { }
 
   public confirmRestart(): void {
     this.showResetOverlay = true;
