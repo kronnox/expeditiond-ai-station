@@ -175,7 +175,7 @@ export class GameComponent implements AfterViewInit {
 
       this.ctx.fillStyle = 'hsla(0,0%,100%,0.4)';
       this.ctx.fillRect(0, 0, 100, 30);
-      this.ctx.font = '15px Consolas';
+      this.ctx.font = '15px Mono';
       this.ctx.fillStyle = 'black';
       this.ctx.fillText("FPS: " + this.fps, 10, 20);
   }
