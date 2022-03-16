@@ -8,6 +8,7 @@ import { WotSuccessOverlayComponent } from './wot-success-overlay/wot-success-ov
 import {ButtonsModule} from "../buttons/buttons.module";
 import { WotProgressBarComponent } from '../bars/wot-progress-bar/wot-progress-bar.component';
 import { WotColumnComponent } from './wot-column/wot-column.component';
+import { WotContentComponent } from './wot-content/wot-content.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { WotColumnComponent } from './wot-column/wot-column.component';
     WotContainerComponent,
     WotPageComponent,
     WotSuccessOverlayComponent,
+    WotContentComponent,
   ],
   exports: [
     WotContainerComponent,
@@ -25,7 +27,8 @@ import { WotColumnComponent } from './wot-column/wot-column.component';
     WotColumnComponent,
     WotPageComponent,
     WotStepInfoComponent,
-    WotSuccessOverlayComponent
+    WotSuccessOverlayComponent,
+    WotContentComponent
   ],
   imports: [
     CommonModule,

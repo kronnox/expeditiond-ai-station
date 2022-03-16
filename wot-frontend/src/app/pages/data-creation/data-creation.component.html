@@ -7,30 +7,32 @@
       Zeichnet im Team vier der folgenden Objekte: Asteroid, Astronaut, Brief, Ufo, Versorgungsbox, Auto, Satellit, Satellitenschüssel, Raumschiff. Klickt nach jedem gezeichneten Objekt auf den Haken.
     </p>
   </wot-step-info>
-  <wot-row>
-    <div class="inner-content">
-      <div class="canvas-group">
-        <div class="drawing-canvas">
-          <wot-container>
-            <ngx-drawing-canvas [width]="'512'" [height]="'512'" strokeColor="#fff" backgroundColor="rgba(0, 0, 0, 0)" #drawingCanvas></ngx-drawing-canvas>
-          </wot-container>
+  <wot-content>
+    <wot-row>
+      <div class="inner-content">
+        <div class="canvas-group">
+          <div class="drawing-canvas">
+            <wot-container>
+              <ngx-drawing-canvas [width]="'512'" [height]="'512'" strokeColor="#fff" backgroundColor="rgba(0, 0, 0, 0)" #drawingCanvas></ngx-drawing-canvas>
+            </wot-container>
+          </div>
+          <div class="canvas-buttons">
+            <wot-button icon="arrow-undo" (press)="drawingCanvas.undoLast()" [disabled]="!drawingCanvas.canUndo()"></wot-button>
+            <wot-button icon="arrow-redo" (press)="drawingCanvas.redoLast()" [disabled]="!drawingCanvas.canRedo()"></wot-button>
+            <wot-button icon="checkmark" (press)="saveCanvas(drawingCanvas)" [disabled]="images.length >= 4 || drawingCanvas.strokes.length === 0"></wot-button>
+          </div>
         </div>
-        <div class="canvas-buttons">
-          <wot-button icon="arrow-undo" (press)="drawingCanvas.undoLast()" [disabled]="!drawingCanvas.canUndo()"></wot-button>
-          <wot-button icon="arrow-redo" (press)="drawingCanvas.redoLast()" [disabled]="!drawingCanvas.canRedo()"></wot-button>
-          <wot-button icon="checkmark" (press)="saveCanvas(drawingCanvas)" [disabled]="images.length >= 4 || drawingCanvas.strokes.length === 0"></wot-button>
-        </div>
-      </div>
 
-      <div class="image-list">
-        <div class="image-item" *ngFor="let image of images">
-          <wot-container>
-            <img width="100%" src="{{image.imagePath}}"/>
-          </wot-container>
+        <div class="image-list">
+          <div class="image-item" *ngFor="let image of images">
+            <wot-container>
+              <img width="100%" src="{{image.imagePath}}"/>
+            </wot-container>
+          </div>
         </div>
       </div>
-    </div>
-  </wot-row>
+    </wot-row>
+  </wot-content>
   <wot-row>
     <wot-button slot="right" [disabled]="images.length < 4" (press)="done()">Schritt abschließen</wot-button>
   </wot-row>

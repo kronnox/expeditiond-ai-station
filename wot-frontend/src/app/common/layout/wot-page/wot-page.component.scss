@@ -1,3 +1,12 @@
-.wot-page {
-  margin: auto;
+:host {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 64px;
+
+  padding: 0 32px;
+
+  display: flex;
+  flex-direction: column;
 }

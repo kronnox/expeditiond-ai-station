@@ -1,3 +1,10 @@
+.inner-content {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: white;
+}
 
 .image-list {
     height: 518px;
@@ -34,16 +41,20 @@
     background: linear-gradient(45deg, var(--color-bg-dark), var(--color-bg-light));
 }
 
-.inner-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    color: white;
-}
-
 .prediction-table {
-    padding: 2em;
-    text-align: left;
+  margin: 2em 10em 2em 0;
+  text-align: left;
+
+  th {
+    font-style: italic;
+    border-spacing: 5px;
+  }
+  th::after {
+    content: "@";
+    display: block;
+    line-height: 2em;
+    text-indent: -99999px;
+  }
 }
 
 .analysis {
@@ -57,7 +68,7 @@
 }
 
 .class-column {
-    padding: 10px;
+    padding: 10px 20px 10px 0;
 }
 
 .prediction-value {

@@ -12,7 +12,7 @@
         <ion-icon name="folder-open-outline" class="btn-icon"></ion-icon>
         <p class="p-count">{{class.children.length}}</p>
       </div>
-      <p class="p-label">{{class.labelName}}</p>
+      <p class="p-label">{{class.labelName === 'Satellitenschüssel' ? 'Satelliten-schüssel' : class.labelName}}</p>
     </div>
 
     <wot-button [disabled]="lastIndex===0" class="undo-btn" (press)="undo()">
