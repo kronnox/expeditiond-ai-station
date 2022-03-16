@@ -31,8 +31,6 @@ export class WotPopoverComponent implements OnInit {
     setTimeout(()=> {
       const popoverDomRect = this.popover.nativeElement.getBoundingClientRect();
       const targetDomRect = element.getBoundingClientRect();
-      console.log(popoverDomRect.height);
-      console.log(targetDomRect);
       this.top = targetDomRect.y - (popoverDomRect.height + 10);
       this.left = (targetDomRect.x + (targetDomRect.width / 2)) - ((popoverDomRect.width) / 2);
     }, 0);

@@ -129,7 +129,6 @@ export class GameComponent implements AfterViewInit {
   }
 
   private tick(delta: number): void {
-      console.log(this.truck.health)
       // background
       this.bgObjects.forEach((obj, i, o) => {
           obj.update(delta);
