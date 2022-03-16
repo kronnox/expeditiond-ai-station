@@ -9,6 +9,7 @@ import {GameConfig} from "./game-config";
 import { ImageService } from 'src/app/shared/image.service';
 import { ImageObject } from 'src/app/model/image/image-object';
 import { WotSuccessOverlayComponent } from 'src/app/common/layout/wot-success-overlay/wot-success-overlay.component';
+import { WotPopoverComponent } from 'src/app/common/popover/wot-popover/wot-popover.component';
 
 @Component({
   selector: 'app-game',
@@ -18,6 +19,8 @@ import { WotSuccessOverlayComponent } from 'src/app/common/layout/wot-success-ov
 export class GameComponent implements AfterViewInit {
 
   @ViewChild('canvas') public canvas!: ElementRef;
+  @ViewChild('popover') public popover: WotPopoverComponent;
+  @ViewChild('canvasContainer') public canvasContainer: ElementRef;
 
   private ctx!: CanvasRenderingContext2D;
   private canvasEl: HTMLCanvasElement;
@@ -57,7 +60,7 @@ export class GameComponent implements AfterViewInit {
     [1,0,1]
   ];
 
-  private survivedObjects: number = 0;
+  public survivedObjects: number = 0;
 
   public gameover: boolean = false;
 
@@ -78,6 +81,8 @@ export class GameComponent implements AfterViewInit {
       this._height = this.canvasEl.height;
       this._centerX = this._width/2;
       this._centerY = this._height/2;
+
+      this.popover.setVisible(this.canvasContainer.nativeElement, 'Hier könnt ihr eigene Objekte zeichnen um euer Erkennungssystem zu testen');
 
       this.prevTime = 0;
 
