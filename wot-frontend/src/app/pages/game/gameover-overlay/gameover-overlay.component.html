@@ -1,11 +1,11 @@
 <div class="wot-overlay">
   <div class="glitch">
-    <h1 class="gameover-title">
-      Game  Over
+    <h1 class="gameover-title" [textContent]="win ? 'Victory' : 'Defeated'" [ngStyle]="{'color': win ? 'var(--color-success)' : 'var(--color-danger)'}">
     </h1>
   </div>
-  <p class="gameover-info">Der Truck wurde zerstört und die Mission ist vorrüber.</p>
-  <p class="gameover-info">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+  <p *ngIf="!win" class="gameover-info">Der Truck wurde schwer beschädigt und die Mission ist gescheitert.</p>
+  <p *ngIf="win" class="gameover-info">Der Truck hat die Mission erfolgreich abgeschlossen.</p>
+  <p class="gameover-info">Ihr könnt nun erneut versuchen ein Erkennungssystem zu trainieren oder das Spiel mit der Auswertung beenden.</p>
   <wot-row>
     <wot-button routerLink="/analytics">Versuche es erneut</wot-button>
   </wot-row>

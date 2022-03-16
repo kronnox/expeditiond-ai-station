@@ -62,7 +62,7 @@ export class GameComponent implements AfterViewInit {
 
   public survivedObjects: number = 0;
 
-  public gameover: boolean = false;
+  public gamestatus: number = 0; //0: running, 1: win, 2: loss
 
   constructor(protected backendService: BackendService, protected imageService: ImageService) {
       this.worldFormular = JSON.parse(localStorage.getItem('world-formular') || '');
@@ -112,8 +112,10 @@ export class GameComponent implements AfterViewInit {
 
       window.requestAnimationFrame(this.loop.bind(this));
 
-      if(this.truck.health <= 0 || this.survivedObjects >= 50) {
-          this.gameover = true;
+      if(this.truck.health <= 0) {
+          this.gamestatus = 2;
+      } else if (this.survivedObjects >= 50) {
+          this.gamestatus = 1;
       }
 
   }
@@ -138,7 +140,10 @@ export class GameComponent implements AfterViewInit {
           obj.draw(this.ctx)
       });
 
-      if (this.gameover) return;
+      if (this.gamestatus!=0){
+        localStorage.setItem('win', this.gamestatus.toString());
+        return;
+      }
 
       // radar
       const imgRadar = new Image();
