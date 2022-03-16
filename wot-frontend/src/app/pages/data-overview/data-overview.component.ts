@@ -44,7 +44,7 @@ export class DataOverviewComponent implements OnInit {
     'Das Asteroid Juno kam in der letzten Mission dem Truck gefährlich nahe und hätte uns beinahe großen Schaden zugefügt.',
     'Huma ist ein Asteroid vom Amor-Typ. Unser Waffensystem konnte ihn neutralisieren.',
     'Dieser Asteroid hat unserem Truck großen Schaden zugefügt.'],
-    ['Das ist Leo. Ihn mussten wir auf ein früheren Mission in der Nähe des Mars aufsammeln.',
+    ['Das ist Leo. Ihn mussten wir auf einer früheren Mission in der Nähe des Mars aufsammeln.',
     'Diese Astronautin konnten wir in unserer letzten Mission leider nicht retten. Nun schwebt sie immer noch durch das All und fehlt in unserer Crew.',
     'Das is Torben. Ihn mussten wir in einer Rettungsmission beim Jupiter aufsammeln.',
     'Das ist der Astronaut Rico. Eine Rettungsmission schlug fehl. Seither wird er vermisst.',
