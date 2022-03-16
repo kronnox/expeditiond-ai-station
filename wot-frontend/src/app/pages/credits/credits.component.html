@@ -23,7 +23,8 @@
     </div>
 
     <div class="feedback">
-        <img width="500px" style="display: block;" src="assets/credits/feedback-qr.png">
+        <img width="500px" style="display: block; z-index: 3; position: fixed;" src="assets/credits/feedback-qr.png">
+        <div class="white-b"></div>
     </div>
     <wot-button *ngIf="skip" (press)="quit()" class="end-btn">Zurück auf Start</wot-button>
 </div>
