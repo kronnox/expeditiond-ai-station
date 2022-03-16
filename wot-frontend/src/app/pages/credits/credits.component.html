@@ -9,9 +9,9 @@
         
         <div class="titlecontent">
 
-            <div class="center header">Mission erfolgreich!!</div>
+            <div class="center header">Mission <span *ngIf="win">erfolgreich!!!</span><span *ngIf="!win">gescheitert!</span></div>
             
-            <div>Ihr habt es geschafft. Wir hoffen ihr hattet Spaß und konntet etwas zum Thema maschinelles Lernen lernen.</div>
+            <div><span *ngIf="win">Ihr habt es geschafft</span><span *ngIf="!win">Da ist etwas bei der Entwicklung des Erkennungssystems schief gegangen und der Truck wurde schwer beschädigt</span>. Wir hoffen ihr hattet <span *ngIf="!win">trotzdem</span> Spaß und konntet etwas zum Thema maschinelles Lernen lernen.</div>
 
             <div>Scannt bitte jetzt den nebenstehenden QR-Code mit einem Smartphone. Bitte füllt den Feedbackbogen aus, um uns bei unserem Projekt zu unterstützen. Danke!</div>
             

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 })
 export class CreditsComponent implements OnInit {
 
+  public win: boolean = false;
   public skip: boolean = false;
 
   constructor(private router: Router) { }
