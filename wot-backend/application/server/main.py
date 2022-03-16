@@ -10,7 +10,7 @@ import uuid
 
 from application.components import predict, read_imagefile, load_model
 from application.components.prediction import settings
-os.environ['WOT_SAVE_PATH'] = 'out'
+
 app_desc = """"""
 app = FastAPI(title='Sketch Classification API', description=app_desc)
 load_model()
@@ -28,7 +28,7 @@ def save_image(image, prediction):
     folder = settings.categories[np.argmax(prediction["confidence"])]
     image_dir = os.path.join(dir,folder)
     if not(os.path.isdir(image_dir)):
-        os.mkdir(image_dir)
+        os.makedirs(image_dir)
     image.save(f"{image_dir}/{str(uuid.uuid1())}.png", format = "PNG")
 
 
@@ -40,7 +40,6 @@ async def predict_api(file: UploadFile = File(...), save_image_flag: Boolean = F
     image = read_imagefile(await file.read())
     prediction = predict(image)
     if os.getenv('WOT_SAVE_PATH') != None and save_image_flag == True:
-        print(os.getenv('WOT_SAVE_PATH'))
         save_image(image, prediction)
 
     return prediction
