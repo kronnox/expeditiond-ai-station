@@ -34,7 +34,8 @@
         </wot-row>
         <wot-row>
           <wot-button slot="fill" (press)="startTraining()" [disabled]="stage != 0" *ngIf="stage < 2">Training Starten</wot-button>
-          <wot-button slot="fill" (press)="continueTraining()" [disabled]="stage != 2" *ngIf="stage >= 2">Training Fortsetzen</wot-button>
+          <wot-button slot="fill" (press)="continueTraining()" [disabled]="stage != 2" *ngIf="stage >= 2 && stage < 4">Training Fortsetzen</wot-button>
+          <wot-button slot="fill" (press)="successOverlay.setVisible()" *ngIf="stage >= 4">Training Abschließen</wot-button>
         </wot-row>
       </div>
     </div>

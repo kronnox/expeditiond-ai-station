@@ -35,7 +35,6 @@ export const colorAnimation = trigger('colorAnimation', [
 })
 export class TrainingComponent implements OnInit {
 
-  @ViewChild('successOverlay') public successOverlay: WotSuccessOverlayComponent;
   @ViewChild('neuralNet') public neuralNet: NeuralNetSimComponent;
 
   public images: ImageObject[] = [];
@@ -111,7 +110,7 @@ export class TrainingComponent implements OnInit {
       }
     }
 
-    this.successOverlay.setVisible();
+    this.stage = 4;
   }
 
   private async fakeTraining(): Promise<void> {
@@ -157,18 +156,10 @@ export class TrainingComponent implements OnInit {
   private generateRatings() {
     this.ratings = [];
     for (let i = 0; i < 8; i++) {
-      this.ratings.push(Math.trunc(Math.random()*2));
-    }
-  }
-
-  public getBorderColor(i: number) {
-    switch (this.ratings[i]) {
-      case 0:
-        return 'var(--color-success)';
-      case 1:
-        return 'var(--color-danger)';
-      default:
-        return '';
+      const rand = Math.random() * 3.5;
+      const normedAccuracy = this.accuracy / 50;
+      const rating = Math.trunc(rand - normedAccuracy);
+      this.ratings.push(Math.min(Math.max(0, rating), 1));
     }
   }
 

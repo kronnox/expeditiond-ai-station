@@ -1,11 +1,37 @@
-import { AfterViewInit, Component, DoCheck, ElementRef, Input, NgZone, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  DoCheck,
+  ElementRef,
+  HostBinding,
+  Input,
+  NgZone,
+  OnInit,
+  ViewChild
+} from '@angular/core';
+import {animate, animateChild, keyframes, query, stagger, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'wot-popover',
   templateUrl: './wot-popover.component.html',
-  styleUrls: ['./wot-popover.component.scss']
+  styleUrls: ['./wot-popover.component.scss'],
+  animations: [
+    trigger('popoverInOut', [
+      transition('* => *', [
+        animate('.1s ease-in', keyframes([
+          style({ opacity: 0, transformOrigin: '50% 100%', transform: 'scale(0.6)', offset: 0 }),
+          style({ opacity: 1, transformOrigin: '50% 100%', transform: 'scale(1)', offset: 1 }),
+        ])),
+      ]),
+    ]),
+    trigger('popoverText', [
+      transition('* => *', [
+        animate('.2s ease-in', style({ opacity: 1, offset: 1 })),
+      ]),
+    ])
+  ]
 })
-export class WotPopoverComponent implements OnInit {
+export class WotPopoverComponent {
 
   @ViewChild('popover') popover: ElementRef;
 
@@ -13,7 +39,7 @@ export class WotPopoverComponent implements OnInit {
   public left: number = 0;
 
   @Input() public width: number = 200;
-  
+
   public padding: number = 15;
 
   public text: string = '';
@@ -21,9 +47,6 @@ export class WotPopoverComponent implements OnInit {
   public active: boolean = false;
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
   public setVisible(element: Element, txt: string): void {
     this.text = txt;

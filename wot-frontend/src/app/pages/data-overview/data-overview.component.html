@@ -10,7 +10,7 @@
   <wot-row>
     <wot-container>
       <div class="image-container" (scroll)="handleScroll()">
-        <div class="image-inner-container">
+        <div class="image-inner-container" [@imageAnimation]="images">
           <span *ngFor="let image of images" (click)="showInfo($event, image)">
               <img class="img-data" src="{{image.imagePath}}"/>
           </span>
