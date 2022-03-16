@@ -43,22 +43,32 @@ export class SpaceObject extends GameObject {
     public draw(ctx: CanvasRenderingContext2D): void {
         ctx.drawImage(this.image, (this.x-this.width/2), (this.y-this.height/2), this.width, this.height);
 
-        if (this.detected){
+        if (this.detected) {
             ctx.beginPath();
             ctx.rect(this.x-0.5*this.width, this.y-0.5*this.height, this.width, this.height);
-            ctx.strokeStyle = (this.action === 0) ? "#e63946" : "#90be6d";
+            ctx.strokeStyle = this.getActionColor();
             ctx.lineWidth = 3;
             ctx.stroke();
-            ctx.font = "20px Consolas";
-            ctx.fillStyle = (this.action === 0) ? "#e63946" : "#90be6d";
+            ctx.font = "16px Mono";
+            ctx.fillStyle = this.getActionColor();
             const msg = this.imageObject.label || '';
-            ctx.fillText(msg, this.x-0.5*this.width, (this.y-0.5*this.height)-5);
+            ctx.fillText(msg, this.x-0.5*this.width, (this.y-0.5*this.height)-10);
             ctx.stroke();
         }
 
         if (this.projectile) {
             this.projectile.draw(ctx);
         }
+    }
+
+    private getActionColor(): string {
+      switch (this.action) {
+        case 0:
+          return '#e63946';
+        case 1:
+          return '#90be6d'
+      }
+      return '#717171';
     }
 
     public update(delta: number): void {
