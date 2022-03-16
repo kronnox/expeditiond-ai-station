@@ -1,6 +1,6 @@
 <div class="wot-overlay">
   <div class="glitch">
-    <h1 class="gameover-title" [textContent]="win ? 'Victory' : 'Defeated'" [ngStyle]="{'color': win ? 'var(--color-success)' : 'var(--color-danger)'}">
+    <h1 class="gameover-title" [textContent]="win ? 'Victory' : 'Defeat'" [ngStyle]="{'color': win ? 'var(--color-success)' : 'var(--color-danger)'}">
     </h1>
   </div>
   <p *ngIf="!win" class="gameover-info">Der Truck wurde schwer beschädigt und die Mission ist gescheitert.</p>
