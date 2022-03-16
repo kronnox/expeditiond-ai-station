@@ -13,7 +13,7 @@
       <p><ng-content></ng-content></p>
     </wot-row>
     <wot-row>
-      <wot-button (press)="continue.emit(null)">Zum nächsten Schritt</wot-button>
+      <wot-button (press)="continue.emit(null)">{{buttonLabel}}</wot-button>
     </wot-row>
   </div>
 </div>
