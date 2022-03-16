@@ -235,6 +235,9 @@ export class GameComponent implements AfterViewInit {
           spaceObject.imageObject.prediction = result;
           spaceObject.imageObject.predictedClass = classId;
           spaceObject.imageObject.label = (this.backendService.classes[classId] + " " + confidence.toFixed(2));
+          if(spaceObject.imageObject.custom) {
+            spaceObject.imageObject.labeledClass = classId
+          }
 
           spaceObject.action = this.grouping[classId];
     });

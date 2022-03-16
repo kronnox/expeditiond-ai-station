@@ -95,14 +95,14 @@ export class SpaceObject extends GameObject {
     }
 
     private checkDemage(): void {
-        if(!this.imageObject.custom) {
-            const demage = this.game.demage[this.imageObject.labeledClass][this.action];
-            if(demage === 0) {
-                if(this.action === 1) {
-                    this.active = false;
-                }
-            } else {
+        const demage = this.game.demage[this.imageObject.labeledClass][this.action];
+        if(demage === 0) {
+            if(this.action === 1) {
                 this.active = false;
+            }
+        } else {
+            this.active = false;
+            if(!this.imageObject.custom) {
                 this.game.truck.health -= demage;
                 this.game.applyShake();
             }
