@@ -95,11 +95,11 @@ export class DataOverviewComponent implements OnInit {
   }
 
   public done(): void {
+    this.popover.setInvisible();
     this.successOverlay.setVisible();
   }
 
   public continue(): void {
-    this.popover.setInvisible();
     void this.router.navigate(['/data-creation']);
   }
 
