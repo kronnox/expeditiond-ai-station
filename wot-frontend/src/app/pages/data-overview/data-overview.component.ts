@@ -36,8 +36,9 @@ export class DataOverviewComponent implements OnInit {
   @ViewChild('popover') public popover: WotPopoverComponent;
 
   public images: ImageObject[] = [];
+  private descriptions: string [] = [];
 
-  private descriptions: string[][] = [
+  private descriptionsDic: string[][] = [
     ['Salacia ist ein Asteroid des Kuipergürtels mit einem Durchmesser von 900km. Sollte er uns begegnen müssen wir ihn zerstören bevor er uns zerstört.',
     'Der Asteroid Psyche hätte uns in einer Mission beinahe zerstört. Zum Glück konnten wir ihn rechtzeitig abschießen.',
     'Das Asteroid Juno kam in der letzten Mission dem Truck gefährlich nahe und hätte uns beinahe großen Schaden zugefügt.',
@@ -81,15 +82,15 @@ export class DataOverviewComponent implements OnInit {
     'Diese Versorgungsbox haben wir in einer Mission beim Saturn eingesammelt.']
   ];
 
-  public currentDescription: string = '';
-
   constructor(private router: Router, private imageService: ImageService) { }
 
   ngOnInit(): void {
     let imgs = this.imageService.getNImagesOfEach(10);
     while(imgs.length > 0) {
       const index = Math.trunc(Math.random()*imgs.length);
+      imgs[index]
       this.images.push(imgs[index]);
+      this.descriptions.push(this.descriptionsDic[imgs[index].predictedClass][Math.trunc(Math.random()*this.descriptionsDic[imgs[index].predictedClass].length)]);
       imgs.splice(index, 1);
     }
   }
@@ -103,10 +104,9 @@ export class DataOverviewComponent implements OnInit {
     void this.router.navigate(['/data-creation']);
   }
 
-  public showInfo(event: Event, imageObject: ImageObject): void {
+  public showInfo(event: Event, i: number): void {
     this.popover.setInvisible();
-    this.currentDescription = this.descriptions[imageObject.predictedClass][Math.trunc(Math.random()*this.descriptions[imageObject.predictedClass].length)];
     const target: Element = event.target as Element;
-    this.popover.setVisible(target, this.currentDescription);
+    this.popover.setVisible(target, this.descriptions[i]);
   }
 }

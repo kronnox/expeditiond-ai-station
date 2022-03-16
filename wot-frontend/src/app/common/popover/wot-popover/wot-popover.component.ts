@@ -50,13 +50,13 @@ export class WotPopoverComponent {
 
   public setVisible(element: Element, txt: string): void {
     this.text = txt;
-    this.active = true;
     setTimeout(()=> {
       const popoverDomRect = this.popover.nativeElement.getBoundingClientRect();
       const targetDomRect = element.getBoundingClientRect();
       this.top = targetDomRect.y - (popoverDomRect.height + 10);
       this.left = (targetDomRect.x + (targetDomRect.width / 2)) - ((popoverDomRect.width) / 2);
-    }, 0);
+      this.active = true;
+    }, 200);
   }
 
   public setInvisible(): void {
