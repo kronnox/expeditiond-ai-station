@@ -26,7 +26,7 @@ export class BackendService {
 
     const res = await firstValueFrom(this.httpClient.post<any>("http://85.235.67.211:8000/predict/image", formData, {headers: headers}));
     //this.toastr.success('It\'s a ' + res[0].class+'!');
-    return res.confidence;
+    return res.confidence[0];
     //return new Array<number>(this._classes.length);
   }
 }
