@@ -7,5 +7,5 @@
 <div *ngIf="gamestatus===0 && truck" class="health-bar" style="z-index: 100;">
     <wot-life-bar [maxLifes]="3" [lifes]="truck.health"></wot-life-bar>
 </div>
-<gameover-overlay *ngIf="gamestatus!=0" [win]="gamestatus===2"></gameover-overlay>
+<gameover-overlay *ngIf="gamestatus!=0" [win]="gamestatus===1"></gameover-overlay>
 <wot-popover *ngIf="survivedObjects <= 10 && gamestatus===0" #popover></wot-popover>
