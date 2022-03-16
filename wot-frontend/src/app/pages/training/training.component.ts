@@ -144,7 +144,7 @@ export class TrainingComponent implements OnInit {
       sumWF += i.reduce((partialSum, a) => partialSum + Math.abs(a), 0);
     });
 
-    const s = -0.06875 * sumWF + 0.95;
+    const s = -0.04 * sumWF + 0.95;
     const r = 0.1;
 
     this.accuracy = ((s-r) * (Math.log(this.epoch)/Math.log(1000)) + r) * 100;
