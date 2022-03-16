@@ -1,15 +1,15 @@
 <wot-page>
-    <wot-step-info>
-      <h1>
-        Schritt 7: Analyse
-      </h1>
-      <p>
-        Auf dieser Seite seht ihr wie eure selbstgezeichneten Bilder erkannt wurden.
-      </p>
-    </wot-step-info>
+  <wot-step-info>
+    <h1>
+      Schritt 7: Analyse
+    </h1>
+    <p>
+      Auf dieser Seite seht ihr wie eure selbstgezeichneten Bilder erkannt wurden.
+    </p>
+  </wot-step-info>
+  <wot-content>
     <wot-row>
       <div class="inner-content">
-
         <div class="image-list">
           <div class="image-item" *ngFor="let image of images" (click)="imageSelected(image)" [ngStyle]="{'border': (selectedImage===image) ? '3px solid var(--color-primary-light)' : '0px'}">
             <div>
@@ -26,7 +26,9 @@
             <tr *ngFor="let class of sortedClasses" class="prediction-row">
               <td class="class-column">{{classes[class]}}</td>
               <td>
-                <wot-progress-bar height="10px" width="400px" background="auto" [progress]="selectedImage.prediction[class]" [total]="1"></wot-progress-bar>
+                <div class="progress-bar-wrapper">
+                  <wot-progress-bar height="10px" width="270px" background="auto" [progress]="selectedImage.prediction[class]" [total]="1"></wot-progress-bar>
+                </div>
               </td>
             </tr>
           </table>
@@ -34,7 +36,8 @@
         </div>
       </div>
     </wot-row>
-    <wot-row>
-      <wot-button slot="right" (press)="continue()">Beenden</wot-button>
-    </wot-row>
+  </wot-content>
+  <wot-row>
+    <wot-button slot="right" (press)="continue()">Beenden</wot-button>
+  </wot-row>
 </wot-page>

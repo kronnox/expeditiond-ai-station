@@ -6,7 +6,7 @@ import { DropLabel } from './model/drop-label';
 import { DragImage } from './model/drag-image';
 
 @Component({
-  selector: 'app-drag-and-drop',
+  selector: 'drag-and-drop',
   templateUrl: './drag-and-drop.component.html',
   styleUrls: ['./drag-and-drop.component.scss']
 })
