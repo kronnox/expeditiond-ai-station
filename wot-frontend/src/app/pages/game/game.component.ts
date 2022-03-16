@@ -54,7 +54,7 @@ export class GameComponent implements AfterViewInit {
     [1,1,0],
     [0,0,0],
     [0,1,1],
-    [0,1,0]
+    [1,0,1]
   ];
 
   private survivedObjects: number = 0;
