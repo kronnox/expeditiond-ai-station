@@ -86,7 +86,7 @@ export class DataOverviewComponent implements OnInit {
 
   public continue(): void {
     this.popover.setInvisible();
-    this.router.navigate(['/data-creation']);
+    void this.router.navigate(['/data-creation']);
   }
 
   public showInfo(event: Event, imageObject: ImageObject): void {

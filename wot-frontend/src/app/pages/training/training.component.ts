@@ -3,6 +3,8 @@ import {ImageService} from "../../shared/image.service";
 import {ImageObject} from "../../model/image/image-object";
 import {animate, keyframes, query, stagger, state, style, transition, trigger} from "@angular/animations";
 import {NeuralNetSimComponent} from "./neural-net-sim/neural-net-sim.component";
+import {Router} from "@angular/router";
+import {WotSuccessOverlayComponent} from "../../common/layout/wot-success-overlay/wot-success-overlay.component";
 
 export const imageAnimation = trigger('imageAnimation', [
   transition('* => *', [
@@ -33,6 +35,7 @@ export const colorAnimation = trigger('colorAnimation', [
 })
 export class TrainingComponent implements OnInit {
 
+  @ViewChild('successOverlay') public successOverlay: WotSuccessOverlayComponent;
   @ViewChild('neuralNet') public neuralNet: NeuralNetSimComponent;
 
   public images: ImageObject[] = [];
@@ -50,7 +53,7 @@ export class TrainingComponent implements OnInit {
 
   private worldFormular: number[][] = [[0,0,0],[0,0,0],[0,0,0]];
 
-  constructor(private imageService: ImageService) { }
+  constructor(private router: Router, private imageService: ImageService) { }
 
   ngOnInit(): void {
     this.targetAccuracy = Math.trunc(Math.random()*10 + 85);
@@ -107,6 +110,8 @@ export class TrainingComponent implements OnInit {
         this.skip = 5;
       }
     }
+
+    this.successOverlay.setVisible();
   }
 
   private async fakeTraining(): Promise<void> {
@@ -165,5 +170,9 @@ export class TrainingComponent implements OnInit {
       default:
         return '';
     }
+  }
+
+  public continue(): void {
+    void this.router.navigate(['/data-grouping']);
   }
 }
