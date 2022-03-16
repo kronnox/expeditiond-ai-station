@@ -5,11 +5,25 @@ import { ImageObject } from 'src/app/model/image/image-object';
 import { BackendService } from 'src/app/shared/backend.service';
 import { ImageService } from 'src/app/shared/image.service';
 import {WotSuccessOverlayComponent} from "../../common/layout/wot-success-overlay/wot-success-overlay.component";
+import {animate, keyframes, query, stagger, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-data-overview',
   templateUrl: './data-overview.component.html',
-  styleUrls: ['./data-overview.component.scss']
+  styleUrls: ['./data-overview.component.scss'],
+  animations: [
+    trigger('imageAnimation', [
+      transition('* => *', [
+        query(':enter', style({ opacity: 0 }), { optional: true }),
+        query(':enter', stagger('5ms', [
+          animate('.2s ease-in', keyframes([
+            style({ opacity: 0, transform: 'translateY(-50%)', offset: 0 }),
+            style({ opacity: .5, transform: 'translateY(-10px) scale(1.1)', offset: 0.3 }),
+            style({ opacity: 1, transform: 'translateY(0)', offset: 1 }),
+          ]))]), { optional: true }),
+      ]),
+    ])
+  ]
 })
 export class DataOverviewComponent implements OnInit {
 
