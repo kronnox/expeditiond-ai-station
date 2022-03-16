@@ -11,7 +11,9 @@ export class CreditsComponent implements OnInit {
   public win: boolean = false;
   public skip: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+    this.win = (localStorage.getItem('win')==='1');
+  }
 
   ngOnInit(): void {
     setTimeout( ()=> {

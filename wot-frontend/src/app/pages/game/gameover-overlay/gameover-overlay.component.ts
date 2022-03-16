@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'gameover-overlay',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./gameover-overlay.component.scss']
 })
 export class GameoverOverlayComponent implements OnInit {
+
+  @Input() win: boolean;
+
   constructor() { }
 
   ngOnInit(): void {
