@@ -11,7 +11,7 @@
     top: 0;
     right: 0;
     background-color: var(--color-bg-darker);;
-    padding: 5px;
+    padding: 6px;
     vertical-align: middle;
     align-items: center;
     color: white;
@@ -20,6 +20,10 @@
     z-index: 101;
 }
 
+.confirm-overlay-text {
+  margin-right: 12px;
+}
+
 .confirm-btn {
-    margin: 5px;
+    margin: 6px;
 }
