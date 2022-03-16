@@ -62,6 +62,6 @@ export class DataGroupingComponent implements OnInit {
   }
 
   public continue(): void {
-    this.router.navigate(['/game']);
+    void this.router.navigate(['/game']);
   }
 }

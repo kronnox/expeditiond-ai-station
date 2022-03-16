@@ -58,6 +58,6 @@ export class AnalyticsComponent implements OnInit {
   }
 
   public continue(): void {
-    this.router.navigate(['/landing']);
+    void this.router.navigate(['/landing']);
   }
 }
