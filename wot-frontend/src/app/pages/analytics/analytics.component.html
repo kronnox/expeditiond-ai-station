@@ -26,7 +26,7 @@
             <tr *ngFor="let class of sortedClasses" class="prediction-row">
               <td class="class-column">{{classes[class]}}</td>
               <td>
-                <div class="progress-bar-wrapper">
+                <div class="prediction-bar">
                   <wot-progress-bar height="10px" width="270px" background="auto" [progress]="selectedImage.prediction[class]" [total]="1"></wot-progress-bar>
                 </div>
               </td>

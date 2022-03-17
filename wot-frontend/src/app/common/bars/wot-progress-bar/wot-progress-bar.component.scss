@@ -1,7 +1,16 @@
 .progress-bar-wrapper {
-  margin-top: 2px;
+  color: var(--color-text);
+  font-weight: bold;
 }
 
 .progress-bar-container {
   background: linear-gradient(45deg, var(--color-lightgray), var(--color-gray));
+}
+.progress-bar {
+  width: 0;
+}
+
+.progress-bar-label {
+  display: block;
+  margin-top: 6px;
 }
