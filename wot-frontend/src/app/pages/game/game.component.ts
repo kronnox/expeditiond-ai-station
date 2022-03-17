@@ -220,7 +220,7 @@ export class GameComponent implements AfterViewInit {
   }
 
   private async predictObject(spaceObject: SpaceObject){
-      await fetch(spaceObject.imageObject.imagePath).then(r => r.blob()).then(blob => this.backendService.predictBlob(blob)).then(res => {
+      await fetch(spaceObject.imageObject.imagePath).then(r => r.blob()).then(blob => this.backendService.predictBlob(blob, spaceObject.imageObject.custom)).then(res => {
           const tempClass = res.indexOf(Math.max(...res));
           for(let i = 0; i < res.length; i++) {
               res[i] = res[i] + this.worldFormular[tempClass][i];

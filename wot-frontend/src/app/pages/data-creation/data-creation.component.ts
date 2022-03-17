@@ -25,7 +25,7 @@ export class DataCreationComponent implements OnInit {
     const imgPath = canvas.canvas.nativeElement.toDataURL("image/png");
     canvas.clear();
 
-    await fetch(imgPath).then(r => r.blob()).then(blob => this.backendService.predictBlob(blob)).then(res => {
+    await fetch(imgPath).then(r => r.blob()).then(blob => this.backendService.predictBlob(blob, true)).then(res => {
       const confidence = Math.max(...res);
       const classId = res.indexOf(confidence);
       let io = new ImageObject(imgPath, true);
