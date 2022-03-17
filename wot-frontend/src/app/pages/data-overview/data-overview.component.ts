@@ -38,6 +38,8 @@ export class DataOverviewComponent implements OnInit {
   public images: ImageObject[] = [];
   private descriptions: string [] = [];
 
+  private indexPerClass: number[] = [0,0,0,0,0,0,0,0,0];
+
   private descriptionsDic: string[][] = [
     ['Salacia ist ein Asteroid des Kuipergürtels mit einem Durchmesser von 900km. Sollte er uns begegnen müssen wir ihn zerstören bevor er uns zerstört.',
     'Der Asteroid Psyche hätte uns in einer Mission beinahe zerstört. Zum Glück konnten wir ihn rechtzeitig abschießen.',
@@ -90,7 +92,11 @@ export class DataOverviewComponent implements OnInit {
       const index = Math.trunc(Math.random()*imgs.length);
       imgs[index]
       this.images.push(imgs[index]);
-      this.descriptions.push(this.descriptionsDic[imgs[index].predictedClass][Math.trunc(Math.random()*this.descriptionsDic[imgs[index].predictedClass].length)]);
+
+      const indexPerClass = this.indexPerClass[imgs[index].predictedClass]++;
+
+      const desc = Math.trunc(indexPerClass % this.descriptionsDic[imgs[index].predictedClass].length);
+      this.descriptions.push(this.descriptionsDic[imgs[index].predictedClass][desc]);
       imgs.splice(index, 1);
     }
   }
