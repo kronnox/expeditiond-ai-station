@@ -10,7 +10,7 @@ export class BackendService {
   public classes: string[] = ["Asteroid","Astronaut","Auto","Brief","Raumschiff","Satellit","Satellitenschüssel","Ufo","Versorgungsbox"];
 
   constructor(private httpClient: HttpClient) {
-    this.httpClient.get<any>("http://85.235.67.211:8000/categories", {}).pipe(take(1)).subscribe(
+    this.httpClient.get<any>("http://localhost:8000/categories", {}).pipe(take(1)).subscribe(
       (res) => {
         this.classes = res.categories;
       }
@@ -26,9 +26,7 @@ export class BackendService {
 
     const params = new HttpParams().set('save_image_flag', upload);
 
-    const res = await firstValueFrom(this.httpClient.post<any>("http://85.235.67.211:8000/predict/image", formData, {headers: headers, params: params}));
-    //this.toastr.success('It\'s a ' + res[0].class+'!');
+    const res = await firstValueFrom(this.httpClient.post<any>("http://localhost:8000/predict/image", formData, {headers: headers, params: params}));
     return res.confidence[0];
-    //return new Array<number>(this._classes.length);
   }
 }
