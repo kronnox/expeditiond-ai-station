@@ -5,11 +5,25 @@ import { ImageObject } from 'src/app/model/image/image-object';
 import { BackendService } from 'src/app/shared/backend.service';
 import { ImageService } from 'src/app/shared/image.service';
 import {WotSuccessOverlayComponent} from "../../common/layout/wot-success-overlay/wot-success-overlay.component";
+import {animate, keyframes, query, stagger, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-data-overview',
   templateUrl: './data-overview.component.html',
-  styleUrls: ['./data-overview.component.scss']
+  styleUrls: ['./data-overview.component.scss'],
+  animations: [
+    trigger('imageAnimation', [
+      transition('* => *', [
+        query(':enter', style({ opacity: 0 }), { optional: true }),
+        query(':enter', stagger('5ms', [
+          animate('.2s ease-in', keyframes([
+            style({ opacity: 0, transform: 'translateY(-50%)', offset: 0 }),
+            style({ opacity: .5, transform: 'translateY(-10px) scale(1.1)', offset: 0.3 }),
+            style({ opacity: 1, transform: 'translateY(0)', offset: 1 }),
+          ]))]), { optional: true }),
+      ]),
+    ])
+  ]
 })
 export class DataOverviewComponent implements OnInit {
 
@@ -22,14 +36,15 @@ export class DataOverviewComponent implements OnInit {
   @ViewChild('popover') public popover: WotPopoverComponent;
 
   public images: ImageObject[] = [];
+  private descriptions: string [] = [];
 
-  private descriptions: string[][] = [
+  private descriptionsDic: string[][] = [
     ['Salacia ist ein Asteroid des Kuipergürtels mit einem Durchmesser von 900km. Sollte er uns begegnen müssen wir ihn zerstören bevor er uns zerstört.',
     'Der Asteroid Psyche hätte uns in einer Mission beinahe zerstört. Zum Glück konnten wir ihn rechtzeitig abschießen.',
     'Das Asteroid Juno kam in der letzten Mission dem Truck gefährlich nahe und hätte uns beinahe großen Schaden zugefügt.',
     'Huma ist ein Asteroid vom Amor-Typ. Unser Waffensystem konnte ihn neutralisieren.',
     'Dieser Asteroid hat unserem Truck großen Schaden zugefügt.'],
-    ['Das ist Leo. Ihn mussten wir auf ein früheren Mission in der Nähe des Mars aufsammeln.',
+    ['Das ist Leo. Ihn mussten wir auf einer früheren Mission in der Nähe des Mars aufsammeln.',
     'Diese Astronautin konnten wir in unserer letzten Mission leider nicht retten. Nun schwebt sie immer noch durch das All und fehlt in unserer Crew.',
     'Das is Torben. Ihn mussten wir in einer Rettungsmission beim Jupiter aufsammeln.',
     'Das ist der Astronaut Rico. Eine Rettungsmission schlug fehl. Seither wird er vermisst.',
@@ -67,32 +82,31 @@ export class DataOverviewComponent implements OnInit {
     'Diese Versorgungsbox haben wir in einer Mission beim Saturn eingesammelt.']
   ];
 
-  public currentDescription: string = '';
-
   constructor(private router: Router, private imageService: ImageService) { }
 
   ngOnInit(): void {
     let imgs = this.imageService.getNImagesOfEach(10);
     while(imgs.length > 0) {
       const index = Math.trunc(Math.random()*imgs.length);
+      imgs[index]
       this.images.push(imgs[index]);
+      this.descriptions.push(this.descriptionsDic[imgs[index].predictedClass][Math.trunc(Math.random()*this.descriptionsDic[imgs[index].predictedClass].length)]);
       imgs.splice(index, 1);
     }
   }
 
   public done(): void {
+    this.popover.setInvisible();
     this.successOverlay.setVisible();
   }
 
   public continue(): void {
-    this.popover.setInvisible();
-    this.router.navigate(['/data-creation']);
+    void this.router.navigate(['/data-creation']);
   }
 
-  public showInfo(event: Event, imageObject: ImageObject): void {
+  public showInfo(event: Event, i: number): void {
     this.popover.setInvisible();
-    this.currentDescription = this.descriptions[imageObject.predictedClass][Math.trunc(Math.random()*this.descriptions[imageObject.predictedClass].length)];
     const target: Element = event.target as Element;
-    this.popover.setVisible(target, this.currentDescription);
+    this.popover.setVisible(target, this.descriptions[i]);
   }
 }

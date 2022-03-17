@@ -1,30 +1,32 @@
-<wot-page width='fit-content'>
+<wot-page>
   <wot-step-info>
     <h1>
       Schritt 1: Übersicht
     </h1>
     <p>
-      Der Computer hat Bilder von Objekten gesammelt, die uns in vergangenen Missionen begegnet sind.
+      Der Computer hat Bilder von Objekten gesammelt, die uns in vergangenen Missionen begegnet sind. Verschafft euch einen Überblick von den verschiedenen Objekten, die uns im Weltall begegnen können.
     </p>
   </wot-step-info>
-  <wot-row>
-    <wot-container>
-      <div class="image-container" (scroll)="handleScroll()">
-        <div class="image-inner-container">
-          <span *ngFor="let image of images" (click)="showInfo($event, image)">
-              <img class="img-data" src="{{image.imagePath}}"/>
-          </span>
+  <wot-content>
+    <wot-row>
+      <wot-container>
+        <div class="image-container" (scroll)="handleScroll()">
+          <div class="image-inner-container" [@imageAnimation]="images">
+            <span *ngFor="let image of images; index as i" (click)="showInfo($event, i)">
+                <img class="img-data" src="{{image.imagePath}}"/>
+            </span>
+          </div>
         </div>
-      </div>
-    </wot-container>
-  </wot-row>
+      </wot-container>
+    </wot-row>
+  </wot-content>
   <wot-row>
     <wot-button slot="right" (press)="done()">Schritt abschließen</wot-button>
   </wot-row>
 </wot-page>
 
 <wot-success-overlay (continue)="continue()" #successOverlay>
-  Super! Ihr habt euch mit den verschiedenen Objekten im Weltall vertraut gemacht. Nun könnt ihr das Erkennungssystem entwickeln.
+  Ihr habt euch mit den verschiedenen Objekten im Weltall vertraut gemacht. Nun könnt ihr das Erkennungssystem entwickeln.
 </wot-success-overlay>
 
 <wot-popover #popover></wot-popover>

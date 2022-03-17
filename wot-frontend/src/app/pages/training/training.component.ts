@@ -3,6 +3,8 @@ import {ImageService} from "../../shared/image.service";
 import {ImageObject} from "../../model/image/image-object";
 import {animate, keyframes, query, stagger, state, style, transition, trigger} from "@angular/animations";
 import {NeuralNetSimComponent} from "./neural-net-sim/neural-net-sim.component";
+import {Router} from "@angular/router";
+import {WotSuccessOverlayComponent} from "../../common/layout/wot-success-overlay/wot-success-overlay.component";
 
 export const imageAnimation = trigger('imageAnimation', [
   transition('* => *', [
@@ -50,7 +52,7 @@ export class TrainingComponent implements OnInit {
 
   private worldFormular: number[][] = [[0,0,0],[0,0,0],[0,0,0]];
 
-  constructor(private imageService: ImageService) { }
+  constructor(private router: Router, private imageService: ImageService) { }
 
   ngOnInit(): void {
     this.targetAccuracy = Math.trunc(Math.random()*10 + 85);
@@ -107,6 +109,8 @@ export class TrainingComponent implements OnInit {
         this.skip = 5;
       }
     }
+
+    this.stage = 4;
   }
 
   private async fakeTraining(): Promise<void> {
@@ -139,7 +143,7 @@ export class TrainingComponent implements OnInit {
       sumWF += i.reduce((partialSum, a) => partialSum + Math.abs(a), 0);
     });
 
-    const s = -0.06875 * sumWF + 0.95;
+    const s = -0.04 * sumWF + 0.95;
     const r = 0.1;
 
     this.accuracy = ((s-r) * (Math.log(this.epoch)/Math.log(1000)) + r) * 100;
@@ -152,18 +156,14 @@ export class TrainingComponent implements OnInit {
   private generateRatings() {
     this.ratings = [];
     for (let i = 0; i < 8; i++) {
-      this.ratings.push(Math.trunc(Math.random()*2));
+      const rand = Math.random() * 3.5;
+      const normedAccuracy = this.accuracy / 50;
+      const rating = Math.trunc(rand - normedAccuracy);
+      this.ratings.push(Math.min(Math.max(0, rating), 1));
     }
   }
 
-  public getBorderColor(i: number) {
-    switch (this.ratings[i]) {
-      case 0:
-        return 'var(--color-success)';
-      case 1:
-        return 'var(--color-danger)';
-      default:
-        return '';
-    }
+  public continue(): void {
+    void this.router.navigate(['/data-grouping']);
   }
 }

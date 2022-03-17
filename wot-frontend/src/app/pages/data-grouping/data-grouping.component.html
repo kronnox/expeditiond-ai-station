@@ -1,20 +1,22 @@
 <wot-page>
   <wot-step-info>
     <h1>
-      Schritt 4: Gruppieren
+      Schritt 5: Gruppieren
     </h1>
     <p>
-      Nun geht es darum zu definieren wie ihr in Missionen mit Objekten umgehen wollt, die euch begegnen. Überlegt dabei ganz genau welche Aktionen für die Objekte sinnvoll sind.
+      Nun geht es darum zu definieren, wie ihr in Missionen mit Objekten umgehen wollt, die euch begegnen. Überlegt dabei ganz genau welche Aktionen für die Objekte sinnvoll sind, damit das Truck-Raumschiff nicht beschädigt wird, aber für die Mission wichtige Objekte eingesammelt werden.
     </p>
   </wot-step-info>
-  <wot-row>
-    <app-drag-and-drop [data]="images" [labels]="labels" #dragDrop></app-drag-and-drop>
-  </wot-row>
+  <wot-content>
+    <wot-row>
+      <drag-and-drop [data]="images" [labels]="labels" #dragDrop></drag-and-drop>
+    </wot-row>
+  </wot-content>
   <wot-row>
     <wot-button slot="right" [disabled]="dragDrop.dragObjects.length > 0" (press)="done(dragDrop)">Schritt abschließen</wot-button>
   </wot-row>
 </wot-page>
 
-<wot-success-overlay (continue)="continue()" #successOverlay>
-  Super! Nun kann der Truck anhand der durch das Erkennungssystem klassifizierten Objekte auf diese reagieren. Die Mission kann nun beginnen.
+<wot-success-overlay buttonLabel="Misson starten" (continue)="continue()" #successOverlay>
+  Nun kann der Truck anhand der durch das Erkennungssystem klassifizierten Objekte auf diese reagieren. Die Mission kann nun beginnen.
 </wot-success-overlay>

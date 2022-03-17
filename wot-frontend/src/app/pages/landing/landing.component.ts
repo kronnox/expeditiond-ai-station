@@ -11,6 +11,6 @@ export class LandingComponent {
   constructor(private router: Router) { }
 
   public continue(): void {
-    this.router.navigate(['/data-overview']);
+    void this.router.navigate(['/data-overview']);
   }
 }

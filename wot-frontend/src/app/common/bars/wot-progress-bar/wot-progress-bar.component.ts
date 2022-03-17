@@ -40,7 +40,7 @@ export class WotProgressBarComponent {
 
   public getBackground(): string {
     if (this.bgMode === 'auto') {
-      if (this.getNormedProgress() < 55) {
+      if (this.getNormedProgress() < 25) {
         return 'var(--color-danger)';
       } else if (this.getNormedProgress() < 75) {
         return 'var(--color-warning)';

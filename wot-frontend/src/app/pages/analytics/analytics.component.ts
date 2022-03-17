@@ -28,7 +28,6 @@ export class AnalyticsComponent implements OnInit {
 
   ngOnInit(): void {
     const imgs: ImageObject[] = JSON.parse(localStorage.getItem('labeled-data') || '');
-    console.log(imgs)
     imgs.forEach(element  => {
       if(element.custom){
         this.images.push(element);
@@ -43,11 +42,9 @@ export class AnalyticsComponent implements OnInit {
     this.selectedImage = imageObject;
     const sortedPredictions = imageObject.prediction.slice()
     sortedPredictions.sort((a,b) => b - a);
-    console.log(sortedPredictions);
     sortedPredictions.forEach(val => {
       this.sortedClasses.push(imageObject.prediction.indexOf(val));
     });
-    console.log(this.sortedClasses);
     this.predictionIndex = imageObject.predictedClass;
     this.selectedColor = (imageObject.predictedClass === imageObject.labeledClass) ? 'var(--color-success)' : 'var(--color-danger)';
   }
@@ -58,6 +55,6 @@ export class AnalyticsComponent implements OnInit {
   }
 
   public continue(): void {
-    this.router.navigate(['/landing']);
+    void this.router.navigate(['/credits']);
   }
 }

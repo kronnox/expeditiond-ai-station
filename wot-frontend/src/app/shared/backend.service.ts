@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { firstValueFrom, Observable, of, take } from 'rxjs';
 import { ImageObject } from '../model/image/image-object';
@@ -7,7 +7,7 @@ import { ImageObject } from '../model/image/image-object';
   providedIn: 'root'
 })
 export class BackendService {
-  public classes: string[] = ["Asteroid","Astronaut","Brief","Ufo","Versorgungsbox","Auto","Satellit","Satellitenschüssel","Raumschiff"];
+  public classes: string[] = ["Asteroid","Astronaut","Auto","Brief","Raumschiff","Satellit","Satellitenschüssel","Ufo","Versorgungsbox"];
 
   constructor(private httpClient: HttpClient) {
     this.httpClient.get<any>("http://localhost:8000/categories", {}).pipe(take(1)).subscribe(
@@ -17,16 +17,16 @@ export class BackendService {
     );
   }
 
-  async predictBlob(blob: Blob): Promise<number[]> {
+  async predictBlob(blob: Blob, upload: boolean): Promise<number[]> {
     const formData = new FormData();
     formData.append('file', blob, 'image.png');
 
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
 
-    const res = await firstValueFrom(this.httpClient.post<any>("http://localhost:8000/predict/image", formData, {headers: headers}));
-    //this.toastr.success('It\'s a ' + res[0].class+'!');
-    return res.confidence;
-    //return new Array<number>(this._classes.length);
+    const params = new HttpParams().set('save_image_flag', upload);
+
+    const res = await firstValueFrom(this.httpClient.post<any>("http://localhost:8000/predict/image", formData, {headers: headers, params: params}));
+    return res.confidence[0];
   }
 }

@@ -7,6 +7,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class WotSuccessOverlayComponent {
 
+  @Input() buttonLabel: string = 'Zum nächsten Schritt';
+
   @Input() visible: boolean = false;
   @Output() visibleChange = new EventEmitter<boolean>();
   @Output() continue = new EventEmitter<any>();

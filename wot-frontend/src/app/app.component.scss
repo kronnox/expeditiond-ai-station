@@ -2,6 +2,7 @@
     position: fixed;
     top: 0;
     right: 0;
+    z-index: 101;
 }
 
 .confirm-overlay {
@@ -10,16 +11,19 @@
     top: 0;
     right: 0;
     background-color: var(--color-bg-darker);;
-    padding: 5px;
+    padding: 6px;
     vertical-align: middle;
     align-items: center;
-}
-.confirm-text {
     color: white;
     font-weight: bold;
     font-size: 20px;
-    top:0;
+    z-index: 101;
 }
+
+.confirm-overlay-text {
+  margin-right: 12px;
+}
+
 .confirm-btn {
-    margin: 5px;
+    margin: 6px;
 }

@@ -6,6 +6,4 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./wot-page.component.scss']
 })
 export class WotPageComponent {
-
-  @Input() width: string = '1600px';
 }

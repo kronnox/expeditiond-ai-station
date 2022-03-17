@@ -1,0 +1,112 @@
+$scroll-duration: 60s;
+
+.page {
+	width: 100%;
+	height: 100%;
+	font-family: "Droid Sans", arial, verdana, sans-serif;
+	font-weight: 700;
+	color: #ff6;
+	background-color: #000;
+	overflow: hidden;
+}
+
+.title {
+	position: fixed;
+    top: 0;
+    left: -800px;
+	opacity: 1;
+	z-index: 3;
+	animation: logo $scroll-duration infinite;
+}
+
+@keyframes logo {
+    0% { left: -800px; top: 0; }
+    20% { left: 190%; top: 110%; }
+    100% { left: 190%; top: 110%; }
+}
+
+/* the interesting 3D scrolling stuff */
+.titles
+{
+	position: absolute;
+	width: 18em;
+	height: 30em;
+	bottom: 0;
+	left: 50%;
+	margin-left: -9em;
+	font-size: 350%;
+	text-align: justify;
+	overflow: hidden;
+	transform-origin: 50% 100%;
+	transform: perspective(300px) rotateX(18deg);
+}
+
+.header {
+    font-size: 200%;
+}
+
+.titles:after
+{
+	position: absolute;
+	content: ' ';
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 60%;
+	pointer-events: none;
+}
+
+.titles div
+{
+	text-align: justify;
+	margin: 0.8em 0;
+}
+
+.titles div.center
+{
+	text-align: center;
+}
+
+.titles a
+{
+	color: #ff6;
+	text-decoration: underline;
+}
+
+.titlecontent
+{
+	position: absolute;
+	top: 100%;
+	animation: scroll $scroll-duration linear 0s infinite;
+}
+
+@keyframes scroll {
+	0% { top: 100%; }
+	100% { top: -170%; }
+}
+
+.feedback {
+	position: fixed;
+    top: 50%;
+    right: 100px;
+    transform: translateY(-50%);
+	opacity: 1;
+	z-index: 2;
+}
+
+.white-b {
+    position: relative;
+    top: 5px;
+    left: 60px;
+    background-color: white;
+    width: 380px;
+    height: 390px;
+    z-index: 1;
+}
+
+.end-btn {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 102;
+}

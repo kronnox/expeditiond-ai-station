@@ -9,6 +9,7 @@ import { BarsModule } from 'src/app/common/bars/bars.module';
 import { GameoverOverlayComponent } from './gameover-overlay/gameover-overlay.component';
 import { LayoutModule } from "../../common/layout/layout.module";
 import { NebulaComponent } from './nebula/nebula.component';
+import { PopoverModule } from 'src/app/common/popover/popover.module';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { NebulaComponent } from './nebula/nebula.component';
     NgxDrawingCanvasModule,
     ButtonsModule,
     LayoutModule,
-    BarsModule
+    BarsModule,
+    PopoverModule
   ]
 })
 export class GameModule { }

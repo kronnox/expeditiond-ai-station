@@ -35,6 +35,10 @@ const routes: Routes = [
     loadChildren: () => import('./analytics/analytics.module').then(m => m.AnalyticsModule)
   },
   {
+    path: 'credits',
+    loadChildren: () => import('./credits/credits.module').then(m => m.CreditsModule)
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'landing'

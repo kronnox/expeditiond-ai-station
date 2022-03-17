@@ -45,16 +45,15 @@ export class DataLabelingComponent implements OnInit {
         worldFormular[i][j] = 0;
       }
     }
-    const weightA = 0.3;
-    const weightB = 0.3;
+    const weight = 0.4;
     let imageObjects: ImageObject[] = [];
     ddc.labels.forEach(element => {
       if(element.children.length === 0) {
         for(let i = 0; i < worldFormular.length; i++) {
           for(let j = 0; j < worldFormular[i].length; j++) {
-            worldFormular[i][j] += (weightA/8);
+            worldFormular[i][j] += (weight/8);
           }
-          worldFormular[i][element.labelID] -= weightA;
+          worldFormular[i][element.labelID] -= weight;
         }
         let io = this.imageService.getNImagesOfClass(1,element.labelID)[0];
         io.label = element.labelName;
@@ -81,9 +80,8 @@ export class DataLabelingComponent implements OnInit {
         }
 
         if(item.imageObject.predictedClass != item.imageObject.labeledClass) {
-          worldFormular[item.imageObject.labeledClass][item.imageObject.predictedClass] += weightB;
-          worldFormular[item.imageObject.labeledClass][item.imageObject.labeledClass] -= weightB;
-          console.log(worldFormular);
+          worldFormular[item.imageObject.labeledClass][item.imageObject.predictedClass] += weight;
+          worldFormular[item.imageObject.labeledClass][item.imageObject.labeledClass] -= weight;
         }
       })
     });
@@ -93,6 +91,6 @@ export class DataLabelingComponent implements OnInit {
   }
 
   public continue(): void {
-    this.router.navigate(['/data-grouping']);
+    void this.router.navigate(['/training']);
   }
 }

@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
 
+@font-face {
+  font-family: Mono;
+  src: url(assets/font/JetBrainsMono-Medium.woff2) format('woff2');
+}
+
 :root {
   --base-scale: 1;
 

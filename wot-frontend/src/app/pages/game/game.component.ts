@@ -9,6 +9,7 @@ import {GameConfig} from "./game-config";
 import { ImageService } from 'src/app/shared/image.service';
 import { ImageObject } from 'src/app/model/image/image-object';
 import { WotSuccessOverlayComponent } from 'src/app/common/layout/wot-success-overlay/wot-success-overlay.component';
+import { WotPopoverComponent } from 'src/app/common/popover/wot-popover/wot-popover.component';
 
 @Component({
   selector: 'app-game',
@@ -18,6 +19,8 @@ import { WotSuccessOverlayComponent } from 'src/app/common/layout/wot-success-ov
 export class GameComponent implements AfterViewInit {
 
   @ViewChild('canvas') public canvas!: ElementRef;
+  @ViewChild('popover') public popover: WotPopoverComponent;
+  @ViewChild('canvasContainer') public canvasContainer: ElementRef;
 
   private ctx!: CanvasRenderingContext2D;
   private canvasEl: HTMLCanvasElement;
@@ -54,12 +57,12 @@ export class GameComponent implements AfterViewInit {
     [1,1,0],
     [0,0,0],
     [0,1,1],
-    [0,1,0]
+    [1,0,1]
   ];
 
-  private survivedObjects: number = 0;
+  public survivedObjects: number = 0;
 
-  public gameover: boolean = false;
+  public gamestatus: number = 0; //0: running, 1: win, 2: loss
 
   constructor(protected backendService: BackendService, protected imageService: ImageService) {
       this.worldFormular = JSON.parse(localStorage.getItem('world-formular') || '');
@@ -78,6 +81,8 @@ export class GameComponent implements AfterViewInit {
       this._height = this.canvasEl.height;
       this._centerX = this._width/2;
       this._centerY = this._height/2;
+
+      this.popover.setVisible(this.canvasContainer.nativeElement, 'Hier könnt ihr eigene Objekte zeichnen um euer Erkennungssystem zu testen');
 
       this.prevTime = 0;
 
@@ -107,8 +112,10 @@ export class GameComponent implements AfterViewInit {
 
       window.requestAnimationFrame(this.loop.bind(this));
 
-      if(this.truck.health <= 0 || this.survivedObjects >= 50) {
-          this.gameover = true;
+      if(this.truck.health <= 0) {
+          this.gamestatus = 2;
+      } else if (this.survivedObjects >= 50) {
+          this.gamestatus = 1;
       }
 
   }
@@ -124,7 +131,6 @@ export class GameComponent implements AfterViewInit {
   }
 
   private tick(delta: number): void {
-      console.log(this.truck.health)
       // background
       this.bgObjects.forEach((obj, i, o) => {
           obj.update(delta);
@@ -134,7 +140,10 @@ export class GameComponent implements AfterViewInit {
           obj.draw(this.ctx)
       });
 
-      if (this.gameover) return;
+      if (this.gamestatus!=0){
+        localStorage.setItem('win', this.gamestatus.toString());
+        return;
+      }
 
       // radar
       const imgRadar = new Image();
@@ -166,7 +175,7 @@ export class GameComponent implements AfterViewInit {
 
       this.ctx.fillStyle = 'hsla(0,0%,100%,0.4)';
       this.ctx.fillRect(0, 0, 100, 30);
-      this.ctx.font = '15px Consolas';
+      this.ctx.font = '15px Mono';
       this.ctx.fillStyle = 'black';
       this.ctx.fillText("FPS: " + this.fps, 10, 20);
   }
@@ -211,7 +220,7 @@ export class GameComponent implements AfterViewInit {
   }
 
   private async predictObject(spaceObject: SpaceObject){
-      await fetch(spaceObject.imageObject.imagePath).then(r => r.blob()).then(blob => this.backendService.predictBlob(blob)).then(res => {
+      await fetch(spaceObject.imageObject.imagePath).then(r => r.blob()).then(blob => this.backendService.predictBlob(blob, spaceObject.imageObject.custom)).then(res => {
           const tempClass = res.indexOf(Math.max(...res));
           for(let i = 0; i < res.length; i++) {
               res[i] = res[i] + this.worldFormular[tempClass][i];
@@ -226,6 +235,9 @@ export class GameComponent implements AfterViewInit {
           spaceObject.imageObject.prediction = result;
           spaceObject.imageObject.predictedClass = classId;
           spaceObject.imageObject.label = (this.backendService.classes[classId] + " " + confidence.toFixed(2));
+          if(spaceObject.imageObject.custom) {
+            spaceObject.imageObject.labeledClass = classId
+          }
 
           spaceObject.action = this.grouping[classId];
     });
