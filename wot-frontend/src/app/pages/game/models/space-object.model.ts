@@ -97,11 +97,20 @@ export class SpaceObject extends GameObject {
                 const vy = Math.sin(this.angle) * 6;
                 this.projectile = new Projectile(this.game, this.game.truck.x, this.game.truck.y, vx, vy);
             }
+        } else if (this.isOutOfBounds()) {
+            this.active = false;
         }
 
         if (this.hitTruck()) {
             this.checkDemage();
         }
+    }
+
+    private isOutOfBounds(): boolean {
+        return(this.x < (0-this.width)
+            || this.y < (0-this.height)
+            || this.x > (this.game.width+this.width)
+            || this.y > (this.game.height+this.height));
     }
 
     private checkDemage(): void {
