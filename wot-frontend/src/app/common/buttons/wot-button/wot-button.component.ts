@@ -55,11 +55,4 @@ export class WotButtonComponent implements OnInit {
     }
     return '';
   }
-
-  public getCursor() {
-    if (this.disabled) {
-      return 'not-allowed'
-    }
-    return 'pointer';
-  }
 }

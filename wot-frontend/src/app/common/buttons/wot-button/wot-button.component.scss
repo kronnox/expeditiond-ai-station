@@ -5,9 +5,9 @@
   font-size: 16px;
   letter-spacing: .08em;
   text-transform: uppercase;
-  cursor: pointer;
   background: linear-gradient(45deg, var(--color-primary), var(--color-secondary));
   overflow: hidden;
+  cursor: none;
   transition: all 0.3s ease-in-out;
 }
 
