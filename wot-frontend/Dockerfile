@@ -4,9 +4,9 @@ WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 RUN npm install
 COPY .. .
-RUN npm run build
+RUN npm run build --prod
 
 ### STAGE 2: Run ###
-FROM nginx:1.21.6-alpine
+FROM nginx:latest
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /usr/src/app/dist/wot-frontend /usr/share/nginx/html
