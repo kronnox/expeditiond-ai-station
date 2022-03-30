@@ -19,7 +19,7 @@
         <wot-progress-bar height="24px" width="400px" [label]="'Epoche '+this.epoch+'/1000'" [progress]="this.epoch" [total]="1000" [animationSpeed]="1000*delayFactor"></wot-progress-bar>
       </wot-row>
       <wot-row>
-        <wot-progress-bar height="24px" width="400px" [label]="getStepLabel()" [progress]="this.step" [total]="4" [animationSpeed]="1000*delayFactor"></wot-progress-bar>
+        <wot-progress-bar height="24px" width="400px" [label]="getStepLabel()" [progress]="this.step" [total]="5" [animationSpeed]="1000*delayFactor"></wot-progress-bar>
       </wot-row>
       <wot-row>
         <div class="info-text" *ngIf="stage >= 2">
@@ -34,7 +34,7 @@
         </wot-row>
         <wot-row>
           <wot-button slot="fill" (press)="startTraining()" [disabled]="stage != 0" *ngIf="stage < 2">Training Starten</wot-button>
-          <wot-button slot="fill" (press)="continueTraining()" [disabled]="stage != 2" *ngIf="stage >= 2 && stage < 4">Training Fortsetzen</wot-button>
+          <wot-button slot="fill" (press)="startTraining()" [disabled]="stage != 2" *ngIf="stage >= 2 && stage < 4">Training Fortsetzen</wot-button>
           <wot-button slot="fill" (press)="successOverlay.setVisible()" *ngIf="stage >= 4">Training Abschließen</wot-button>
         </wot-row>
       </div>

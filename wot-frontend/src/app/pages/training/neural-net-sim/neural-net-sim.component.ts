@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {WotSuccessOverlayComponent} from "../../../common/layout/wot-success-overlay/wot-success-overlay.component";
 import {GameObject} from "../../game/models/game-object.model";
 import {Truck} from "../../game/models/truck.model";
@@ -22,6 +22,8 @@ export class NeuralNetSimComponent implements AfterViewInit {
   @ViewChild('canvas') public canvas!: ElementRef;
   @ViewChild('successOverlay') public successOverlay: WotSuccessOverlayComponent;
 
+  @Input() public pulseDelay: number = 1;
+  private pulseStage = -1;
 
   private ctx!: CanvasRenderingContext2D;
   private canvasEl: HTMLCanvasElement;
@@ -32,6 +34,7 @@ export class NeuralNetSimComponent implements AfterViewInit {
   private _centerY: number;
 
   private prevTime: number;
+  private prevPulseTime: number;
 
   private spaceBetweenNodes: number;
   private layout: number[] = [3, 4, 4, 2];
@@ -57,7 +60,8 @@ export class NeuralNetSimComponent implements AfterViewInit {
 
     this.spaceBetweenNodes = this._height / 5;
 
-    this.prevTime = 0;
+    this.prevTime = -100;
+    this.prevPulseTime = -100;
 
     // create nodes and edges
     let prevNodes: Node[] = [];
@@ -75,11 +79,12 @@ export class NeuralNetSimComponent implements AfterViewInit {
       prevNodes = nodes;
     }
 
-    window.requestAnimationFrame(this.loop.bind(this));
+    this.loop(0);
   }
 
-  private loop(time: number): void {
+  loop(time: number): void {
     const elapsed = time - this.prevTime;
+
     if (elapsed > 24) {
       this.prevTime = time;
 
@@ -90,7 +95,16 @@ export class NeuralNetSimComponent implements AfterViewInit {
       this.postTick(elapsed);
     }
 
-    window.requestAnimationFrame(this.loop.bind(this));
+    const elapsedPulse = time - this.prevPulseTime;
+    if (this.pulseStage !== -1 && elapsedPulse > 200*this.pulseDelay) {
+      if (this.pulseStage > this.layout.length) {
+        this.pulseStage = -1;
+        return;
+      }
+      this.pulseColumn(this.pulseStage);
+      this.pulseStage++;
+      this.prevPulseTime = time;
+    }
   }
 
   private preTick(delta: number): void {
@@ -110,17 +124,31 @@ export class NeuralNetSimComponent implements AfterViewInit {
     this.edges.forEach(e => e.updateWeight(epoch));
   }
 
-  public async showPulse(delayFactor: number): Promise<void> {
+  public showPulse(): void {
+    this.pulseStage = 0;
+  }
+
+  private pulseColumn(column: number): void {
     let totalCount = 0;
-    for (let c = 0; c < this.layout.length; c++) {
-      for (let r = 0; r < this.layout[c]; r++) {
-        this.nodes[totalCount+r].glow = true;
+
+    if (column > 0) {
+      // get number of node upfront
+      for (let c = 0; c < column - 1; c++) {
+        totalCount += this.layout[c];
       }
-      await new Promise(resolve => setTimeout(resolve, 100*delayFactor));
-      for (let r = 0; r < this.layout[c]; r++) {
-        this.nodes[totalCount+r].glow = false;
+
+      // disable glow for previous row
+      for (let r = 0; r < this.layout[column - 1]; r++) {
+        this.nodes[totalCount + r].glow = false;
       }
-      totalCount += this.layout[c];
+      totalCount += this.layout[column - 1];
+    }
+
+    if (column < this.layout.length) {
+      // enable glow for row
+      for (let r = 0; r < this.layout[column]; r++) {
+        this.nodes[totalCount + r].glow = true;
+      }
     }
   }
 

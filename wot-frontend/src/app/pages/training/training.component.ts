@@ -1,10 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ImageService} from "../../shared/image.service";
 import {ImageObject} from "../../model/image/image-object";
 import {animate, keyframes, query, stagger, state, style, transition, trigger} from "@angular/animations";
 import {NeuralNetSimComponent} from "./neural-net-sim/neural-net-sim.component";
 import {Router} from "@angular/router";
 import {WotSuccessOverlayComponent} from "../../common/layout/wot-success-overlay/wot-success-overlay.component";
+import {beaker} from "ionicons/icons";
 
 export const imageAnimation = trigger('imageAnimation', [
   transition('* => *', [
@@ -37,12 +38,14 @@ export class TrainingComponent implements OnInit {
 
   @ViewChild('neuralNet') public neuralNet: NeuralNetSimComponent;
 
+  private prevTime: number;
+
   public images: ImageObject[] = [];
 
   public stage: number = 0;
   public epoch: number = 0;
   public step: number = -1;
-  public delayFactor: number = 1;
+  public delayFactor: number = 2;
   private skip: number = 1;
 
   public ratings: number[] = [-1,-1,-1,-1,-1,-1,-1,-1];
@@ -54,9 +57,118 @@ export class TrainingComponent implements OnInit {
 
   constructor(private router: Router, private imageService: ImageService) { }
 
-  ngOnInit(): void {
-    this.targetAccuracy = Math.trunc(Math.random()*10 + 85);
+  public ngOnInit(): void {
+    this.targetAccuracy = Math.trunc(Math.random() * 10 + 85);
     this.worldFormular = JSON.parse(localStorage.getItem('world-formular') || '');
+
+    this.prevTime = 0;
+  }
+
+  public async startTraining(): Promise<void> {
+    window.requestAnimationFrame(this.loop.bind(this));
+  }
+
+  private loop(time: number): void {
+    // update stage value and check for halts
+    if (!this.updateStage()) {
+      return;
+    }
+
+    // repaint neural net
+    this.neuralNet.loop(time);
+
+    const elapsed = time - this.prevTime;
+
+    let iterateStep: boolean = false;
+    switch (this.step) {
+      case -1:
+        iterateStep = true;
+        break;
+      case 0:
+        this.updateImages();
+        iterateStep = true;
+        break;
+      case 1:
+        if (elapsed < 1000*this.delayFactor) {
+          break;
+        }
+        if (this.epoch < 10) {
+          this.neuralNet.showPulse();
+        }
+        iterateStep = true;
+        break;
+      case 2:
+        if (elapsed < 1000*this.delayFactor) {
+          break;
+        }
+        if (this.epoch < 10) {
+          this.generateRatings();
+        }
+        iterateStep = true;
+        break;
+      case 3:
+        if (elapsed < 2000*this.delayFactor) {
+          break;
+        }
+        this.weltformel_2_0();
+        iterateStep = true;
+        break;
+      case 4:
+        if (elapsed < 1000*this.delayFactor) {
+          break;
+        }
+        this.neuralNet.update(this.epoch);
+        iterateStep = true;
+        break;
+      case 5:
+        if (elapsed < 1000*this.delayFactor) {
+          break;
+        }
+        iterateStep = true;
+        break;
+    }
+
+    if (iterateStep) {
+      this.step++;
+      if (this.step > 5) {
+        this.resetRatings();
+        this.step = 0;
+        this.epoch += this.skip;
+        this.updateParameters()
+      }
+      this.prevTime = time;
+    }
+
+    window.requestAnimationFrame(this.loop.bind(this));
+  }
+
+  private updateParameters(): void {
+    if (this.epoch === 3) {
+      this.delayFactor = 1;
+    } else if (this.epoch === 10) {
+      this.delayFactor = 0.1;
+    } else if (this.epoch === 25) {
+      this.delayFactor = 0.01;
+    } else if (this.epoch === 200) {
+      this.delayFactor = 0;
+      this.skip = 5;
+    }
+  }
+
+  private updateStage(): boolean {
+    if (this.stage === 0) {
+      this.stage = 1;
+    } else if (this.stage === 1 && this.epoch === 3) {
+      this.step = -1;
+      this.stage = 2;
+      return false;
+    } else if (this.stage === 2 && this.epoch === 3) {
+      this.stage = 3;
+    } else if (this.stage === 3 && this.epoch >= 1000) {
+      this.stage = 4;
+      return false;
+    }
+    return true;
   }
 
   private updateImages(): void {
@@ -70,71 +182,17 @@ export class TrainingComponent implements OnInit {
       case 0:
         return 'Traningsdaten laden...';
       case 1:
-        return 'Traningsdaten klassifizieren...';
+        return 'Traningsdaten laden...';
       case 2:
-        return 'Ergebnisse auswerten...';
+        return 'Traningsdaten klassifizieren...';
       case 3:
+        return 'Ergebnisse auswerten...';
+      case 4:
         return 'Neuronales Netz anpassen...';
-      default:
+      case 5:
         return 'Epoche abgeschlossen!'
     }
-  }
-
-  public async startTraining(): Promise<void> {
-    if (this.stage > 0) return;
-    this.stage = 1;
-
-    this.delayFactor = 2;
-    while (this.epoch < 3) {
-      await this.fakeTraining();
-    }
-
-    this.stage = 2;
-  }
-
-  public async continueTraining(): Promise<void> {
-    if (this.stage > 2) return;
-    this.stage = 3;
-
-    this.delayFactor = 0.5;
-    while (this.epoch < 1000) {
-      await this.fakeTraining();
-
-      if (this.epoch === 10) {
-        this.delayFactor = 0.1;
-      } else if (this.epoch === 25) {
-        this.delayFactor = 0.01;
-      } else if (this.epoch === 200) {
-        this.delayFactor = 0;
-        this.skip = 5;
-      }
-    }
-
-    this.stage = 4;
-  }
-
-  private async fakeTraining(): Promise<void> {
-    this.epoch += this.skip;
-    this.step = 0;
-    this.updateImages();
-    await this.delay(500*this.delayFactor);
-    this.step = 1;
-    await this.neuralNet.showPulse(this.delayFactor);
-    await this.delay(1000*this.delayFactor);
-    this.step = 2;
-    this.generateRatings();
-    await this.delay(2000*this.delayFactor);
-    this.step = 3;
-    this.weltformel_2_0();
-    await this.delay(1000*this.delayFactor);
-    this.step = 4;
-    this.neuralNet.update(this.epoch);
-    await this.delay(1000*this.delayFactor);
-    this.resetRatings();
-  }
-
-  private delay(ms: number): Promise<void> {
-    return new Promise( resolve => setTimeout(resolve, ms));
+    return "N/A";
   }
 
   private weltformel_2_0(): void {

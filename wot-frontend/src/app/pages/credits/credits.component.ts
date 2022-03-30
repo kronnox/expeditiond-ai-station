@@ -22,7 +22,9 @@ export class CreditsComponent implements OnInit {
   }
 
   public quit(): void {
-    this.router.navigate(['/landing']);
+    this.router.navigate(['/landing']).then(() => {
+      window.location.reload();
+    });
   }
 
 }

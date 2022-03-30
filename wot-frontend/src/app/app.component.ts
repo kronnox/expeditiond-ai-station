@@ -18,7 +18,9 @@ export class AppComponent {
   }
 
   public restart(): void {
-    this.router.navigate(['/landing']);
+    this.router.navigate(['/landing']).then(() => {
+      window.location.reload();
+    });
     this.showResetOverlay = false;
   }
 
