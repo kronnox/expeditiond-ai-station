@@ -180,11 +180,11 @@ export class TrainingComponent implements OnInit {
       case -1:
         return 'Training gestoppt.'
       case 0:
-        return 'Traningsdaten laden...';
+        return 'Trainingsdaten laden...';
       case 1:
-        return 'Traningsdaten laden...';
+        return 'Trainingsdaten laden...';
       case 2:
-        return 'Traningsdaten klassifizieren...';
+        return 'Trainingsdaten klassifizieren...';
       case 3:
         return 'Ergebnisse auswerten...';
       case 4:

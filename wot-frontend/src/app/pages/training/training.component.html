@@ -9,8 +9,8 @@
     </div>
   </wot-container>
   <wot-column>
-    <h1 style="margin: 6px; text-align: center">Das Neuronale-Netz</h1>
-    <h3 style="margin: 0; text-align: center">Hinter unserem Erkennungssystem</h3>
+    <h1 style="margin: 6px; text-align: center">Das Neuronale Netz</h1>
+    <h3 style="margin: 0; text-align: center">hinter unserem Erkennungssystem</h3>
     <neural-net-sim #neuralNet></neural-net-sim>
   </wot-column>
   <wot-container>
@@ -30,7 +30,7 @@
       </wot-row>
       <div style="position: absolute; bottom: 48px; width: calc(100% - 96px)">
         <wot-row>
-          <h2>Genauigkeit: {{accuracy | number: '1.0-2'}}%</h2>
+          <h2>Genauigkeit: {{accuracy | number: '1.0-2'}} %</h2>
         </wot-row>
         <wot-row>
           <wot-button slot="fill" (press)="startTraining()" [disabled]="stage != 0" *ngIf="stage < 2">Training Starten</wot-button>
@@ -43,5 +43,5 @@
 </div>
 
 <wot-success-overlay (continue)="continue()" #successOverlay>
-  Wir haben unser erstes Neuronales-Netz trainiert! Nun müssen wir unserem Abwehrsystem noch mitteilen, wie es mit den erkannten Objekten umgehen soll.
+  Wir haben unser erstes Neuronales Netz trainiert! Nun müssen wir unserem Abwehrsystem noch mitteilen, wie es mit den erkannten Objekten umgehen soll.
 </wot-success-overlay>
