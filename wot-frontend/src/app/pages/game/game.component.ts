@@ -82,7 +82,7 @@ export class GameComponent implements AfterViewInit {
       this._centerX = this._width/2;
       this._centerY = this._height/2;
 
-      this.popover.setVisible(this.canvasContainer.nativeElement, 'Hier könnt ihr eigene Objekte zeichnen um euer Erkennungssystem zu testen');
+      this.popover.setVisible(this.canvasContainer.nativeElement, 'Hier könnt ihr eigene Objekte zeichnen, um euer Erkennungssystem zu testen');
 
       this.prevTime = 0;
 
