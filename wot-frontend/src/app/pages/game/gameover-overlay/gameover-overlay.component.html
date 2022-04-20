@@ -3,9 +3,9 @@
     <h1 class="gameover-title" [textContent]="win ? 'Victory' : 'Defeat'" [ngStyle]="{'color': win ? 'var(--color-success)' : 'var(--color-danger)'}">
     </h1>
   </div>
-  <p *ngIf="!win" class="gameover-info">Der Truck wurde schwer beschädigt und die Mission ist gescheitert.</p>
+  <p *ngIf="!win" class="gameover-info">Die Mission ist gescheitert.</p>
   <p *ngIf="win" class="gameover-info">Der Truck hat die Mission erfolgreich abgeschlossen.</p>
-  <p class="gameover-info">Ihr könnt nun erneut versuchen ein Erkennungssystem zu trainieren. Überlegt dabei bei welchem Schritt ihr neu einteigen möchtet. Ihr könnt das Spiel auch über die Auswertung beenden.</p>
+  <p class="gameover-info">Ihr könnt nun erneut versuchen ein Erkennungssystem zu trainieren. Überlegt dabei bei welchem Schritt ihr neu einsteigen möchtet. Ihr könnt das Spiel auch über die Auswertung beenden.</p>
   <wot-row>
     <wot-button routerLink="/data-overview">Nochmal komplett neu versuchen</wot-button>
   </wot-row>
