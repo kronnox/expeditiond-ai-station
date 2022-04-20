@@ -10,7 +10,7 @@
   <wot-content>
     <wot-row>
       <div class="inner-content">
-        <div class="canvas-group">
+        <div class="canvas-group" *ngIf="images.length < 4">
           <div class="drawing-canvas">
             <wot-container>
               <ngx-drawing-canvas [width]="'512'" [height]="'512'" strokeColor="#fff" backgroundColor="rgba(0, 0, 0, 0)" #drawingCanvas></ngx-drawing-canvas>
