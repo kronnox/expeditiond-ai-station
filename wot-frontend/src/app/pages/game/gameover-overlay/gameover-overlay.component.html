@@ -5,9 +5,15 @@
   </div>
   <p *ngIf="!win" class="gameover-info">Der Truck wurde schwer beschädigt und die Mission ist gescheitert.</p>
   <p *ngIf="win" class="gameover-info">Der Truck hat die Mission erfolgreich abgeschlossen.</p>
-  <p class="gameover-info">Ihr könnt nun erneut versuchen ein Erkennungssystem zu trainieren oder das Spiel mit der Auswertung beenden.</p>
+  <p class="gameover-info">Ihr könnt nun erneut versuchen ein Erkennungssystem zu trainieren. Überlegt dabei bei welchem Schritt ihr neu einteigen möchtet. Ihr könnt das Spiel auch über die Auswertung beenden.</p>
   <wot-row>
-    <wot-button routerLink="/data-overview">Versucht es erneut</wot-button>
+    <wot-button routerLink="/data-overview">Nochmal komplett neu versuchen</wot-button>
+  </wot-row>
+  <wot-row>
+    <wot-button routerLink="/data-labeling">Bei Schritt 3 (Klassifizierung) starten</wot-button>
+  </wot-row>
+  <wot-row>
+    <wot-button routerLink="/data-grouping">Bei Schritt 5 (Gruppieren) starten</wot-button>
   </wot-row>
   <wot-row>
     <wot-button routerLink="/analytics">Zur Auswertung der Ergebnisse</wot-button>
