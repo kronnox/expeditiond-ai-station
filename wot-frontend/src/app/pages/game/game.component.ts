@@ -234,7 +234,7 @@ export class GameComponent implements AfterViewInit {
           const classId = result.indexOf(confidence);
           spaceObject.imageObject.prediction = result;
           spaceObject.imageObject.predictedClass = classId;
-          spaceObject.imageObject.label = (this.backendService.classes[classId] + " " + confidence.toFixed(2));
+          spaceObject.imageObject.label = (this.backendService.classes[classId] + " " + (confidence*100).toFixed(2) + "%");
           if(spaceObject.imageObject.custom) {
             spaceObject.imageObject.labeledClass = classId
           }
