@@ -114,7 +114,7 @@ export class GameComponent implements AfterViewInit {
 
       if(this.truck.health <= 0) {
           this.gamestatus = 2;
-      } else if (this.survivedObjects >= 50) {
+      } else if (this.survivedObjects >= 30) {
           this.gamestatus = 1;
       }
 
