@@ -62,6 +62,8 @@ export class TrainingComponent implements OnInit {
     this.worldFormular = JSON.parse(localStorage.getItem('world-formular') || '');
 
     this.prevTime = 0;
+
+    void this.startTraining();
   }
 
   public async startTraining(): Promise<void> {
@@ -92,7 +94,7 @@ export class TrainingComponent implements OnInit {
         if (elapsed < 1000*this.delayFactor) {
           break;
         }
-        if (this.epoch < 10) {
+        if (this.epoch < 3) {
           this.neuralNet.showPulse();
         }
         iterateStep = true;
@@ -144,12 +146,6 @@ export class TrainingComponent implements OnInit {
 
   private updateParameters(): void {
     if (this.epoch === 3) {
-      this.delayFactor = 1;
-    } else if (this.epoch === 10) {
-      this.delayFactor = 0.1;
-    } else if (this.epoch === 25) {
-      this.delayFactor = 0.01;
-    } else if (this.epoch === 200) {
       this.delayFactor = 0;
       this.skip = 5;
     }
@@ -161,7 +157,7 @@ export class TrainingComponent implements OnInit {
     } else if (this.stage === 1 && this.epoch === 3) {
       this.step = -1;
       this.stage = 2;
-      return false;
+      // return false;
     } else if (this.stage === 2 && this.epoch === 3) {
       this.stage = 3;
     } else if (this.stage === 3 && this.epoch >= 1000) {
@@ -204,7 +200,7 @@ export class TrainingComponent implements OnInit {
     const s = -0.04 * sumWF + 0.95;
     const r = 0.1;
 
-    this.accuracy = ((s-r) * (Math.log(this.epoch)/Math.log(1000)) + r) * 100;
+    this.accuracy = Math.max(0, ((s-r) * (Math.log(this.epoch)/Math.log(1000)) + r) * 100);
   }
 
   private resetRatings() {

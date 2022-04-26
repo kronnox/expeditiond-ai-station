@@ -9,8 +9,8 @@
     </div>
   </wot-container>
   <wot-column>
-    <h1 style="margin: 6px; text-align: center">Das Neuronale Netz</h1>
-    <h3 style="margin: 0; text-align: center">hinter unserem Erkennungssystem</h3>
+    <h1 style="margin: 6px; text-align: center">Unser Neuronale Netz</h1>
+    <h3 style="margin: 0; text-align: center">schaut zu, wie es trainiert wird</h3>
     <neural-net-sim #neuralNet></neural-net-sim>
   </wot-column>
   <wot-container>
@@ -23,9 +23,12 @@
       </wot-row>
       <wot-row>
         <div class="info-text" *ngIf="stage >= 2">
-          <p *ngIf="stage === 2">HINWEIS: Das Training des Modells ist rechenintensiv und entsprechend sehr langsam. Daher beschleunigen wir das Ganze jetzt.</p>
-          <p *ngIf="stage > 2 && epoch <= 200">Beschleunigung: {{2/delayFactor}}x</p>
-          <p *ngIf="epoch > 200">Beschleunigung: HYPERSPEED</p>
+<!--          <p *ngIf="stage === 2">HINWEIS: Das Training des Modells ist rechenintensiv und entsprechend sehr langsam. Daher beschleunigen wir das Ganze jetzt.</p>-->
+<!--          <p *ngIf="stage > 2 && epoch <= 200">Beschleunigung: {{2/delayFactor}}x</p>-->
+          <p *ngIf="epoch > 3">
+            HINWEIS: Das Training des Modells ist rechenintensiv und entsprechend sehr langsam. Daher beschleunigen wir das Ganze jetzt.<br><br>
+            Beschleunigung: HYPERSPEED
+          </p>
         </div>
       </wot-row>
       <div style="position: absolute; bottom: 48px; width: calc(100% - 96px)">
@@ -33,8 +36,8 @@
           <h2>Genauigkeit: {{accuracy | number: '1.0-2'}} %</h2>
         </wot-row>
         <wot-row>
-          <wot-button slot="fill" (press)="startTraining()" [disabled]="stage != 0" *ngIf="stage < 2">Training Starten</wot-button>
-          <wot-button slot="fill" (press)="startTraining()" [disabled]="stage != 2" *ngIf="stage >= 2 && stage < 4">Training Fortsetzen</wot-button>
+<!--          <wot-button slot="fill" (press)="startTraining()" [disabled]="stage != 0" *ngIf="stage < 2">Training Starten</wot-button>-->
+<!--          <wot-button slot="fill" (press)="startTraining()" [disabled]="stage != 2" *ngIf="stage >= 2 && stage < 4">Training Fortsetzen</wot-button>-->
           <wot-button slot="fill" (press)="successOverlay.setVisible()" *ngIf="stage >= 4">Training Abschließen</wot-button>
         </wot-row>
       </div>
