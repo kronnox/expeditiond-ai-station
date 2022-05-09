@@ -7,7 +7,7 @@ import {Star} from "./models/star.model";
 import {Truck} from "./models/truck.model";
 import {GameConfig} from "./game-config";
 import { ImageService } from 'src/app/shared/image.service';
-import { ImageObject } from 'src/app/model/image/image-object';
+import { ImageObject } from 'src/app/drag-and-drop/model/image/image-object';
 import { WotSuccessOverlayComponent } from 'src/app/common/layout/wot-success-overlay/wot-success-overlay.component';
 import { WotPopoverComponent } from 'src/app/common/popover/wot-popover/wot-popover.component';
 

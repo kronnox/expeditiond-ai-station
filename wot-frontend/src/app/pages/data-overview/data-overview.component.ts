@@ -1,7 +1,7 @@
 import {Component, DoCheck, HostListener, OnInit, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { WotPopoverComponent } from 'src/app/common/popover/wot-popover/wot-popover.component';
-import { ImageObject } from 'src/app/model/image/image-object';
+import { ImageObject } from 'src/app/drag-and-drop/model/image/image-object';
 import { BackendService } from 'src/app/shared/backend.service';
 import { ImageService } from 'src/app/shared/image.service';
 import {WotSuccessOverlayComponent} from "../../common/layout/wot-success-overlay/wot-success-overlay.component";

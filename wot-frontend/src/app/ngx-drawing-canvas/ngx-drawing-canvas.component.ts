@@ -1,8 +1,8 @@
 import {AfterViewInit, Component, DoCheck, ElementRef, Input, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
 import {fromEvent, mergeWith, Observable, pairwise, switchMap, takeUntil} from "rxjs";
-import {Vector} from "../model/vector/vector";
-import {Path} from "../model/path/path";
-import {Stroke} from "../model/stroke/stroke";
+import {Vector} from "./model/vector/vector";
+import {Path} from "./model/path/path";
+import {Stroke} from "./model/stroke/stroke";
 
 @Component({
   selector: 'ngx-drawing-canvas',

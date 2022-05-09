@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ImageObject } from '../model/image/image-object';
+import { ImageObject } from '../drag-and-drop/model/image/image-object';
 
 @Injectable({
   providedIn: 'root'

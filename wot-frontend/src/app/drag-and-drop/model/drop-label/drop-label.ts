@@ -1,5 +1,5 @@
-import { ImageObject } from "src/app/model/image/image-object";
-import { DragImage } from "./drag-image";
+import { ImageObject } from "src/app/drag-and-drop/model/image/image-object";
+import { DragImage } from "../draw-image/drag-image";
 
 export class DropLabel {
     public labelID: number;

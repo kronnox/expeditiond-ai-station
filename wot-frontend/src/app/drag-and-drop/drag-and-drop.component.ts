@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, ElementRef, Input, NgZone, OnInit, ViewChild, ChangeDetectorRef, AfterViewChecked, AfterContentInit } from '@angular/core';
 import { CdkDragDrop, CdkDropList, moveItemInArray, Point, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Router } from '@angular/router';
-import { ImageObject } from '../model/image/image-object';
-import { DropLabel } from './model/drop-label';
-import { DragImage } from './model/drag-image';
+import { ImageObject } from './model/image/image-object';
+import { DropLabel } from './model/drop-label/drop-label';
+import { DragImage } from './model/draw-image/drag-image';
 
 @Component({
   selector: 'drag-and-drop',

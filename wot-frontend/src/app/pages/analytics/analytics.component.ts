@@ -2,7 +2,7 @@ import { TransitiveCompileNgModuleMetadata } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { WotSuccessOverlayComponent } from 'src/app/common/layout/wot-success-overlay/wot-success-overlay.component';
-import { ImageObject } from 'src/app/model/image/image-object';
+import { ImageObject } from 'src/app/drag-and-drop/model/image/image-object';
 import { BackendService } from 'src/app/shared/backend.service';
 
 @Component({

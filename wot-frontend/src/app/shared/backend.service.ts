@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { firstValueFrom, Observable, of, take } from 'rxjs';
-import { ImageObject } from '../model/image/image-object';
+import { ImageObject } from '../drag-and-drop/model/image/image-object';
 
 @Injectable({
   providedIn: 'root'

@@ -3,7 +3,7 @@ import {GameObject} from "./game-object.model";
 import {GameComponent} from "../game.component";
 import {Explosion} from "./explosion.model";
 import {GameConfig} from "../game-config";
-import { ImageObject } from "src/app/model/image/image-object";
+import { ImageObject } from "src/app/drag-and-drop/model/image/image-object";
 
 export class SpaceObject extends GameObject {
     public x: number;

@@ -1,4 +1,4 @@
-import { ImageObject } from "src/app/model/image/image-object";
+import { ImageObject } from "src/app/drag-and-drop/model/image/image-object";
 
 export class DragImage {
 

@@ -2,7 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NgxDrawingCanvasComponent} from "../../ngx-drawing-canvas/ngx-drawing-canvas.component";
 import { Router } from '@angular/router';
 import { BackendService } from 'src/app/shared/backend.service';
-import { ImageObject } from 'src/app/model/image/image-object';
+import { ImageObject } from 'src/app/drag-and-drop/model/image/image-object';
 import {WotSuccessOverlayComponent} from "../../common/layout/wot-success-overlay/wot-success-overlay.component";
 
 @Component({

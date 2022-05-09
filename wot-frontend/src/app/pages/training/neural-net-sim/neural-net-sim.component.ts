@@ -2,7 +2,7 @@ import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@a
 import {WotSuccessOverlayComponent} from "../../../common/layout/wot-success-overlay/wot-success-overlay.component";
 import {GameObject} from "../../game/models/game-object.model";
 import {Truck} from "../../game/models/truck.model";
-import {ImageObject} from "../../../model/image/image-object";
+import {ImageObject} from "../../../drag-and-drop/model/image/image-object";
 import {BackendService} from "../../../shared/backend.service";
 import {ImageService} from "../../../shared/image.service";
 import {GameConfig} from "../../game/game-config";

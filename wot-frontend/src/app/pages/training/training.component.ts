@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {ImageService} from "../../shared/image.service";
-import {ImageObject} from "../../model/image/image-object";
+import {ImageObject} from "../../drag-and-drop/model/image/image-object";
 import {animate, keyframes, query, stagger, state, style, transition, trigger} from "@angular/animations";
 import {NeuralNetSimComponent} from "./neural-net-sim/neural-net-sim.component";
 import {Router} from "@angular/router";
