@@ -15,7 +15,7 @@
       <p class="p-label">{{class.labelName === 'Satellitenschüssel' ? 'Satelliten-schüssel' : class.labelName}}</p>
     </div>
 
-    <wot-button [disabled]="lastIndex===0" class="undo-btn" (press)="undo()">
+    <wot-button [disabled]="lastIndices.length===0" class="undo-btn" (press)="undo()">
       <div class="undo-div">
         <div class="icon-count">
           <ion-icon name="arrow-undo" class="btn-icon"></ion-icon>

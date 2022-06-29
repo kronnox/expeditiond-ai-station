@@ -22,7 +22,7 @@ export class DragAndDropComponent implements AfterViewInit {
 
   private topZ: number = 1;
 
-  public lastIndex: number = 0;
+  public lastIndices: number[] = [];
 
   constructor(private router: Router, private cdRef: ChangeDetectorRef) { }
 
@@ -42,7 +42,7 @@ export class DragAndDropComponent implements AfterViewInit {
   public changePosition(event: any, item: DragImage): void {
     if (event.previousContainer !== event.container) {
       transferArrayItem(event.previousContainer.data, event.container.data, this.dragObjects.indexOf(item), event.currentIndex);
-      this.lastIndex = event.container.id.slice(-1);
+      this.lastIndices.push(event.container.id.slice(-1)-1)
     } else {
       const rectZone = this.dropZone.nativeElement.getBoundingClientRect();
       const rectElement = event.item.element.nativeElement.getBoundingClientRect()
@@ -69,11 +69,11 @@ export class DragAndDropComponent implements AfterViewInit {
   }
 
   public undo(): void {
-    let dragObject = this.labels[this.lastIndex-1].children.shift();
+    const lastIndex = this.lastIndices.pop() || 0;
+    let dragObject = this.labels[lastIndex].children.shift();
     if(dragObject) {
       this.dragObjects.push(dragObject);
     }
-    this.lastIndex = 0;
   }
 
   public changeZIndex(item: DragImage): void {
