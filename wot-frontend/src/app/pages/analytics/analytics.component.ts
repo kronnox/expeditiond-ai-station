@@ -27,7 +27,7 @@ export class AnalyticsComponent implements OnInit {
   constructor(private backendService: BackendService, private router: Router) { }
 
   ngOnInit(): void {
-    const imgs: ImageObject[] = JSON.parse(localStorage.getItem('labeled-data') || '');
+    const imgs: ImageObject[] = JSON.parse(localStorage.getItem('created-data') || '');
     imgs.forEach(element  => {
       if(element.custom){
         this.images.push(element);

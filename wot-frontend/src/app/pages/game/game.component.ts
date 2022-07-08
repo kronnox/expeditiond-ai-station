@@ -219,6 +219,11 @@ export class GameComponent implements AfterViewInit {
 
           const spaceObject = new SpaceObject(this, x, y, vx, vy, img, GameConfig.spaceObjectSize, GameConfig.spaceObjectSize);
           this.predictObject(spaceObject).then(res => {
+            if(spaceObject.imageObject.custom) {
+                const createdImages: ImageObject[] = JSON.parse(localStorage.getItem('created-data') || '[]');
+                createdImages.push(spaceObject.imageObject);
+                localStorage.setItem('created-data', JSON.stringify(createdImages));
+            }
               this.objects.push(spaceObject);
               this.survivedObjects++;
           });
@@ -264,7 +269,8 @@ export class GameComponent implements AfterViewInit {
   }
 
   public saveCanvas(canvas: NgxDrawingCanvasComponent): void {
-      this.customImages.push(new ImageObject(canvas.canvas.nativeElement.toDataURL("image/png"), true));
+      const newImage = new ImageObject(canvas.canvas.nativeElement.toDataURL("image/png"), true);
+      this.customImages.push(newImage);
       canvas.clear();
   }
 
