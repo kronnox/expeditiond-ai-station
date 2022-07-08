@@ -18,6 +18,8 @@ import { WotPopoverComponent } from 'src/app/common/popover/wot-popover/wot-popo
 })
 export class GameComponent implements AfterViewInit {
 
+  @ViewChild('infoOverlay') public infoOverlay: WotSuccessOverlayComponent;
+
   @ViewChild('canvas') public canvas!: ElementRef;
   @ViewChild('popover') public popover: WotPopoverComponent;
   @ViewChild('canvasContainer') public canvasContainer: ElementRef;
@@ -69,6 +71,7 @@ export class GameComponent implements AfterViewInit {
   }
 
   public ngAfterViewInit() {
+    
       this.grouping = JSON.parse(localStorage.getItem('grouping') || '');
 
       this.canvasEl = this.canvas.nativeElement;
@@ -82,14 +85,17 @@ export class GameComponent implements AfterViewInit {
       this._centerX = this._width/2;
       this._centerY = this._height/2;
 
-      this.popover.setVisible(this.canvasContainer.nativeElement, 'Hier könnt ihr eigene Objekte zeichnen, um euer Erkennungssystem zu testen');
-
       this.prevTime = 0;
 
       this._truck = new Truck(this);
       this.initStars(2000);
-      window.requestAnimationFrame(this.loop.bind(this));
-      this.spawnSpaceObjects();
+  }
+
+  public continue(): void {
+    this.infoOverlay.setVisible(false);
+    this.popover.setVisible(this.canvasContainer.nativeElement, 'Hier könnt ihr eigene Objekte zeichnen, um euer Erkennungssystem zu testen');
+    this.spawnSpaceObjects();
+    window.requestAnimationFrame(this.loop.bind(this));
   }
 
   private loop(time: number): void {
@@ -260,10 +266,6 @@ export class GameComponent implements AfterViewInit {
   public saveCanvas(canvas: NgxDrawingCanvasComponent): void {
       this.customImages.push(new ImageObject(canvas.canvas.nativeElement.toDataURL("image/png"), true));
       canvas.clear();
-  }
-
-  public continue(): void {
-
   }
 
   public applyShake(): void {

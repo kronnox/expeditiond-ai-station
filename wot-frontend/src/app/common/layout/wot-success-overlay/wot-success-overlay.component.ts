@@ -13,6 +13,9 @@ export class WotSuccessOverlayComponent {
   @Output() visibleChange = new EventEmitter<boolean>();
   @Output() continue = new EventEmitter<any>();
 
+  @Input() header: string = 'Bravo!';
+  @Input() showIcon: boolean = true;
+
   public setVisible(visible: boolean = true): void {
     this.visible = visible;
     this.visibleChange.emit(this.visible);

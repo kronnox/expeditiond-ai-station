@@ -10,5 +10,8 @@
 <div *ngIf="gamestatus===0 && truck" class="health-bar" style="z-index: 100;">
     <wot-life-bar [maxLifes]="3" [lifes]="truck.health"></wot-life-bar>
 </div>
+<wot-success-overlay (continue)="continue()" [visible]="true" [showIcon]="false" [header]="'Infos'" #infoOverlay>
+    Gleich startet die Mission. Dabei könnt ihr zusehen, wie sich euer Erkennungssystem im Weltallt schlägt. Auf den Truck werden verschiedene Objekte zufliegen, die jeweils mit dem von euch trainierten Erkennungssystem analysiert und nach euren Regeln behandelt werden. Unten rechts könnt ihr außerdem selbst Objekte zeichnen, um den Truck damit zu testen.
+</wot-success-overlay>
 <gameover-overlay *ngIf="gamestatus!=0" [win]="gamestatus===1"></gameover-overlay>
 <wot-popover *ngIf="survivedObjects <= 10 && gamestatus===0" #popover></wot-popover>
