@@ -4,7 +4,9 @@
       Schritt 5: Gruppieren
     </h1>
     <p>
-      Nun geht es darum zu definieren, wie ihr in Missionen mit Objekten umgehen wollt, die euch begegnen. Überlegt dabei ganz genau welche Aktionen für die Objekte sinnvoll sind, damit das Truck-Raumschiff nicht beschädigt wird, aber für die Mission wichtige Objekte eingesammelt werden.
+      Nun geht es darum zu definieren, wie ihr mit Objekten umgehen wollt, die euch begegnen. Überlegt dabei ganz genau,
+      welche Aktionen für die Objekte sinnvoll sind. Das Truck-Raumschiff soll nicht beschädigt werden, gleichzeitig
+      wollt ihr für die Mission wichtige Objekte einsammeln.
     </p>
   </wot-step-info>
   <wot-content>
@@ -13,12 +15,19 @@
     </wot-row>
   </wot-content>
   <wot-row>
-    <wot-button slot="right" [disabled]="dragDrop.dragObjects.length > 0" (press)="done(dragDrop)">Schritt abschließen</wot-button>
+    <wot-button slot="right" [disabled]="dragDrop.dragObjects.length > 0" (press)="done(dragDrop)">SCHRITT ABSCHLIESSEN
+    </wot-button>
   </wot-row>
 </wot-page>
 
-<wot-success-overlay buttonLabel="Mission starten" (continue)="continue()" #successOverlay>
-  <div>Nun kann der Truck anhand der durch das Erkennungssystem klassifizierten Objekte auf diese reagieren.</div>
+<wot-success-overlay buttonLabel="MISSION STARTEN" (continue)="continue()" #successOverlay>
+  <div>
+    Bravo! <br>
+    Das Erkennungssystem sortiert jetzt Objekte in Klassen und reagiert nach euren Regeln auf diese.
+  </div>
   <br>
-  <div>Startet nun die Mission und seht zu, wie sich euer Erkennungssystem schlägt. Auf den Truck werden verschiedene Objekte zufliegen, die jeweils mit dem von euch trainierten Erkennungssystem analysiert werden. Unten rechts könnt ihr außerdem selbst Objekte zeichnen, um den Truck damit zu testen.</div>
+  <div>
+    Startet nun die Mission und seht zu, wie sich euer Erkennungssystem schlägt. Auf den Truck werden verschiedene
+    Objekte zufliegen, die jeweils mit dem von euch trainierten Erkennungssystem analysiert werden. Unten rechts könnt
+    ihr außerdem selbst Objekte zeichnen, um den Truck damit zu testen.</div>
 </wot-success-overlay>
