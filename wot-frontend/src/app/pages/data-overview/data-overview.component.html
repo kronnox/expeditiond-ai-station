@@ -4,7 +4,8 @@
       Schritt 1: Übersicht
     </h1>
     <p>
-      Der Computer hat Bilder von Objekten gesammelt, die uns in vergangenen Missionen begegnet sind. Verschafft euch einen Überblick von den verschiedenen Objekten, die uns im Weltall begegnen können.
+      Der Computer hat Bilder von Objekten gesammelt, die uns in vergangenen Weltraum-Missionen begegnet sind.
+      Verschafft euch einen Überblick über die verschiedenen Objekte, indem ihr sie anklickt.
     </p>
   </wot-step-info>
   <wot-content>
@@ -13,7 +14,7 @@
         <div class="image-container" (scroll)="handleScroll()">
           <div class="image-inner-container" [@imageAnimation]="images">
             <span *ngFor="let image of images; index as i" (click)="showInfo($event, i)">
-                <img class="img-data" src="{{image.imagePath}}"/>
+              <img class="img-data" src="{{image.imagePath}}" />
             </span>
           </div>
         </div>
@@ -21,12 +22,15 @@
     </wot-row>
   </wot-content>
   <wot-row>
-    <wot-button slot="right" (press)="done()">Schritt abschließen</wot-button>
+    <wot-button slot="right" (press)="done()">SCHRITT ABSCHLIESSEN</wot-button>
   </wot-row>
 </wot-page>
 
 <wot-success-overlay (continue)="continue()" #successOverlay>
-  Ihr habt euch mit den verschiedenen Objekten im Weltall vertraut gemacht. Nun könnt ihr das Erkennungssystem entwickeln.
+  Bravo! <br>
+  Ihr habt euch mit den verschiedenen Objekten im Weltall vertraut gemacht. Nun könnt ihr das Erkennungssystem
+  entwickeln. <br>
+  ZUM NÄCHSTEN SCHRITT
 </wot-success-overlay>
 
 <wot-popover #popover></wot-popover>

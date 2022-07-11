@@ -4,7 +4,8 @@
       Schritt 3: Klassifizierung
     </h1>
     <p>
-      Um die Objekte zuordnen zu können, ist es nun wichtig diesen eine Kategorie zuzuweisen. Sortiert dafür die Objekte in die untenstehenden Ordner ein.
+      Damit der Computer die Objekte erkennen kann, ist es nun wichtig, ihnen eine Kategorie zuzuweisen. Sortiert dafür
+      die Objekte in die unten stehenden Ordner ein.
     </p>
   </wot-step-info>
   <wot-content>
@@ -13,10 +14,14 @@
     </wot-row>
   </wot-content>
   <wot-row>
-    <wot-button slot="right" [disabled]="dragDrop.dragObjects.length > 0" (press)="done(dragDrop)">Schritt abschließen</wot-button>
+    <wot-button slot="right" [disabled]="dragDrop.dragObjects.length > 0" (press)="done(dragDrop)">ZUM NÄCHSTEN SCHRITT
+    </wot-button>
   </wot-row>
 </wot-page>
 
 <wot-success-overlay (continue)="continue()" #successOverlay>
-  Ihr habt den Objektzeichnungen eine Kategorie zugewiesen. Die KI kann nun darauf trainiert werden Zeichnungen einer Kategorie zuzuordnen.
+  Bravo!<br>
+  Ihr habt den Objektzeichnungen eine Kategorie zugewiesen. Die KI kann nun darauf trainiert werden, selbstständig
+  Zeichnungen einer Kategorie zuzuordnen.<br>
+  SCHRITT ABSCHLIESSEN
 </wot-success-overlay>

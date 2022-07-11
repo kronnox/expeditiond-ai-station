@@ -4,7 +4,8 @@
       Schritt 2: Datensatz-Erstellung
     </h1>
     <p>
-      Zeichnet im Team vier der folgenden Objekte: Asteroid, Astronaut, Brief, Ufo, Versorgungsbox, Auto, Satellit, Satellitenschüssel, Raumschiff. Klickt nach jedem gezeichneten Objekt auf den Haken.
+      Zeichnet im Team vier der folgenden Objekte: Asteroid, Astronaut, Brief, Ufo, Versorgungsbox, Auto, Satellit,
+      Satellitenschüssel, Raumschiff. Klickt nach jedem gezeichneten Objekt auf den Haken.
     </p>
   </wot-step-info>
   <wot-content>
@@ -13,20 +14,24 @@
         <div class="canvas-group" *ngIf="images.length < 4">
           <div class="drawing-canvas">
             <wot-container>
-              <ngx-drawing-canvas [width]="'512'" [height]="'512'" strokeColor="#fff" backgroundColor="rgba(0, 0, 0, 0)" #drawingCanvas></ngx-drawing-canvas>
+              <ngx-drawing-canvas [width]="'512'" [height]="'512'" strokeColor="#fff" backgroundColor="rgba(0, 0, 0, 0)"
+                #drawingCanvas></ngx-drawing-canvas>
             </wot-container>
           </div>
           <div class="canvas-buttons">
-            <wot-button icon="arrow-undo" (press)="drawingCanvas.undoLast()" [disabled]="!drawingCanvas.canUndo()"></wot-button>
-            <wot-button icon="arrow-redo" (press)="drawingCanvas.redoLast()" [disabled]="!drawingCanvas.canRedo()"></wot-button>
-            <wot-button icon="checkmark" (press)="saveCanvas(drawingCanvas)" [disabled]="images.length >= 4 || drawingCanvas.strokes.length === 0"></wot-button>
+            <wot-button icon="arrow-undo" (press)="drawingCanvas.undoLast()" [disabled]="!drawingCanvas.canUndo()">
+            </wot-button>
+            <wot-button icon="arrow-redo" (press)="drawingCanvas.redoLast()" [disabled]="!drawingCanvas.canRedo()">
+            </wot-button>
+            <wot-button icon="checkmark" (press)="saveCanvas(drawingCanvas)"
+              [disabled]="images.length >= 4 || drawingCanvas.strokes.length === 0"></wot-button>
           </div>
         </div>
 
         <div class="image-list">
           <div class="image-item" *ngFor="let image of images">
             <wot-container>
-              <img width="100%" src="{{image.imagePath}}"/>
+              <img width="100%" src="{{image.imagePath}}" />
             </wot-container>
           </div>
         </div>
@@ -34,10 +39,13 @@
     </wot-row>
   </wot-content>
   <wot-row>
-    <wot-button slot="right" [disabled]="images.length < 4" (press)="done()">Schritt abschließen</wot-button>
+    <wot-button slot="right" [disabled]="images.length < 4" (press)="done()">SCHRITT ABSCHLIESSEN</wot-button>
   </wot-row>
 </wot-page>
 
 <wot-success-overlay (continue)="continue()" #successOverlay>
-  Mit den von euch gezeichneten Bildern habt ihr den vorliegenden Datensatz erweitert. Das hilft der KI dabei, ein größeres Spektrum von Objektvarianten zu erkennen.
+  Bravo! <br>
+  Mit den von euch gezeichneten Bildern habt ihr den vorliegenden Datensatz erweitert. Das hilft der KI dabei, viele
+  verschiedene Varianten eines Objektes zu erkennen.
+  ZUM NÄCHSTEN SCHRITT <br>
 </wot-success-overlay>

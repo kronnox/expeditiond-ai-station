@@ -1,66 +1,65 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
-import {BackendService} from 'src/app/shared/backend.service';
-import {SpaceObject} from './models/space-object.model';
-import {NgxDrawingCanvasComponent} from "../../ngx-drawing-canvas/ngx-drawing-canvas.component";
-import {GameObject} from "./models/game-object.model";
-import {Star} from "./models/star.model";
-import {Truck} from "./models/truck.model";
-import {GameConfig} from "./game-config";
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { BackendService } from 'src/app/shared/backend.service';
+import { SpaceObject } from './models/space-object.model';
+import { NgxDrawingCanvasComponent } from "../../ngx-drawing-canvas/ngx-drawing-canvas.component";
+import { GameObject } from "./models/game-object.model";
+import { Star } from "./models/star.model";
+import { Truck } from "./models/truck.model";
+import { GameConfig } from "./game-config";
 import { ImageService } from 'src/app/shared/image.service';
 import { ImageObject } from 'src/app/drag-and-drop/model/image/image-object';
 import { WotSuccessOverlayComponent } from 'src/app/common/layout/wot-success-overlay/wot-success-overlay.component';
 import { WotPopoverComponent } from 'src/app/common/popover/wot-popover/wot-popover.component';
 
 @Component({
-  selector: 'app-game',
-  templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss']
+    selector: 'app-game',
+    templateUrl: './game.component.html',
+    styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements AfterViewInit {
 
-  @ViewChild('infoOverlay') public infoOverlay: WotSuccessOverlayComponent;
+    @ViewChild('infoOverlay') public infoOverlay: WotSuccessOverlayComponent;
+    @ViewChild('canvas') public canvas!: ElementRef;
+    @ViewChild('popover') public popover: WotPopoverComponent;
+    @ViewChild('canvasContainer') public canvasContainer: ElementRef;
 
-  @ViewChild('canvas') public canvas!: ElementRef;
-  @ViewChild('popover') public popover: WotPopoverComponent;
-  @ViewChild('canvasContainer') public canvasContainer: ElementRef;
+    private ctx!: CanvasRenderingContext2D;
+    private canvasEl: HTMLCanvasElement;
 
-  private ctx!: CanvasRenderingContext2D;
-  private canvasEl: HTMLCanvasElement;
+    private _width: number;
+    private _height: number;
+    private _centerX: number;
+    private _centerY: number;
 
-  private _width: number;
-  private _height: number;
-  private _centerX: number;
-  private _centerY: number;
+    private bgObjects: GameObject[] = [];
+    private _truck: Truck;
+    private objects: GameObject[] = [];
 
-  private bgObjects: GameObject[] = [];
-  private _truck: Truck;
-  private objects: GameObject[] = [];
+    private _radarAngle: number = Math.PI;
 
-  private _radarAngle: number = Math.PI;
+    private _currentShakeFactor: number = 0;
 
-  private _currentShakeFactor: number = 0;
+    private prevTime: number;
+    private prevSecond: number = 0;
+    private fps: number = 0;
 
-  private prevTime: number;
-  private prevSecond: number = 0;
-  private fps: number = 0;
+    private worldFormular: number[][];
 
-  private worldFormular: number[][];
+    private customImages: ImageObject[] = [];
 
-  private customImages: ImageObject[] = [];
+    private grouping: number[];
 
-  private grouping: number[];
-
-  public demage: number[][] = [
-    [0,1,1],
-    [1,0,1],
-    [0,0,0],
-    [1,0,1],
-    [1,1,0],
-    [1,1,0],
-    [0,0,0],
-    [0,1,1],
-    [1,0,1]
-  ];
+    public demage: number[][] = [
+        [0, 1, 1],
+        [1, 0, 1],
+        [0, 0, 0],
+        [1, 0, 1],
+        [1, 1, 0],
+        [1, 1, 0],
+        [0, 0, 0],
+        [0, 1, 1],
+        [1, 0, 1]
+    ];
 
   public survivedObjects: number = 0;
 
@@ -254,59 +253,58 @@ export class GameComponent implements AfterViewInit {
     });
   }
 
-  private normalize(array: number[]): number[] {
-    for(let i = 0; i < array.length; i++){
-        array[i] = (array[i] < 0 ? 0 : array[i]);
+    private normalize(array: number[]): number[] {
+        for (let i = 0; i < array.length; i++) {
+            array[i] = (array[i] < 0 ? 0 : array[i]);
+        }
+        let sum = 0;
+        for (let i = 0; i < array.length; i++) {
+            sum += array[i];
+        }
+        for (let i = 0; i < array.length; i++) {
+            array[i] = array[i] / sum;
+        }
+        return array;
     }
-    let sum = 0;
-    for(let i = 0; i < array.length; i++){
-        sum += array[i];
+
+    public saveCanvas(canvas: NgxDrawingCanvasComponent): void {
+        this.customImages.push(new ImageObject(canvas.canvas.nativeElement.toDataURL("image/png"), true));
+        canvas.clear();
     }
-    for(let i = 0; i < array.length; i++){
-        array[i] = array[i] / sum;
+
+    public applyShake(): void {
+        this._currentShakeFactor = GameConfig.shakeFactor;
     }
-    return array;
-  }
 
-  public saveCanvas(canvas: NgxDrawingCanvasComponent): void {
-      const newImage = new ImageObject(canvas.canvas.nativeElement.toDataURL("image/png"), true);
-      this.customImages.push(newImage);
-      canvas.clear();
-  }
+    public spawnObject(obj: GameObject): void {
+        this.objects.push(obj);
+    }
 
-  public applyShake(): void {
-      this._currentShakeFactor = GameConfig.shakeFactor;
-  }
+    get height(): number {
+        return this._height;
+    }
 
-  public spawnObject(obj: GameObject): void {
-      this.objects.push(obj);
-  }
+    get width(): number {
+        return this._width;
+    }
 
-  get height(): number {
-      return this._height;
-  }
+    get centerY(): number {
+        return this._centerY;
+    }
 
-  get width(): number {
-      return this._width;
-  }
+    get centerX(): number {
+        return this._centerX;
+    }
 
-  get centerY(): number {
-      return this._centerY;
-  }
+    get radarAngle(): number {
+        return this._radarAngle;
+    }
 
-  get centerX(): number {
-      return this._centerX;
-  }
+    get currentShakeFactor(): number {
+        return this._currentShakeFactor;
+    }
 
-  get radarAngle(): number {
-      return this._radarAngle;
-  }
-
-  get currentShakeFactor(): number {
-      return this._currentShakeFactor;
-  }
-
-  get truck(): Truck {
-      return this._truck;
-  }
+    get truck(): Truck {
+        return this._truck;
+    }
 }
