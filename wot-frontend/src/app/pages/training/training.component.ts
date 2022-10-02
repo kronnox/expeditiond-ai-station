@@ -5,7 +5,6 @@ import {animate, keyframes, query, stagger, state, style, transition, trigger} f
 import {NeuralNetSimComponent} from "./neural-net-sim/neural-net-sim.component";
 import {Router} from "@angular/router";
 import {WotSuccessOverlayComponent} from "../../common/layout/wot-success-overlay/wot-success-overlay.component";
-import {beaker} from "ionicons/icons";
 
 export const imageAnimation = trigger('imageAnimation', [
   transition('* => *', [

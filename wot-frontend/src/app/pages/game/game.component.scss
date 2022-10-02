@@ -6,15 +6,19 @@
 }
 .drawingCanvas{
   border-style: solid;
-  border: 2px;
-  border-color: darkblue;
+  border: 5px;
+  border-color: lightblue;
   background-color: black;
+  z-index: 999;
 }
 
 #canvas {
   position: fixed;
   overflow: hidden;
   z-index: 1;
+  border-style: solid;
+  border: 5px;
+  border-color: lightblue;
   //visibility: hidden;
 }
 

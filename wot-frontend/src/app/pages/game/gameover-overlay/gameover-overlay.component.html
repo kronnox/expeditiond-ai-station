@@ -10,13 +10,13 @@
   <p *ngIf="win" class="gameover-info">Der Truck hat die Mission erfolgreich abgeschlossen!</p>
   <p *ngIf="win" class="gameover-info">Nun könnt ihr in der Auswertung noch überprüfen, wofür die von euch gezeichneten
     Bilder von der KI gehalten wurden.</p>
-  <wot-row>
+  <wot-row *ngIf="!win">
     <wot-button routerLink="/data-overview">Nochmal komplett neu versuchen</wot-button>
   </wot-row>
-  <wot-row>
+  <wot-row *ngIf="!win">
     <wot-button routerLink="/data-labeling">Bei Schritt 3 (Klassifizierung) starten</wot-button>
   </wot-row>
-  <wot-row>
+  <wot-row *ngIf="!win">
     <wot-button routerLink="/data-grouping">Bei Schritt 5 (Gruppieren) starten</wot-button>
   </wot-row>
   <wot-row>

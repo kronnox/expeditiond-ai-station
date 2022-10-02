@@ -119,7 +119,7 @@ export class GameComponent implements AfterViewInit {
 
       if(this.truck.health <= 0) {
           this.gamestatus = 2;
-      } else if (this.survivedObjects >= 30) {
+      } else if (this.survivedObjects >= 45) {
           this.gamestatus = 1;
       }
 
@@ -182,7 +182,6 @@ export class GameComponent implements AfterViewInit {
       this.ctx.fillRect(0, 0, 100, 30);
       this.ctx.font = '15px Mono';
       this.ctx.fillStyle = 'black';
-      this.ctx.fillText("FPS: " + this.fps, 10, 20);
   }
 
   private initStars(count: number): void {
