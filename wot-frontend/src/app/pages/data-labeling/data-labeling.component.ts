@@ -45,10 +45,10 @@ export class DataLabelingComponent implements OnInit {
         worldFormular[i][j] = 0;
       }
     }
-    const weight = 0.4;
+    const weight = 0.5;
     let imageObjects: ImageObject[] = [];
     ddc.labels.forEach(element => {
-      if(element.children.length === 0) {
+      /*if(element.children.length === 0) {
         for(let i = 0; i < worldFormular.length; i++) {
           for(let j = 0; j < worldFormular[i].length; j++) {
             worldFormular[i][j] += (weight/8);
@@ -59,7 +59,7 @@ export class DataLabelingComponent implements OnInit {
         io.label = element.labelName;
         io.labeledClass = element.labelID;
         imageObjects.push(io);
-      }
+      }*/
       element.children.forEach(item => {
         item.imageObject.labeledClass = element.labelID;
         item.imageObject.label = this.backendService.classes[element.labelID];
@@ -80,8 +80,10 @@ export class DataLabelingComponent implements OnInit {
         }
 
         if(item.imageObject.predictedClass != item.imageObject.labeledClass) {
-          worldFormular[item.imageObject.labeledClass][item.imageObject.predictedClass] += weight;
-          worldFormular[item.imageObject.labeledClass][item.imageObject.labeledClass] -= weight;
+          //worldFormular[item.imageObject.labeledClass][item.imageObject.predictedClass] -= weight;
+          //worldFormular[item.imageObject.labeledClass][item.imageObject.labeledClass] += weight;
+          worldFormular[item.imageObject.predictedClass][item.imageObject.predictedClass] += weight;
+          worldFormular[item.imageObject.predictedClass][item.imageObject.labeledClass] -= weight;
         }
       })
     });

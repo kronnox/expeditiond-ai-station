@@ -41,7 +41,6 @@ export class GameComponent implements AfterViewInit {
 
     private prevTime: number;
     private prevSecond: number = 0;
-    private fps: number = 0;
 
     private worldFormular: number[][];
 
@@ -107,7 +106,6 @@ export class GameComponent implements AfterViewInit {
           const totalSeconds = Math.round(time / 100);
           if (totalSeconds > this.prevSecond) {
               this.prevSecond = totalSeconds;
-              this.fps = Math.round(1 / (elapsed / 1000));
           }
 
           this.preTick(elapsed);
@@ -179,7 +177,6 @@ export class GameComponent implements AfterViewInit {
       this.ctx.restore();
 
       this.ctx.fillStyle = 'hsla(0,0%,100%,0.4)';
-      this.ctx.fillRect(0, 0, 100, 30);
       this.ctx.font = '15px Mono';
       this.ctx.fillStyle = 'black';
   }
@@ -231,8 +228,11 @@ export class GameComponent implements AfterViewInit {
   private async predictObject(spaceObject: SpaceObject){
       await fetch(spaceObject.imageObject.imagePath).then(r => r.blob()).then(blob => this.backendService.predictBlob(blob, spaceObject.imageObject.custom)).then(res => {
           const tempClass = res.indexOf(Math.max(...res));
+          if(tempClass === 7) {
+              console.log(this.worldFormular)
+          }
           for(let i = 0; i < res.length; i++) {
-              res[i] = res[i] + this.worldFormular[tempClass][i];
+              res[i] = res[i] - this.worldFormular[tempClass][i];
           }
           const result = this.normalize(res);
           let sum = 0;

@@ -30,8 +30,12 @@
                   <wot-progress-bar height="10px" width="270px" background="auto" [progress]="selectedImage.prediction[class]" [total]="1"></wot-progress-bar>
                 </div>
               </td>
+              <td>
+                <span>{{(selectedImage.prediction[class]*100).toFixed(2)}}%</span>
+              </td>
             </tr>
           </table>
+          <div>Das Objekt habt ihr als Auto klassifiziert</div>
         </div>
       </div>
     </wot-row>
