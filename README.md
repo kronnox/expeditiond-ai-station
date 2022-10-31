@@ -12,6 +12,6 @@ Model:
 https://drive.google.com/file/d/1-SQuEgz1UkAg3TkwKYf4GI5GvzO3fmQm/view
 
 
-docker run --rm -d -p 8000:8000/tcp expeditiondaistation_frontend:latest 
+docker run --rm -d  wot_backend:latest
 
-docker run --rm -d -p 8000:8000/tcp expeditiondaistation_backend:latest 
+docker run --rm -d  -p 80:80/tcp wot_frontend:lates

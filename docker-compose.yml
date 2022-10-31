@@ -2,8 +2,24 @@ version: '3.8'
 
 services:
   wot-backend:
-    image: ghcr.io/kronnox/wot-backend:latest
+    image: wot-backend:latest
+    build:
+      context: ./wot-backend
     volumes:
       - .:/application
     ports:
       - "8000:8000"
+    restart:
+      always
+  wot-frontend:
+    image: wot-frontend:latest
+    build:
+      context: ./wot-frontend
+    depends_on:
+      - wot-backend
+    volumes:
+      - .:/application
+    ports:
+      - "80:80"
+    restart:
+      always
