@@ -91,7 +91,7 @@ export class GameComponent implements AfterViewInit {
 
   public continue(): void {
     this.infoOverlay.setVisible(false);
-    this.popover.setVisible(this.canvasContainer.nativeElement, 'Hier könnt ihr eigene Objekte zeichnen, um euer Erkennungssystem zu testen');
+    this.popover.setVisible(this.canvasContainer.nativeElement, 'Hier könnt ihr eigene Objekte zeichnen, um euer Erkennungssystem zu testen.');
     this.spawnSpaceObjects();
     window.requestAnimationFrame(this.loop.bind(this));
   }
