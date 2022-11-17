@@ -5,11 +5,12 @@
   z-index: 10;
 }
 .drawingCanvas{
-  border-style: solid;
-  border: 5px;
-  border-color: lightblue;
+  //border-style: solid;
+  //border: 5px;
+  //border-color: lightblue;
   background-color: black;
   z-index: 999;
+  border: #7F7764 solid 1px;
 }
 
 #canvas {
