@@ -134,7 +134,11 @@ export class TrainingComponent implements OnInit {
       if (this.step > 5) {
         this.resetRatings();
         this.step = 0;
-        this.epoch += this.skip;
+        if (this.epoch + this.skip > 1000){
+          this.epoch = 1000
+        } else {
+          this.epoch += this.skip;
+        }
         this.updateParameters()
       }
       this.prevTime = time;
