@@ -14,7 +14,8 @@
     <h3 style="margin: 0; text-align: center">Das "Gehirn" unserer KI</h3>
     <h3 style="margin: 0; margin-top: 10px; text-align: center">Mit diesem Künstlichen Neuronalen Netzwerk<br> und den von uns klassifizierten Bildern <br>kann die KI nun trainieren!<br>Beobachtet die KI beim Training und wie sich das <br>Neuronale Netz verändert.</h3> -->
     <div style="text-align: center; margin-top: 10px;" >
-      <wot-button style="text-align: center" (press)="startTraining()" [hidden]="stage > 0">TRAINING STARTEN</wot-button>    
+      <wot-button slot="fill" (press)="startTraining()" [disabled]="stage != 0" *ngIf="stage < 2">TRAINING STARTEN</wot-button>   
+      <wot-button slot="fill" (press)="startTraining()" [disabled]="stage != 2" *ngIf="stage >= 2 && stage < 4">TRAINING FORTSETZEN</wot-button> 
     </div>
     <div #popoverTarget2></div>
     <neural-net-sim #neuralNet></neural-net-sim>
@@ -32,7 +33,8 @@
       </wot-row>
       <wot-row>
         <div class="info-text" *ngIf="stage >= 2">
-          <!--          <p *ngIf="stage === 2">HINWEIS: Das Training des Modells ist rechenintensiv und entsprechend sehr langsam. Daher beschleunigen wir das Ganze jetzt.</p>-->
+          <p style="color: red;"*ngIf="stage === 2">HINWEIS: Das Training des Modells ist rechenintensiv und deswegen sehr langsam. Daher beschleunigen wir das Ganze jetzt.</p>
+          <p style="color: red;"*ngIf="stage === 2">Klickt dafür auf „TRAINING FORTSETZEN“!</p>
           <!--          <p *ngIf="stage > 2 && epoch <= 200">Beschleunigung: {{2/delayFactor}}x</p>-->
           <p *ngIf="epoch > 3">
             HINWEIS: Das Training des Modells ist rechenintensiv und deswegen sehr langsam. Daher beschleunigen wir das

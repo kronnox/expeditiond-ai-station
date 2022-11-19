@@ -200,7 +200,7 @@ export class TrainingComponent implements OnInit {
     } else if (this.stage === 1 && this.epoch === 3) {
       this.step = -1;
       this.stage = 2;
-      // return false;
+      return false;
     } else if (this.stage === 2 && this.epoch === 3) {
       this.stage = 3;
     } else if (this.stage === 3 && this.epoch >= 1000) {
