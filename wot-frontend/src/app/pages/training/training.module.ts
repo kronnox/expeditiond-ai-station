@@ -7,7 +7,7 @@ import {LayoutModule} from "../../common/layout/layout.module";
 import {BarsModule} from "../../common/bars/bars.module";
 import {ButtonsModule} from "../../common/buttons/buttons.module";
 import { NeuralNetSimComponent } from './neural-net-sim/neural-net-sim.component';
-
+import { PopoverModule } from 'src/app/common/popover/popover.module';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import { NeuralNetSimComponent } from './neural-net-sim/neural-net-sim.component
     TrainingRoutingModule,
     LayoutModule,
     BarsModule,
-    ButtonsModule
+    ButtonsModule,
+    PopoverModule
   ]
 })
 export class TrainingModule { }

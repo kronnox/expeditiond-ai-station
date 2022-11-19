@@ -1,25 +1,28 @@
 <div class="wot-overlay">
   <wot-container>
-    <div class="container img" [@.disabled]="epoch > 10">
+    <div class="container img" [@.disabled]="epoch > 10" #popoverTarget1>
       <div class="image-inner-container" [@imageAnimation]="{value: images, params: {time: this.delayFactor*0.1}}">
         <span *ngFor="let image of images; let i=index;">
           <img class="img-data" src="{{image.imagePath}}" [@colorAnimation]="ratings[i]" />
         </span>
       </div>
     </div>
+    <div #popoverTarget3></div>
   </wot-container>
   <wot-column>
     <h1 style="margin: 6px; text-align: center">Unser Neuronales Netz</h1>
     <h3 style="margin: 0; text-align: center">Das "Gehirn" unserer KI</h3>
-    <h3 style="margin: 0; margin-top: 10px; text-align: center">Mit diesem Künstlichen Neuronalen Netzwerk und den von uns klassifizierten Bildern kann die KI nun trainieren! Beobachtet die KI beim Training und wie sich das Neuronale Netz verändert.</h3>
+    <h3 style="margin: 0; margin-top: 10px; text-align: center">Mit diesem Künstlichen Neuronalen Netzwerk<br> und den von uns klassifizierten Bildern <br>kann die KI nun trainieren!<br>Beobachtet die KI beim Training und wie sich das <br>Neuronale Netz verändert.</h3> -->
     <div style="text-align: center; margin-top: 10px;" >
       <wot-button style="text-align: center" (press)="startTraining()" [hidden]="stage > 0">TRAINING STARTEN</wot-button>    
     </div>
+    <div #popoverTarget2></div>
     <neural-net-sim #neuralNet></neural-net-sim>
+    <div #popoverTarget4></div>
   </wot-column>
   <wot-container>
     <div class="container">
-      <wot-row>
+      <wot-row #popoverTarget5>
         <wot-progress-bar height="24px" width="400px" [label]="'Epoche '+this.epoch+'/1000'" [progress]="this.epoch"
           [total]="1000" [animationSpeed]="1000*delayFactor"></wot-progress-bar>
       </wot-row>
@@ -39,7 +42,7 @@
         </div>
       </wot-row>
       <div style="position: absolute; bottom: 48px; width: calc(100% - 96px)">
-        <wot-row>
+        <wot-row popoverTarget6>
           <h2>Genauigkeit: {{accuracy | number: '1.0-2'}} %</h2>
         </wot-row>
         <wot-row>
@@ -57,3 +60,11 @@
   Ihr habt euer erstes Neuronales Netz trainiert. Nun müsst ihr dem Abwehrsystem noch sagen, was es mit den erkannten
   Objekten tun soll.
 </wot-success-overlay>
+
+<wot-popover #popover1></wot-popover>
+<wot-popover #popover2></wot-popover>
+<wot-popover #popover3></wot-popover>
+<wot-popover #popover4></wot-popover>
+<wot-popover #popover5></wot-popover>
+<wot-popover #popover6></wot-popover>
+<wot-popover #popover7></wot-popover>

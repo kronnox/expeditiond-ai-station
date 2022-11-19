@@ -45,21 +45,40 @@ export class WotPopoverComponent {
   public text: string = '';
 
   public active: boolean = false;
+  
+  public grey: boolean = false;
 
   constructor() { }
 
-  public setVisible(element: Element, txt: string): void {
+  public setVisible(element: Element, txt: string, isBottom: boolean = false, isLeft: boolean = false, isRight: boolean = false): void {
     this.text = txt;
     setTimeout(()=> {
       const popoverDomRect = this.popover.nativeElement.getBoundingClientRect();
       const targetDomRect = element.getBoundingClientRect();
-      this.top = targetDomRect.y - (popoverDomRect.height + 10);
-      this.left = (targetDomRect.x + (targetDomRect.width / 2)) - ((popoverDomRect.width) / 2);
-      this.active = true;
+      //TODO implement this propperly
+      if (isBottom){
+        this.top = 0;
+      } else {
+        this.top = targetDomRect.y - (popoverDomRect.height + 10);        
+      }
+      if ( isLeft ){
+        this.left = 0;
+      } else if ( isRight ){
+        this.left = 50;
+      } else {
+        this.left = (targetDomRect.x + (targetDomRect.width / 2)) - ((popoverDomRect.width) / 2);
+      }
+      this.active = true;      
+      this.grey = false;
     }, 200);
   }
 
   public setInvisible(): void {
     this.active = false;
+  }
+
+  public setGrey(): void {
+    // TODO: Change color
+    this.grey = true;
   }
 }

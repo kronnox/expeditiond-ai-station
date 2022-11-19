@@ -1,10 +1,11 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {ImageService} from "../../shared/image.service";
 import {ImageObject} from "../../drag-and-drop/model/image/image-object";
 import {animate, keyframes, query, stagger, state, style, transition, trigger} from "@angular/animations";
 import {NeuralNetSimComponent} from "./neural-net-sim/neural-net-sim.component";
 import {Router} from "@angular/router";
 import {WotSuccessOverlayComponent} from "../../common/layout/wot-success-overlay/wot-success-overlay.component";
+import { WotPopoverComponent } from 'src/app/common/popover/wot-popover/wot-popover.component';
 
 export const imageAnimation = trigger('imageAnimation', [
   transition('* => *', [
@@ -54,6 +55,33 @@ export class TrainingComponent implements OnInit {
 
   private worldFormular: number[][] = [[0,0,0],[0,0,0],[0,0,0]];
 
+ 
+  @ViewChild('popover1') public popover1: WotPopoverComponent;
+  @ViewChild('popover2') public popover2: WotPopoverComponent;
+  @ViewChild('popover3') public popover3: WotPopoverComponent;
+  @ViewChild('popover4') public popover4: WotPopoverComponent;
+  @ViewChild('popover5') public popover5: WotPopoverComponent;
+  @ViewChild('popover6') public popover6: WotPopoverComponent;
+  @ViewChild('popover7') public popover7: WotPopoverComponent;
+ 
+  @ViewChild('popoverTarget1') popoverTarget1: ElementRef;
+  @ViewChild('popoverTarget2') popoverTarget2: ElementRef;
+  @ViewChild('popoverTarget3') popoverTarget3: ElementRef;
+  @ViewChild('popoverTarget4') popoverTarget4: ElementRef;
+  @ViewChild('popoverTarget5') popoverTarget5: ElementRef;
+  @ViewChild('popoverTarget6') popoverTarget6: ElementRef;
+  @ViewChild('neuralNet') popoverTarget7: ElementRef;
+
+  private descriptions: string[] = [
+    '1. Ein Set aus Bildern wird geladen.',
+    '2. Das Neuronale Netzwerk berechnet, um welches Motiv es sich vermutlich handelt.',
+    '3. Das Ergebnis des Netzwerks wird mit der Klassifizierung abgeglichen: Grün = KI hat das Bild der richtigen Kategorie zugeordnet, Rot = KI hat das Bild falsch zugeordnet.',
+    '4. Das Neuronale Netz wird angepasst: Verbindungen zwischen Neuronen, die zu richtigen Lösungen geführt haben, werden stärker, andere schwächer.',
+    'Die Schritte 1 bis 4 werden 1000x wiederholt. Die Wiederholungen heißen Epochen. Je öfter man etwas wiederholt, desto besser trainiert man es! Das ist beim Menschen so, und auch bei der KI.',
+    'Die Genauigkeit des Neuronalen Netzwerks steigt mit zunehmendem Training.',
+    'Das Neuronale Netz ist unserem Gehirn nachempfunden. Auch beim menschlichen Gehirn werden Verbindungen zwischen Neuronen, die oft genutzt werden, immer stärker und andere dafür schwächer. Egal, ob wir eine Sprache lernen, ein Instrument üben oder ein Spiel immer wieder zocken. So werden wir immer besser. Genauso ist es bei der KI, die die Bildererkennung trainiert.'
+  ];
+
   constructor(private router: Router, private imageService: ImageService) { }
 
   public ngOnInit(): void {
@@ -66,7 +94,7 @@ export class TrainingComponent implements OnInit {
   }
 
   public async startTraining(): Promise<void> {
-    window.requestAnimationFrame(this.loop.bind(this));
+    window.requestAnimationFrame(this.loop.bind(this));    
   }
 
   private loop(time: number): void {
@@ -88,13 +116,16 @@ export class TrainingComponent implements OnInit {
       case 0:
         this.updateImages();
         iterateStep = true;
+        if (this.epoch < 3) {
+          this.showPopup(1);
+        }
         break;
       case 1:
         if (elapsed < 1000*this.delayFactor) {
           break;
         }
         if (this.epoch < 3) {
-          this.neuralNet.showPulse();
+          this.neuralNet.showPulse();          
         }
         iterateStep = true;
         break;
@@ -105,11 +136,17 @@ export class TrainingComponent implements OnInit {
         if (this.epoch < 10) {
           this.generateRatings();
         }
+        if (this.epoch < 3) {
+          this.showPopup(2);
+        }
         iterateStep = true;
         break;
       case 3:
         if (elapsed < 2000*this.delayFactor) {
           break;
+        }
+        if (this.epoch < 3) {
+          this.showPopup(3);
         }
         this.weltformel_2_0();
         iterateStep = true;
@@ -117,6 +154,9 @@ export class TrainingComponent implements OnInit {
       case 4:
         if (elapsed < 1000*this.delayFactor) {
           break;
+        }
+        if (this.epoch < 4) {
+          this.showPopup(4);
         }
         this.neuralNet.update(this.epoch);
         iterateStep = true;
@@ -222,5 +262,53 @@ export class TrainingComponent implements OnInit {
 
   public continue(): void {
     void this.router.navigate(['/data-grouping']);
+  }
+
+  private setAllPopoversGrey(): void {
+    this.popover1.setGrey();
+    this.popover2.setGrey();
+    this.popover3.setGrey();
+    this.popover4.setGrey();
+    this.popover5.setGrey();
+    this.popover6.setGrey();
+    this.popover7.setGrey();
+  }
+
+  public showPopup(i: number): void {
+    console.log(i);
+    switch ( i ) {
+      case 1:
+        this.setAllPopoversGrey();
+        this.popover1.setVisible(this.popoverTarget1.nativeElement, this.descriptions[i-1]);
+        break;
+      case 2:
+        this.setAllPopoversGrey();
+        this.popover2.setVisible(this.popoverTarget2.nativeElement, this.descriptions[i-1], false, true);
+        break;
+      case 3:
+        this.setAllPopoversGrey();
+        this.popover3.setVisible(this.popoverTarget3.nativeElement, this.descriptions[i-1], true);
+        break;
+      case 4:
+        this.setAllPopoversGrey();
+        this.popover4.setVisible(this.popoverTarget4.nativeElement, this.descriptions[i-1], true, true);
+        break;
+      case 5:
+        this.setAllPopoversGrey();
+        this.popover5.setVisible(this.popoverTarget5.nativeElement, this.descriptions[i-1]);
+        break;
+      case 6:
+        this.setAllPopoversGrey();
+        this.popover6.setVisible(this.popoverTarget6.nativeElement, this.descriptions[i-1]);
+        break;
+      case 7:
+        this.setAllPopoversGrey();
+        this.popover7.setVisible(this.popoverTarget7.nativeElement, this.descriptions[i-1], true, false, true);
+        break;
+      default:
+        //
+        break;
+    }
+    
   }
 }

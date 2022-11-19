@@ -1,4 +1,4 @@
 
-<div [@popoverInOut]="top+left" [ngStyle]="{'top': top + 'px', 'left': left + 'px', 'width': width + 'px', 'padding': padding + 'px', 'visibility': active ? 'visible' : 'hidden', 'z-index': 100}" class="popover" #popover>
+<div [@popoverInOut]="top+left" [ngStyle]="{'top': top + 'px', 'left': left + 'px', 'width': width + 'px', 'padding': padding + 'px', 'visibility': active ? 'visible' : 'hidden', 'z-index': 100}" [ngClass]="grey ? 'popover grey' : 'popover'" #popover>
   {{text}}
 </div>
