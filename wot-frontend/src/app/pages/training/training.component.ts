@@ -70,7 +70,7 @@ export class TrainingComponent implements OnInit {
   @ViewChild('popoverTarget4') popoverTarget4: ElementRef;
   @ViewChild('popoverTarget5') popoverTarget5: ElementRef;
   @ViewChild('popoverTarget6') popoverTarget6: ElementRef;
-  @ViewChild('neuralNet') popoverTarget7: ElementRef;
+  @ViewChild('popoverTarget7') popoverTarget7: ElementRef;
 
   private descriptions: string[] = [
     '1. Ein Set aus Bildern wird geladen.',
@@ -189,6 +189,17 @@ export class TrainingComponent implements OnInit {
 
   private updateParameters(): void {
     if (this.epoch === 3) {
+      this.showPopup(4);
+      this.delayFactor = 0.5;      
+    } else if (this.epoch === 4){
+      this.showPopup(5);
+    } else if (this.epoch === 10) { 
+      this.showPopup(6);     
+      this.delayFactor = 0.1;
+    } else if (this.epoch === 25) {
+      this.showPopup(7);
+      this.delayFactor = 0.01;
+    } else if (this.epoch === 200) {      
       this.delayFactor = 0;
       this.skip = 5;
     }
@@ -277,6 +288,13 @@ export class TrainingComponent implements OnInit {
   public showPopup(i: number): void {
     console.log(i);
     switch ( i ) {
+      case 0:
+        // show 1-4
+        this.popover1.setVisible(this.popoverTarget1.nativeElement, this.descriptions[i-1]);  
+        this.popover2.setVisible(this.popoverTarget2.nativeElement, this.descriptions[i-1], false, true);  
+        this.popover3.setVisible(this.popoverTarget3.nativeElement, this.descriptions[i-1], true);
+        this.popover4.setVisible(this.popoverTarget4.nativeElement, this.descriptions[i-1], true, true);
+        break;
       case 1:
         this.setAllPopoversGrey();
         this.popover1.setVisible(this.popoverTarget1.nativeElement, this.descriptions[i-1]);
@@ -294,15 +312,12 @@ export class TrainingComponent implements OnInit {
         this.popover4.setVisible(this.popoverTarget4.nativeElement, this.descriptions[i-1], true, true);
         break;
       case 5:
-        this.setAllPopoversGrey();
         this.popover5.setVisible(this.popoverTarget5.nativeElement, this.descriptions[i-1]);
         break;
       case 6:
-        this.setAllPopoversGrey();
         this.popover6.setVisible(this.popoverTarget6.nativeElement, this.descriptions[i-1]);
         break;
       case 7:
-        this.setAllPopoversGrey();
         this.popover7.setVisible(this.popoverTarget7.nativeElement, this.descriptions[i-1], true, false, true);
         break;
       default:
