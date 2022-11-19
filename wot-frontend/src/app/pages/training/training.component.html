@@ -10,7 +10,11 @@
   </wot-container>
   <wot-column>
     <h1 style="margin: 6px; text-align: center">Unser Neuronales Netz</h1>
-    <h3 style="margin: 0; text-align: center">Schaut dabei zu, wie es trainiert wird!</h3>
+    <h3 style="margin: 0; text-align: center">Das "Gehirn" unserer KI</h3>
+    <h3 style="margin: 0; margin-top: 10px; text-align: center">Mit diesem Künstlichen Neuronalen Netzwerk und den von uns klassifizierten Bildern kann die KI nun trainieren! Beobachtet die KI beim Training und wie sich das Neuronale Netz verändert.</h3>
+    <div style="text-align: center; margin-top: 10px;" >
+      <wot-button style="text-align: center" (press)="startTraining()" [hidden]="stage > 0">TRAINING STARTEN</wot-button>    
+    </div>
     <neural-net-sim #neuralNet></neural-net-sim>
   </wot-column>
   <wot-container>

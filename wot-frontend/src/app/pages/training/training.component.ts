@@ -62,7 +62,7 @@ export class TrainingComponent implements OnInit {
 
     this.prevTime = 0;
 
-    void this.startTraining();
+    //void this.startTraining();
   }
 
   public async startTraining(): Promise<void> {
