@@ -7,7 +7,7 @@
     font-size: 18px;
   }
 
-.popover::before {
+.popover-arrow-bottom::before {
     position: absolute;
     bottom: -10px;
     content: "";
@@ -15,6 +15,25 @@
     border-style: solid;
     border-width: 10px 10px 0 10px;
     border-color: var(--color-bg-lighter) transparent transparent transparent;
+}
+.popover-arrow-top::after {
+    position: absolute;
+    top: -20px;
+    content: "";
+    right: calc(50% - 10px);
+    border-style: solid;
+    border-width: 10px 10px 10px 10px;
+    border-color: transparent transparent var(--color-bg-lighter) transparent;
+}
+
+.popover-arrow-top-left::after {
+    position: absolute;
+    top: -20px;
+    content: "";
+    right: calc(50% + 200px);
+    border-style: solid;
+    border-width: 10px 10px 10px 10px;
+    border-color: transparent transparent var(--color-bg-lighter) transparent;
 }
 .grey {
     opacity: 0.5;

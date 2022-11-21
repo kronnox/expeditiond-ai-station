@@ -47,27 +47,59 @@ export class WotPopoverComponent {
   public active: boolean = false;
   
   public grey: boolean = false;
+  public arrowTop: boolean = false;
+  public arrowBottom: boolean = true;
+  public arrowTopLeft: boolean = false;
 
   constructor() { }
 
-  public setVisible(element: Element, txt: string, isBottom: boolean = false, isLeft: boolean = false, isRight: boolean = false): void {
+  public setVisible(element: Element, txt: string, popupNo: number = 0): void {
     this.text = txt;
     setTimeout(()=> {
       const popoverDomRect = this.popover.nativeElement.getBoundingClientRect();
       const targetDomRect = element.getBoundingClientRect();
-      //TODO implement this propperly
-      if (isBottom){
-        this.top = 0;
-      } else {
-        this.top = targetDomRect.y - (popoverDomRect.height + 10);        
+      switch (popupNo) {
+        case 2:
+          this.top = targetDomRect.y + 10;
+          this.left = targetDomRect.x;
+          break;
+        case 3:
+          this.arrowTop = true;
+          this.arrowBottom = false;
+          this.top = 850;
+          this.left = (targetDomRect.x + (targetDomRect.width / 2)) - 215;
+          this.width = 400;
+          break;
+        case 4:
+          this.arrowTop = true;
+          this.arrowBottom = false;
+          this.top = 850;
+          this.left = targetDomRect.x;
+          this.width = 300;
+          break;
+        case 5:
+          this.top = 30;
+          this.left = targetDomRect.x + 75;
+          this.width = 300
+          break;
+        case 6:
+          this.top = targetDomRect.y - 100;
+          this.left = targetDomRect.x;
+          break;
+        case 7:
+          this.arrowTop = false;
+          this.arrowBottom = false;
+          this.arrowTopLeft = true;
+          this.top = 850;
+          this.left = targetDomRect.x + 400;
+          this.width = 600;
+          break;
+        default:
+          this.top = targetDomRect.y - (popoverDomRect.height + 10);
+          this.left = (targetDomRect.x + (targetDomRect.width / 2)) - ((popoverDomRect.width) / 2);
+          break;
       }
-      if ( isLeft ){
-        this.left = 0;
-      } else if ( isRight ){
-        this.left = 50;
-      } else {
-        this.left = (targetDomRect.x + (targetDomRect.width / 2)) - ((popoverDomRect.width) / 2);
-      }
+
       this.active = true;      
       this.grey = false;
     }, 200);
@@ -78,7 +110,6 @@ export class WotPopoverComponent {
   }
 
   public setGrey(): void {
-    // TODO: Change color
     this.grey = true;
   }
 }
