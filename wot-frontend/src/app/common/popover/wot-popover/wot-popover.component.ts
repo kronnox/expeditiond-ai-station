@@ -59,38 +59,42 @@ export class WotPopoverComponent {
       const popoverDomRect = this.popover.nativeElement.getBoundingClientRect();
       const targetDomRect = element.getBoundingClientRect();
       switch (popupNo) {
+        case 1:
+          this.top = targetDomRect.y - 75;
+          this.left = (targetDomRect.x + (targetDomRect.width / 2)) - ((popoverDomRect.width) / 2);
+          break;       
         case 2:
-          this.top = targetDomRect.y + 10;
+          this.top = targetDomRect.y - 30;
           this.left = targetDomRect.x;
           break;
         case 3:
           this.arrowTop = true;
           this.arrowBottom = false;
-          this.top = 850;
+          this.top = 875;
           this.left = (targetDomRect.x + (targetDomRect.width / 2)) - 215;
           this.width = 400;
           break;
         case 4:
           this.arrowTop = true;
           this.arrowBottom = false;
-          this.top = 850;
+          this.top = 875;
           this.left = targetDomRect.x;
           this.width = 300;
           break;
         case 5:
-          this.top = 30;
+          this.top = 50;
           this.left = targetDomRect.x + 75;
           this.width = 300
           break;
         case 6:
-          this.top = targetDomRect.y - 100;
+          this.top = targetDomRect.y - 110;
           this.left = targetDomRect.x;
           break;
         case 7:
           this.arrowTop = false;
           this.arrowBottom = false;
           this.arrowTopLeft = true;
-          this.top = 850;
+          this.top = 875;
           this.left = targetDomRect.x + 400;
           this.width = 600;
           break;

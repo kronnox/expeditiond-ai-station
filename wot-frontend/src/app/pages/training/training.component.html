@@ -17,6 +17,7 @@
       <wot-button slot="fill" (press)="startTraining()" [disabled]="stage != 0" *ngIf="stage < 2">TRAINING STARTEN</wot-button>   
       <wot-button slot="fill" (press)="startTraining()" [disabled]="stage != 2" *ngIf="stage >= 2 && stage < 4">TRAINING FORTSETZEN</wot-button> 
     </div>
+    <div style="margin-top: 40px;"></div>
     <div #popoverTarget2 #popoverTarget4 #popoverTarget7></div>
     <neural-net-sim #neuralNet></neural-net-sim>
   </wot-column>
