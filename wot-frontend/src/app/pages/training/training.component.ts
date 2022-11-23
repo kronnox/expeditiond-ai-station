@@ -226,6 +226,7 @@ export class TrainingComponent implements OnInit {
     } else if (this.stage === 2 && this.epoch === 3) {
       this.stage = 3;
     } else if (this.stage === 3 && this.epoch >= 1000) {
+      this.setAllPopoversInvisible();
       this.stage = 4;
       return false;
     }
@@ -294,6 +295,16 @@ export class TrainingComponent implements OnInit {
     this.popover5.setGrey();
     this.popover6.setGrey();
     this.popover7.setGrey();
+  }
+
+  private setAllPopoversInvisible(): void {
+    this.popover1.setInvisible();
+    this.popover2.setInvisible();
+    this.popover3.setInvisible();
+    this.popover4.setInvisible();
+    this.popover5.setInvisible();
+    this.popover6.setInvisible();
+    this.popover7.setInvisible();
   }
 
   public showPopup(i: number): void {
