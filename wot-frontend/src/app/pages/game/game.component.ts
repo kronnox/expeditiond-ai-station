@@ -48,6 +48,8 @@ export class GameComponent implements AfterViewInit {
 
     private grouping: number[];
 
+    private timer: ReturnType<typeof setInterval>;
+
     public demage: number[][] = [
         [0, 1, 1],
         [1, 0, 1],
@@ -116,9 +118,11 @@ export class GameComponent implements AfterViewInit {
       window.requestAnimationFrame(this.loop.bind(this));
 
       if(this.truck.health <= 0) {
+          clearInterval(this.timer);
           this.gamestatus = 2;
       } else if (this.survivedObjects >= 45) {
           this.gamestatus = 1;
+          clearInterval(this.timer);
       }
 
   }
@@ -188,7 +192,7 @@ export class GameComponent implements AfterViewInit {
   }
 
   private spawnSpaceObjects(){
-      setInterval(() => {
+      this.timer = setInterval(() => {
           const velocity = Math.random() + 0.5;
 
           let x: number;
