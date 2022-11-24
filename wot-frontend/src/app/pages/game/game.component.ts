@@ -89,6 +89,7 @@ export class GameComponent implements AfterViewInit {
 
       this._truck = new Truck(this);
       this.initStars(2000);
+      localStorage.setItem('drawn-data','');
   }
 
   public continue(): void {
@@ -197,6 +198,7 @@ export class GameComponent implements AfterViewInit {
 
           let x: number;
           let y: number;
+          let isCustom: Boolean;
           if (Math.random() < 0.5) {
               x = Math.random() < 0.5 ? 0 - GameConfig.spaceObjectSize : this.canvasEl.width + GameConfig.spaceObjectSize;
               y = Math.random() * this.canvasEl.height;
@@ -211,17 +213,26 @@ export class GameComponent implements AfterViewInit {
           let img: ImageObject;
           if(this.customImages.length == 0){
               img = this.imageService.getRandomImage();
+              isCustom = false;
           } else {
               img = this.customImages[0];
               this.customImages.splice(0,1);
+              isCustom = true;
           }
 
           const spaceObject = new SpaceObject(this, x, y, vx, vy, img, GameConfig.spaceObjectSize, GameConfig.spaceObjectSize);
           this.predictObject(spaceObject).then(res => {
             if(spaceObject.imageObject.custom) {
-                const createdImages: ImageObject[] = JSON.parse(localStorage.getItem('created-data') || '[]');
-                createdImages.push(spaceObject.imageObject);
-                localStorage.setItem('created-data', JSON.stringify(createdImages));
+                if ( isCustom ) {
+                    const createdImages: ImageObject[] = JSON.parse(localStorage.getItem('drawn-data') || '[]');
+                    createdImages.push(spaceObject.imageObject);
+                    localStorage.setItem('drawn-data', JSON.stringify(createdImages));
+                } else {
+                    const createdImages: ImageObject[] = JSON.parse(localStorage.getItem('created-data') || '[]');
+                    createdImages.push(spaceObject.imageObject);
+                    localStorage.setItem('created-data', JSON.stringify(createdImages));
+                }
+
             }
               this.objects.push(spaceObject);
               this.survivedObjects++;
