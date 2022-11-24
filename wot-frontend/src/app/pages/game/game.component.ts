@@ -89,7 +89,21 @@ export class GameComponent implements AfterViewInit {
 
       this._truck = new Truck(this);
       this.initStars(2000);
-      localStorage.setItem('drawn-data','');
+      localStorage.setItem('drawn-data','[]');
+      localStorage.setItem('analytics-hits','[]');
+      localStorage.setItem('analytics-actions','[]');
+    // To test the overlay
+    //   this.infoOverlay.setVisible(false);  
+    //   clearInterval(this.timer);
+    //   this.gamestatus = 2;
+    //   localStorage.setItem('analytics-actions','[1,2,3]');
+    //   const createdImages: ImageObject[] = [];
+    //   let obj: ImageObject = this.imageService.getRandomImage()
+    //   obj.label = '0'
+    //   createdImages.push(obj);
+    //   createdImages.push(obj);
+    //   createdImages.push(obj);
+    //   localStorage.setItem('analytics-hits', JSON.stringify(createdImages));
   }
 
   public continue(): void {
@@ -243,9 +257,10 @@ export class GameComponent implements AfterViewInit {
   private async predictObject(spaceObject: SpaceObject){
       await fetch(spaceObject.imageObject.imagePath).then(r => r.blob()).then(blob => this.backendService.predictBlob(blob, spaceObject.imageObject.custom)).then(res => {
           const tempClass = res.indexOf(Math.max(...res));
-          if(tempClass === 7) {
-              console.log(this.worldFormular)
-          }
+        // Not sure what this does so out it goes
+        //   if(tempClass === 7) {
+        //       console.log(this.worldFormular)
+        //   }
           for(let i = 0; i < res.length; i++) {
               res[i] = res[i] - this.worldFormular[tempClass][i];
           }

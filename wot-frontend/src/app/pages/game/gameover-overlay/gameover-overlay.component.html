@@ -10,6 +10,22 @@
   <p *ngIf="win" class="gameover-info">Der Truck hat die Mission erfolgreich abgeschlossen!</p>
   <p *ngIf="win" class="gameover-info">Nun könnt ihr in der Auswertung noch überprüfen, wofür die von euch gezeichneten
     Bilder von der KI gehalten wurden.</p>
+  <div *ngIf="!win">
+    <wot-row *ngFor="let hit of hits; let i = index" [attr.data-index]="i">
+      <wot-column class="hit-list-col">
+        <ion-icon name="heart" class="hit-list-heart" [ngStyle]="{'color': 'red'}"></ion-icon>
+      </wot-column>
+      <wot-column class="hit-list-col">
+        <img src="{{hit.imagePath}}" class="hit-list-img"/>
+      </wot-column>
+      <wot-column class="hit-list-col">
+        <p>wurde indentifiziert als</p>
+      </wot-column>
+      <wot-column class="hit-list-col hit-list-label"><p><b>{{getLabelString(hit.predictedClass)}}</b></p></wot-column>
+      <wot-column class="hit-list-col"><p>und wurde</p></wot-column>
+      <wot-column class="hit-list-col hit-list-label"><p><b>{{getActionString(actions[i])}}</b></p></wot-column>      
+    </wot-row>
+  </div>
   <wot-row *ngIf="!win">
     <wot-button routerLink="/data-overview">Nochmal komplett neu versuchen</wot-button>
   </wot-row>

@@ -124,6 +124,12 @@ export class SpaceObject extends GameObject {
             if(!this.imageObject.custom) {
                 this.game.truck.health -= demage;
                 this.game.applyShake();
+                const dmg: ImageObject[] = JSON.parse(localStorage.getItem('analytics-hits') || '[]');
+                dmg.push(this.imageObject);
+                localStorage.setItem('analytics-hits', JSON.stringify(dmg));
+                const actions: Number[] = JSON.parse(localStorage.getItem('analytics-actions') || '[]');
+                actions.push(this.action);
+                localStorage.setItem('analytics-actions', JSON.stringify(actions));
             }
         }
     }
