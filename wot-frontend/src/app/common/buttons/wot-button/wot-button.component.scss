@@ -56,6 +56,34 @@ ion-icon {
   left: 170%;
   opacity: 0.3;
 }
+
 .btn span {
   z-index: 20;
+}
+
+div.texticon {
+  width: 100%;
+  text-align: center;
+}
+
+.texticon {
+  --ionicon-stroke-width: 20px;
+  font-size: 50px;
+  margin-top: 20px;
+  position: relative;
+}
+
+.texticon-count {
+  position: absolute;
+  font-size: 0.3em;
+  right: 70px;
+  bottom: 22px;
+}
+
+.texticon-label {
+  position: absolute;
+  font-size: 0.15em;
+  right: 42px;
+  bottom: 5px;
+  text-align: center;
 }

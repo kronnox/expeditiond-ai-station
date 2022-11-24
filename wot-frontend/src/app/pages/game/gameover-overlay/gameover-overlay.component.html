@@ -27,15 +27,21 @@
     </wot-row>
   </div>
   <wot-row *ngIf="!win">
-    <wot-button routerLink="/data-overview">Nochmal komplett neu versuchen</wot-button>
-  </wot-row>
-  <wot-row *ngIf="!win">
-    <wot-button routerLink="/data-labeling">Bei Schritt 3 (Klassifizierung) starten</wot-button>
-  </wot-row>
-  <wot-row *ngIf="!win">
-    <wot-button routerLink="/data-grouping">Bei Schritt 5 (Gruppieren) starten</wot-button>
-  </wot-row>
-  <wot-row>
-    <wot-button routerLink="/analytics">Zur Auswertung der Ergebnisse</wot-button>
+    <wot-column class="defeat_button">
+      <wot-button texticon="arrow-undo" routerLink="/data-overview" class="defeat_button">Nochmal komplett<br/>neu versuchen</wot-button>
+    </wot-column>
+    <wot-column class="defeat_button">
+      <wot-button texticon="planet-outline" texticon2="arrow-forward" texticon3="folder-open-outline" texticonCount="1" texticonLabel="Raumschiff" routerLink="/data-labeling" class="defeat_button">Bei Schritt 3 starten<br/>Klassifizierung</wot-button>
+    </wot-column>
+    <wot-column class="defeat_button">
+      <wot-button texticon="planet-outline" texticon2="arrow-forward" texticon3="folder-open-outline" texticonLabel="Abschiessen" texticonCount="3" routerLink="/data-grouping" class="defeat_button">Bei Schritt 5 starten<br/>Gruppieren</wot-button>
+    </wot-column>
+    <wot-column class="defeat_button">
+      <wot-button texticon="bulb" routerLink="/analytics" class="defeat_button">Zur Auswertung <br/>der Ergebnisse</wot-button>
+    </wot-column>
+    
+    
+    
+    
   </wot-row>
 </div>
