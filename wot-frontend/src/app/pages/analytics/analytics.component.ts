@@ -46,7 +46,14 @@ export class AnalyticsComponent implements OnInit {
       this.sortedClasses.push(imageObject.prediction.indexOf(val));
     });
     this.predictionIndex = imageObject.predictedClass;
-    this.selectedColor = (imageObject.predictedClass === imageObject.labeledClass) ? 'var(--color-success)' : 'var(--color-danger)';
+    
+    imageObject.label = (this.backendService.classes[imageObject.predictedClass] + " " + (imageObject.prediction[imageObject.predictedClass] * 100).toFixed(2) + "%");
+    if (imageObject.labeledClass) {
+      this.selectedColor = (imageObject.predictedClass === imageObject.labeledClass) ? 'var(--color-success)' : 'var(--color-danger)';
+    } else {
+      this.selectedColor = 'white';
+    }
+    
   }
 
   public getClassColor(index: number) {
