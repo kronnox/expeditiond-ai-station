@@ -137,7 +137,8 @@ export class TrainingComponent implements OnInit {
           break;
         }
         if (this.epoch < 3) {
-          this.neuralNet.showPulse();          
+          this.neuralNet.showPulse();
+          this.showPopup(2);          
         }
         iterateStep = true;
         break;
@@ -149,7 +150,7 @@ export class TrainingComponent implements OnInit {
           this.generateRatings();
         }
         if (this.epoch < 3) {
-          this.showPopup(2);
+          this.showPopup(3);
         }
         iterateStep = true;
         break;
@@ -158,7 +159,7 @@ export class TrainingComponent implements OnInit {
           break;
         }
         if (this.epoch < 3) {
-          this.showPopup(3);
+          this.showPopup(4);
         }
         this.weltformel_2_0();
         iterateStep = true;
@@ -166,9 +167,6 @@ export class TrainingComponent implements OnInit {
       case 4:
         if (elapsed < 1000*this.delayFactor) {
           break;
-        }
-        if (this.epoch < 3) {
-          this.showPopup(4);
         }
         this.neuralNet.update(this.epoch);
         iterateStep = true;
