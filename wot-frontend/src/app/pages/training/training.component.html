@@ -16,6 +16,7 @@
     <div style="text-align: center; margin-top: 10px;" >
       <wot-button slot="fill" (press)="startTraining()" [disabled]="stage != 0" *ngIf="stage < 2">TRAINING STARTEN</wot-button>   
       <wot-button slot="fill" (press)="startTraining()" [disabled]="stage != 2" *ngIf="stage >= 2 && stage < 4">TRAINING FORTSETZEN</wot-button> 
+      <wot-button slot="fill" (press)="successOverlay.setVisible(); setAllPopoversInvisible();" *ngIf="stage >= 4">TRAINING ABSCHLIESSEN</wot-button>
     </div>
     <div style="margin-top: 40px;"></div>
     <div #popoverTarget2 #popoverTarget4 #popoverTarget7></div>
@@ -28,14 +29,18 @@
           [total]="1000" [animationSpeed]="1000*delayFactor"></wot-progress-bar>
       </wot-row>
       <wot-row>
-        <wot-progress-bar height="24px" width="400px" [label]="getStepLabel()" [progress]="this.step" [total]="5"
+        <wot-progress-bar height="24px" width="400px" [label]="getStepLabel()" [progress]="getProgress()" [total]="5"
           [animationSpeed]="1000*delayFactor"></wot-progress-bar>
       </wot-row>
       <wot-row>
         <div class="info-text" *ngIf="stage >= 2">
           <p style="color: red;"*ngIf="stage === 2">HINWEIS: Das Training des Modells ist rechenintensiv und deswegen sehr langsam. Daher beschleunigen wir das Ganze jetzt.</p>
           <p style="color: red;"*ngIf="stage === 2">Klickt dafür auf „TRAINING FORTSETZEN“!</p>
-          <p *ngIf="stage > 2 && epoch <= 200">Beschleunigung: {{2/delayFactor}}x</p>
+          <p *ngIf="stage > 2 && epoch <= 200">
+            HINWEIS: Das Training des Modells ist rechenintensiv und deswegen sehr langsam. Daher beschleunigen wir das
+            Ganze jetzt.<br><br>
+            Beschleunigung: {{2/delayFactor}}x
+          </p>
           <p *ngIf="epoch > 200">
             HINWEIS: Das Training des Modells ist rechenintensiv und deswegen sehr langsam. Daher beschleunigen wir das
             Ganze jetzt.<br><br>
@@ -50,8 +55,7 @@
         <wot-row>
           <!--          <wot-button slot="fill" (press)="startTraining()" [disabled]="stage != 0" *ngIf="stage < 2">Training Starten</wot-button>-->
           <!--          <wot-button slot="fill" (press)="startTraining()" [disabled]="stage != 2" *ngIf="stage >= 2 && stage < 4">TRAINING FORTSETZEN</wot-button>-->
-          <wot-button slot="fill" (press)="successOverlay.setVisible()" *ngIf="stage >= 4">TRAINING ABSCHLIESSEN
-          </wot-button>
+
         </wot-row>
       </div>
     </div>

@@ -224,7 +224,9 @@ export class TrainingComponent implements OnInit {
     } else if (this.stage === 2 && this.epoch === 3) {
       this.stage = 3;
     } else if (this.stage === 3 && this.epoch >= 1000) {
-      this.setAllPopoversInvisible();
+      // Alle Textboxen am Ende weg
+      //this.setAllPopoversInvisible();
+      this.step = 6;
       this.stage = 4;
       return false;
     }
@@ -233,6 +235,11 @@ export class TrainingComponent implements OnInit {
 
   private updateImages(): void {
     this.images = this.imageService.getRandomImages(8);
+  }
+
+
+  public getProgress(): number {
+    return Math.min(this.step, 5);
   }
 
   public getStepLabel(): string {
@@ -251,6 +258,8 @@ export class TrainingComponent implements OnInit {
         return 'Neuronales Netz anpassen...';
       case 5:
         return 'Epoche abgeschlossen!'
+      case 6:
+        return 'Training beendet!'
     }
     return "N/A";
   }
@@ -295,7 +304,7 @@ export class TrainingComponent implements OnInit {
     this.popover7.setGrey();
   }
 
-  private setAllPopoversInvisible(): void {
+  public setAllPopoversInvisible(): void {
     this.popover1.setInvisible();
     this.popover2.setInvisible();
     this.popover3.setInvisible();
