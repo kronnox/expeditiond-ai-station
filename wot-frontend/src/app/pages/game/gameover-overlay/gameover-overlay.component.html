@@ -26,14 +26,14 @@
       <wot-column class="hit-list-col hit-list-label"><p><b>{{getActionString(actions[i])}}</b></p></wot-column>      
     </wot-row>
   </div>
-  <wot-row *ngIf="!win">
-    <wot-column class="defeat_button">
+  <wot-row>
+    <wot-column class="defeat_button" *ngIf="!win">
       <wot-button texticon="arrow-undo" routerLink="/data-overview" class="defeat_button">Nochmal komplett<br/>neu versuchen</wot-button>
     </wot-column>
-    <wot-column class="defeat_button">
+    <wot-column class="defeat_button" *ngIf="!win">
       <wot-button texticon="planet-outline" texticon2="arrow-forward" texticon3="folder-open-outline" texticonCount="1" texticonLabel="Raumschiff" routerLink="/data-labeling" class="defeat_button">Bei Schritt 3 starten<br/>Klassifizierung</wot-button>
     </wot-column>
-    <wot-column class="defeat_button">
+    <wot-column class="defeat_button" *ngIf="!win">
       <wot-button texticon="planet-outline" texticon2="arrow-forward" texticon3="folder-open-outline" texticonLabel="Abschiessen" texticonCount="3" routerLink="/data-grouping" class="defeat_button">Bei Schritt 5 starten<br/>Gruppieren</wot-button>
     </wot-column>
     <wot-column class="defeat_button">
