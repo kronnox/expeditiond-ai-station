@@ -47,6 +47,7 @@ export class DataLabelingComponent implements OnInit {
     }
     const weight = 0.5;
     let imageObjects: ImageObject[] = [];
+    let imageObjectsAll: ImageObject[] = [];
     ddc.labels.forEach(element => {
       /*if(element.children.length === 0) {
         for(let i = 0; i < worldFormular.length; i++) {
@@ -78,7 +79,7 @@ export class DataLabelingComponent implements OnInit {
         } else {
           imageObjects.push(item.imageObject);
         }
-
+        imageObjectsAll.push(item.imageObject);
         if(item.imageObject.predictedClass != item.imageObject.labeledClass) {
           //worldFormular[item.imageObject.labeledClass][item.imageObject.predictedClass] -= weight;
           //worldFormular[item.imageObject.labeledClass][item.imageObject.labeledClass] += weight;
@@ -89,6 +90,7 @@ export class DataLabelingComponent implements OnInit {
     });
     this.successOverlay.setVisible();
     localStorage.setItem('labeled-data', JSON.stringify(imageObjects));
+    localStorage.setItem('labeled-data-all', JSON.stringify(imageObjectsAll));
     localStorage.setItem('world-formular', JSON.stringify(worldFormular));
   }
 
