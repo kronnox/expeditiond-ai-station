@@ -12,18 +12,20 @@
     Bilder von der KI gehalten wurden.</p>
   <div *ngIf="!win">
     <wot-row *ngFor="let hit of hits; let i = index" [attr.data-index]="i">
+      <div class="hit-list-row">
       <wot-column class="hit-list-col">
-        <ion-icon name="heart" class="hit-list-heart" [ngStyle]="{'color': 'red'}"></ion-icon>
+        <ion-icon name="heart-outline" class="hit-list-heart" [ngStyle]="{'color': 'red'}"></ion-icon>
       </wot-column>
       <wot-column class="hit-list-col">
         <img src="{{hit.imagePath}}" class="hit-list-img"/>
       </wot-column>
       <wot-column class="hit-list-col">
-        <p>wurde indentifiziert als</p>
+        <p>wurde identifiziert als</p>
       </wot-column>
       <wot-column class="hit-list-col hit-list-label"><p><b>{{getLabelString(hit.predictedClass)}}</b></p></wot-column>
       <wot-column class="hit-list-col"><p>und wurde</p></wot-column>
       <wot-column class="hit-list-col hit-list-label"><p><b>{{getActionString(actions[i])}}</b></p></wot-column>      
+    </div>
     </wot-row>
   </div>
   <wot-row>
@@ -34,7 +36,7 @@
       <wot-button texticon="planet-outline" texticon2="arrow-forward" texticon3="folder-open-outline" texticonCount="1" texticonLabel="Raumschiff" routerLink="/data-labeling" class="defeat_button">Bei Schritt 3 starten<br/>Klassifizierung</wot-button>
     </wot-column>
     <wot-column class="defeat_button" *ngIf="!win">
-      <wot-button texticon="planet-outline" texticon2="arrow-forward" texticon3="folder-open-outline" texticonLabel="Abschiessen" texticonCount="3" routerLink="/data-grouping" class="defeat_button">Bei Schritt 5 starten<br/>Gruppieren</wot-button>
+      <wot-button texticon="planet-outline" texticon2="arrow-forward" texticon3="folder-open-outline" texticonLabelOne="Raumschiff" texticonLabel="Abschiessen" texticonCount="3" routerLink="/data-grouping" class="defeat_button">Bei Schritt 5 starten<br/>Gruppieren</wot-button>
     </wot-column>
     <wot-column class="defeat_button">
       <wot-button texticon="bulb" routerLink="/analytics" class="defeat_button">Zur Auswertung <br/>der Ergebnisse</wot-button>

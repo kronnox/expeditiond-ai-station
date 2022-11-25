@@ -76,14 +76,23 @@ div.texticon {
 .texticon-count {
   position: absolute;
   font-size: 0.3em;
-  right: 70px;
+  right: 60px;
   bottom: 22px;
 }
 
 .texticon-label {
   position: absolute;
   font-size: 0.15em;
-  right: 42px;
+  right: 32px;
+  bottom: 5px;
+  text-align: center;
+}
+
+.texticon-label-left {
+  border: solid 0.25px;
+  position: absolute;
+  font-size: 0.15em;
+  left: 35px;
   bottom: 5px;
   text-align: center;
 }

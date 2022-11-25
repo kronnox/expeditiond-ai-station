@@ -12,10 +12,11 @@
     <ion-icon name="{{icon}}" class="btn-icon" *ngIf="icon"></ion-icon>
     <div *ngIf="texticon" class="texticon">
       <ion-icon name="{{texticon}}" class="texticon" *ngIf="texticon"></ion-icon>
-      <ion-icon name="{{texticon2}}" class="texticon" *ngIf="texticon2"></ion-icon>
+      <ion-icon name="{{texticon2}}" style="margin-inline: 10px;"class="texticon" *ngIf="texticon2"></ion-icon>
       <ion-icon name="{{texticon3}}" class="texticon" *ngIf="texticon3"></ion-icon>
       <div class="texticon-count" *ngIf="texticonCount">{{texticonCount}}</div>
       <div class="texticon-label" *ngIf="texticonLabel">{{texticonLabel}}</div>
+      <div class="texticon-label-left" *ngIf="texticonLabelOne">{{texticonLabelOne}}</div>
     </div>
   </span>
 </a>

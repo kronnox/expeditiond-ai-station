@@ -47,11 +47,13 @@ $glow: rgba(#fff, 0.5);
   --ionicon-stroke-width: 50px;
   font-size: 50px;
 }
-
-.hit-list-col {
+.hit-list-row {
   background-color: var(--color-bg-dark);
   border: var(--color-primary-light);
   border-style: solid;
+}
+
+.hit-list-col {
   height: 75px;
   vertical-align: middle;
   margin: 0 10px 0 10px;  
@@ -65,7 +67,7 @@ $glow: rgba(#fff, 0.5);
 }
 
 .hit-list-label {
-  width: 400px;
+  width: 300px;
 }
 
 .defeat_button {

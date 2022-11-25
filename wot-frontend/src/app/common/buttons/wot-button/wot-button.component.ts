@@ -15,6 +15,7 @@ export class WotButtonComponent implements OnInit {
   @Input() public texticon3: string;
   @Input() public texticonCount: string;
   @Input() public texticonLabel: string;
+  @Input() public texticonLabelOne: string;
 
   @Output() press = new EventEmitter();
   @HostListener('click', ['$event'])
