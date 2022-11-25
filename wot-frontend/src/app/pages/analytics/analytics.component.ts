@@ -52,7 +52,6 @@ export class AnalyticsComponent implements OnInit {
       this.sortedClasses.push(imageObject.prediction.indexOf(val));
     });
     this.predictionIndex = imageObject.predictedClass;
-    imageObject.label = (this.backendService.classes[imageObject.predictedClass] + " " + (imageObject.prediction[imageObject.predictedClass] * 100).toFixed(2) + "%");
     this.selectedColor = (imageObject.predictedClass === imageObject.labeledClass) ? 'var(--color-success)' : 'var(--color-danger)';
 
   }
@@ -64,5 +63,11 @@ export class AnalyticsComponent implements OnInit {
 
   public continue(): void {
     void this.router.navigate(['/credits']);
+  }
+
+  public getCustomLabel(imageObject: ImageObject): string {
+    if ( !imageObject.label) return '';
+    if (imageObject.label.indexOf('%') >= 0) return '';
+    return imageObject.label;
   }
 }

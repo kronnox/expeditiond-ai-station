@@ -35,7 +35,7 @@
               </td>
             </tr>
           </table>
-          Ihr habt das Objekt als <span [style.color]="selectedColor" >{{selectedImage.label}}</span> klassifiziert.
+          <div *ngIf="getCustomLabel(selectedImage)">Ihr habt das Objekt als <span [style.color]="selectedColor" >{{getCustomLabel(selectedImage)}}</span> klassifiziert.</div>
         </div>
       </div>
     </wot-row>
