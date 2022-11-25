@@ -45,7 +45,7 @@ export class TrainingComponent implements OnInit {
   public stage: number = 0;
   public epoch: number = 0;
   public step: number = -1;
-  public delayFactor: number = 2;
+  public delayFactor: number = 0//2;
   private skip: number = 1;
 
   public ratings: number[] = [-1,-1,-1,-1,-1,-1,-1,-1];
