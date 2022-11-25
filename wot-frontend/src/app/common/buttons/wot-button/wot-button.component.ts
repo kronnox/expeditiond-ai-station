@@ -10,6 +10,11 @@ export class WotButtonComponent implements OnInit {
   @Input() public slot: string = 'inline';
   @Input() public disabled: boolean = false;
   @Input() public icon: string;
+  @Input() public texticon: string;
+  @Input() public texticon2: string;
+  @Input() public texticon3: string;
+  @Input() public texticonCount: string;
+  @Input() public texticonLabel: string;
 
   @Output() press = new EventEmitter();
   @HostListener('click', ['$event'])
@@ -52,6 +57,20 @@ export class WotButtonComponent implements OnInit {
   public getBackground(): string {
     if (this.disabled) {
       return 'linear-gradient(45deg, var(--color-gray), var(--color-darkgray))'
+    }
+    return '';
+  }
+
+  public getWidth(): string {
+    if (this.texticon) {
+      return '250px';      
+    }
+    return '';
+  }
+
+  public getTextAlign(): string {
+    if (this.texticon) {
+      return 'center';      
     }
     return '';
   }
