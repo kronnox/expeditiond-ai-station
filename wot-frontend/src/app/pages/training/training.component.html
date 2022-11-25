@@ -25,7 +25,7 @@
   <wot-container>
     <div class="container" #popoverTarget5>
       <wot-row>
-        <wot-progress-bar height="24px" width="400px" [label]="'Epoche '+this.epoch+'/1000'" [progress]="this.epoch"
+        <wot-progress-bar height="24px" width="400px" [label]="'Epoche '+getEpochLabel()+'/1000'" [progress]="this.epoch"
           [total]="1000" [animationSpeed]="1000*delayFactor"></wot-progress-bar>
       </wot-row>
       <wot-row>

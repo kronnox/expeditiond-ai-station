@@ -109,6 +109,11 @@ export class TrainingComponent implements OnInit {
     }
   }
 
+  public getEpochLabel(): number {
+    if (this.epoch == 1000) return 1000;
+    else return this.epoch + 1;
+  }
+
   private loop(time: number): void {
     // update stage value and check for halts
     if (!this.updateStage()) {
