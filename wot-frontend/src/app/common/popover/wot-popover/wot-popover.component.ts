@@ -66,18 +66,19 @@ export class WotPopoverComponent {
         case 2:
           this.top = targetDomRect.y - 30;
           this.left = targetDomRect.x;
+          this.width = 270;
           break;
         case 3:
           this.arrowTop = true;
           this.arrowBottom = false;
-          this.top = 900;
+          this.top = 830;
           this.left = (targetDomRect.x + (targetDomRect.width / 2)) - 215;
           this.width = 400;
           break;
         case 4:
           this.arrowTop = true;
           this.arrowBottom = false;
-          this.top = 850;
+          this.top = 830;
           this.left = targetDomRect.x;
           this.width = 300;
           break;
