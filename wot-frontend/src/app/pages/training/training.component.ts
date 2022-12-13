@@ -45,6 +45,8 @@ export class TrainingComponent implements OnInit {
   public stage: number = 0;
   public epoch: number = 0;
   public step: number = -1;
+  // delayFactor bestimmt wie schnell bzw. langsam die Phasen dauern. Standard-Wert am Anfang ist 2. Je höher desto langsamer
+  // In der Funktion updateParameters() wird dieser je nach Phase geändert. Den Faktor anpassen um das gewünschte Timing zu erreichen
   public delayFactor: number = 2;
   private skip: number = 1;
 
