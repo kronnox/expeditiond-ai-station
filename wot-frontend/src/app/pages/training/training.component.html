@@ -36,12 +36,12 @@
         <div class="info-text" *ngIf="stage >= 2">
           <p style="color: red;"*ngIf="stage === 2">HINWEIS: Das Training des Modells ist rechenintensiv und deswegen sehr langsam. Daher beschleunigen wir das Ganze jetzt.</p>
           <p style="color: red;"*ngIf="stage === 2">Klickt dafür auf „TRAINING FORTSETZEN“!</p>
-          <p *ngIf="stage > 2 && epoch <= 200">
+          <p *ngIf="stage > 2 && epoch <= 99">
             HINWEIS: Das Training des Modells ist rechenintensiv und deswegen sehr langsam. Daher beschleunigen wir das
             Ganze jetzt.<br><br>
-            Beschleunigung: {{2/delayFactor}}x
+            Beschleunigung: {{2.5/delayFactor}}x
           </p>
-          <p *ngIf="epoch > 200">
+          <p *ngIf="epoch > 99">
             HINWEIS: Das Training des Modells ist rechenintensiv und deswegen sehr langsam. Daher beschleunigen wir das
             Ganze jetzt.<br><br>
             Beschleunigung: HYPERSPEED

@@ -47,7 +47,7 @@ export class TrainingComponent implements OnInit {
   public step: number = -1;
   // delayFactor bestimmt wie schnell bzw. langsam die Phasen dauern. Standard-Wert am Anfang ist 2. Je höher desto langsamer
   // In der Funktion updateParameters() wird dieser je nach Phase geändert. Den Faktor anpassen um das gewünschte Timing zu erreichen
-  public delayFactor: number = 2;
+  public delayFactor: number = 2.5;
   private skip: number = 1;
 
   public ratings: number[] = [-1,-1,-1,-1,-1,-1,-1,-1];
@@ -209,13 +209,13 @@ export class TrainingComponent implements OnInit {
       this.delayFactor = 0.5;      
     } else if (this.epoch === 4){
       this.showPopup(5);
-    } else if (this.epoch === 10) { 
+    } else if (this.epoch === 7) { 
       this.showPopup(6);     
       this.delayFactor = 0.1;
     } else if (this.epoch === 25) {
-      this.showPopup(7);
       this.delayFactor = 0.01;
-    } else if (this.epoch === 200) {      
+    } else if (this.epoch === 100) { 
+      this.showPopup(7);     
       this.delayFactor = 0;
       this.skip = 5;
     }
