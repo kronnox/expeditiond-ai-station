@@ -48,7 +48,7 @@ export class DataOverviewComponent implements OnInit {
       'Dieser Asteroid hat unserem Truck großen Schaden zugefügt.'],
     ['Das ist Leo. Ihn mussten wir auf einer früheren Mission in der Nähe des Mars aufsammeln.',
       'Astronautin Pia konnten wir in unserer letzten Mission leider nicht retten. Nun schwebt sie immer noch durch das All und fehlt in unserer Crew.',
-      'Das ist Dunja. Sie mussten wir in einer Rettungsmission beim Jupiter aufsammeln.',
+      'Das ist Feli. Sie mussten wir in einer Rettungsmission beim Jupiter aufsammeln.',
       'Das ist der Astronaut Rico. Eine Rettungsmission schlug fehl. Seither wird er vermisst.',
       'Der Astronaut Luca ist ein wichtiger Teil unserer Mannschaft. Ihn haben wir beim Jupiter aufgesammelt.'],
     ['Das ist der Tesla Roadster, der 2018 von Elon Musk ins Weltall geschossen wurde.',
